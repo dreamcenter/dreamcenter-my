@@ -44,12 +44,12 @@
       text-indent: 2rem;
     }
   }
-  &::-webkit-scrollbar{
-    width: 4px;
-    background-color: rgb(61, 94, 94);
-  }
-  &::-webkit-scrollbar-thumb{
-    background-color: rgb(155, 214, 99);
-  }
+  // &::-webkit-scrollbar{
+  //   width: 4px;
+  //   background-color: rgb(61, 94, 94);
+  // }
+  // &::-webkit-scrollbar-thumb{
+  //   background-color: rgb(155, 214, 99);
+  // }
 }
 </style>

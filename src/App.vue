@@ -7,12 +7,13 @@
       <router-link class="nav-color nav-sub iconfont icon--todo" to="/Todo">待做</router-link>
       <router-link class="nav-color nav-sub iconfont icon-linggandengpao" to="/Inspire">灵感</router-link>
       <router-link class="nav-color nav-sub iconfont icon-cangku" to="/Repository">仓库</router-link>
-      <router-link class="nav-color nav-sub iconfont icon-xiangpian" to="/Inspire">回忆</router-link>
+      <router-link class="nav-color nav-sub iconfont icon-xiangpian" to="/Album">回忆</router-link>
       <router-link class="nav-color nav-sub iconfont icon-xihongshifanqie" to="/Acgn">番剧</router-link>
       <router-link class="nav-color nav-sub iconfont icon-airudiantubiaohuizhi-zhuanqu_zixundongtai" to="/Dynamic">动态</router-link>
       <router-link class="nav-color nav-sub iconfont icon-bokeyuan" to="/Blog">博客</router-link>
       <router-link class="nav-color nav-sub iconfont icon-zhuye" to="/">首页</router-link>
     </div>
+    <!-- <div style="height:60px"></div> -->
     <router-view/>
   </div>
 </template>
@@ -41,6 +42,7 @@ export default {
   height: 100%;
   background: url('/imgs/background.png') fixed no-repeat;
   background-size: cover;
+  overflow: hidden;
   #nav{
     width: 100%;
     padding: 10px;
