@@ -5,8 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    isAdmin: false
   },
   mutations: {
+    toAdmin (state, data) {
+      state.isAdmin = data
+    }
   },
   actions: {
   },

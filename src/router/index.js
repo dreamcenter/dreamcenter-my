@@ -9,6 +9,7 @@ import Repository from '../views/Repository.vue'
 import Inspire from '../views/Inspire.vue'
 import Todo from '../views/Todo.vue'
 import About from '../views/About.vue'
+import Admin from '../views/admin.vue'
 
 Vue.use(VueRouter)
 
@@ -49,6 +50,36 @@ const routes = [
   {
     path: '/About',
     component: About
+  },
+  {
+    path: '/Admin',
+    component: Admin,
+    children: [
+      {
+        path: 'view',
+        component: () => import('../views/admin/view.vue')
+      },
+      {
+        path: 'writing',
+        component: () => import('../views/admin/writing.vue')
+      },
+      {
+        path: 'blog',
+        component: () => import('../views/admin/blog.vue')
+      },
+      {
+        path: 'dynamic',
+        component: () => import('../views/admin/dynamic.vue')
+      },
+      {
+        path: '',
+        redirect: 'view'
+      }
+    ]
+  },
+  {
+    path: '*',
+    redirect: '/'
   }
 ]
 

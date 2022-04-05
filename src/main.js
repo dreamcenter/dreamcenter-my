@@ -6,7 +6,10 @@ import store from './store'
 import './css/common.css'
 import './css/iconfont.css'
 
+import * as echarts from 'echarts'
+
 Vue.config.productionTip = false
+Vue.prototype.$echarts = echarts
 
 new Vue({
   router,

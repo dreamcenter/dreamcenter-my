@@ -1,24 +1,6 @@
 # dreamcenter
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+---
+技术
+1. vue (vue,vue-router,vuex)
+2. echarts  图标组件
+3. wangeditor 富文本组件

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div id="nav" :style="{'backgroundColor':(isHome?'':'black')}">
-      <img src="/imgs/avatar.jpg" width="40px" style="border-radius:20px"/>
+    <div id="nav" v-if="!this.$store.state.isAdmin" :style="{'backgroundColor':(isHome?'':'black')}">
+      <img src="/imgs/avatar.jpg" @click="gotoAdmin()" width="40px" style="border-radius:20px"/>
       <span class="sign">时光潜流</span>
       <router-link class="nav-color nav-sub iconfont icon-xiangguan" to="/About" style="margin-right:20px">关于</router-link>
       <router-link class="nav-color nav-sub iconfont icon--todo" to="/Todo">待做</router-link>
@@ -32,6 +32,11 @@ export default {
   },
   beforeUpdate () {
     this.isHome = (this.$route.path === '/')
+  },
+  methods: {
+    gotoAdmin: function () {
+      this.$router.push('/admin')
+    }
   }
 }
 </script>
