@@ -17,6 +17,9 @@
           <div ref="pics" style="text-align:center;background-color:rgba(200,200,200,.5)">
             <img width="100%" src="/imgs/temp.jpg"/>
           </div>
+          <div v-for="j in 10" :key="j" style="width:100px;height:100px;display:inline-block;overflow:hidden;margin-top:10px;margin-right:10px">
+            <img src="/imgs/temp.jpg" width="100%"/>
+          </div>
         </li>
       </ul>
       <div style="height:100px"></div>

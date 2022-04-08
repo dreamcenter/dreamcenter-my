@@ -29,6 +29,8 @@ export default {
   },
   beforeMount () {
     this.isHome = (this.$route.path === '/')
+    const token = this.$cookie.get('token')
+    if (token) sessionStorage.token = token
   },
   beforeUpdate () {
     this.isHome = (this.$route.path === '/')

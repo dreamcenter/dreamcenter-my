@@ -3,12 +3,13 @@
     <div class="loginPanel" v-if="!this.isLogin">
       <h1>管理员登录</h1>
       <hr style="border:1px solid coral"/>
-      <form action="#" @submit="jump()" method="post">
-        <input name="account" class="text long" placeholder="代号"/><br/>
-        <input name="password" class="text long" type="password" placeholder="密码"/><br/>
-        <input name="remember" id="remember" class="checkbox" type="checkbox"/><label for="remember">记住密码</label>
+      <form action="#" @submit.prevent="jump()" method="post">
+        <input name="account" class="text long" placeholder="代号" v-model="username"/><br/>
+        <input name="password" class="text long" type="password" placeholder="密码" v-model="password"/><br/>
+        <input name="remember" id="remember" class="checkbox" type="checkbox" v-model="remember"/><label for="remember">记住密码</label>
         <a href="#">忘记密码?</a>
         <input class="submit long" type="submit" value="提交"/>
+        <label style="color:red;font-weight:bold">{{this.msg}}</label>
       </form>
     </div>
     <div class="adminPanel" v-else>
@@ -34,23 +35,50 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
-      isLogin: false
+      isLogin: false,
+      username: '',
+      password: '',
+      remember: false,
+      msg: ''
     }
   },
+  beforeMount () {
+    axios.get('/api/info/total').then(res => {
+      if (res.data.code !== -403) {
+        this.isLogin = true
+        this.$store.commit('toAdmin', true)
+      }
+    }).catch(err => err)
+  },
   mounted () {
-    // to be delete
-    this.jump()
   },
   beforeDestroy () {
     this.$store.commit('toAdmin', false)
   },
   methods: {
     jump () {
-      this.$store.commit('toAdmin', true)
-      this.isLogin = true
+      axios.post('/api/admin/check',
+        `username=${this.username}&password=${this.password}`)
+        .then(res => {
+          if (res.data.code === 200) {
+            if (this.remember) {
+              sessionStorage.token = res.data.data
+              this.$cookie.config('10d')
+              this.$cookie.set('token', res.data.data)
+            } else {
+              sessionStorage.token = res.data.data
+              this.$cookie.remove('token')
+            }
+            this.$store.commit('toAdmin', true)
+            this.isLogin = true
+          } else {
+            this.msg = '*' + res.data.msg
+          }
+        }).catch(err => err)
     },
     back () {
       this.$router.push('/')

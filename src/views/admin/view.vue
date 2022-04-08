@@ -30,7 +30,7 @@ export default {
             },
             {
               value: 1548,
-              name: '回忆'
+              name: '相册'
             }
           ],
           radius: '150px'
