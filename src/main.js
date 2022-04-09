@@ -10,6 +10,7 @@ import { getNowTime } from './js/util'
 import * as echarts from 'echarts'
 import cookie from 'vue-cookies'
 import axios from 'axios'
+import { Pagination } from 'element-ui'
 
 axios.interceptors.request.use((config) => {
   const token = sessionStorage.getItem('token')
@@ -21,6 +22,8 @@ Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
 Vue.prototype.$cookie = cookie
 Vue.prototype.$time = getNowTime
+
+Vue.use(Pagination)
 
 new Vue({
   router,
