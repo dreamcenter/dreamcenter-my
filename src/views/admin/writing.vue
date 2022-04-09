@@ -14,6 +14,7 @@
 import axios from 'axios'
 // https://www.wangeditor.com/
 import E from 'wangeditor'
+import hljs from 'highlight.js'
 export default {
   data () {
     return {
@@ -28,6 +29,7 @@ export default {
       .find((item) => item.includes('type')).split('=')[1]
     this.isBlog = this.from === 'blog'
     this.editor = new E('#editor')
+    this.editor.highlight = hljs
     this.editor.config.height = 500
     this.editor.create()
   },
@@ -42,10 +44,9 @@ export default {
     commit () {
       const time = this.$time()
       const content = this.editor.txt.html()
-      console.log(time)
+      const cont = this.$xss(encodeURIComponent(content))
       axios.post('/api/blog/add',
-        `title=${this.title}&time=${time}&content=${content}`).then(res => {
-        // console.log(res.data)
+        `title=${this.title}&time=${time}&content=${cont}`).then(res => {
         if (res.data.code !== 200) alert(res.data.msg)
         else {
           if (res.data.data === 0) alert('创建失败!')

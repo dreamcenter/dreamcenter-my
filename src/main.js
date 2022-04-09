@@ -5,12 +5,15 @@ import store from './store'
 
 import './css/common.css'
 import './css/iconfont.css'
-import { getNowTime } from './js/util'
+// import 'highlight.js/styles/atom-one-dark.css'
+import 'highlight.js/styles/androidstudio.css'
 
+import { getNowTime } from './js/util'
 import * as echarts from 'echarts'
 import cookie from 'vue-cookies'
 import axios from 'axios'
 import { Pagination } from 'element-ui'
+import xss from 'xss'
 
 axios.interceptors.request.use((config) => {
   const token = sessionStorage.getItem('token')
@@ -22,6 +25,7 @@ Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
 Vue.prototype.$cookie = cookie
 Vue.prototype.$time = getNowTime
+Vue.prototype.$xss = xss
 
 Vue.use(Pagination)
 

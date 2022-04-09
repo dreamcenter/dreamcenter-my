@@ -24,6 +24,10 @@ const routes = [
     component: Blog
   },
   {
+    path: '/Blog/:id',
+    component: () => import('../views/Blog/article.vue')
+  },
+  {
     path: '/Dynamic',
     component: Dynamic
   },

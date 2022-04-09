@@ -43,5 +43,10 @@ module.exports = {
         content: '一大堆的废话'
       }
     ]
+  },
+  'get /api/blog/count': {
+    code: 200,
+    msg: '',
+    data: 31
   }
 }

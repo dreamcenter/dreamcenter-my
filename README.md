@@ -6,6 +6,10 @@
 3. wangeditor 富文本组件
 4. vue-cookies 设置cookie
 5. 通过authorization-token鉴权
+6. axios 请求与处理
+7. element-ui Pagination分页ui组件
+8. xss 防注入组件
+9. highlight.js 代码高亮组件
 
 工具
 1. DOCWAY http://xiaoyaoji.cn => 接口文档编辑
