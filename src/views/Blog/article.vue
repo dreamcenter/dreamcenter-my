@@ -6,9 +6,10 @@
       <p class="time">{{data.time}}</p>
       <div v-html="data.content"></div>
       <div style="height:100px"></div>
+      <span v-for="j in data.tags" :key="j" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>
     </div>
     <div class="frame right" style="width:20%"> </div>
-    <div style="clear:both"></div>
+    <!-- <div style="clear:both"></div> -->
   </div>
 </template>
 
@@ -22,7 +23,8 @@ export default {
       data: {
         title: '',
         time: '',
-        content: ''
+        content: '',
+        tags: []
       }
     }
   },

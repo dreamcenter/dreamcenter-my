@@ -10,7 +10,7 @@
           </h1>
           <p>{{item.content}}...</p>
           <p>
-            <span v-for="j in 6" :key="j" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#tag{{j}}</span>
+            <span v-for="j in item.tags" :key="j" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>
           </p>
         </li>
       </ul>

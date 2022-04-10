@@ -5,8 +5,12 @@
       <li><button @click="this.clear">清空</button></li>
       <li><button @click="this.commit">提交</button></li>
     </ul><br/>
-    <input v-model="title" v-if="this.isBlog" style="height:40px;font-size:36px" placeholder="标题"/>
+    <input v-model="title" v-if="this.isBlog" style="height:30px;font-size:30px" placeholder="标题"/>
     <div id="editor"></div>
+    <ul class="tags">
+      <li v-for="item in tags" :key="item" @click.left="delTag(item)">{{item}}</li>
+      <input placeholder="回车添加tag" @keyup.enter="newTag" v-model="tag"/>
+    </ul>
   </div>
 </template>
 
@@ -21,13 +25,16 @@ export default {
       from: '',
       isBlog: true,
       editor: null,
-      title: ''
+      title: '',
+      tags: [],
+      tag: ''
     }
   },
   mounted () {
     this.from = location.search.substr(1).split('&')
       .find((item) => item.includes('type')).split('=')[1]
     this.isBlog = this.from === 'blog'
+    // // https://bbs-api-static.mihoyo.com/misc/api/emoticon_set
     this.editor = new E('#editor')
     this.editor.highlight = hljs
     this.editor.config.height = 500
@@ -46,7 +53,7 @@ export default {
       const content = this.editor.txt.html()
       const cont = this.$xss(encodeURIComponent(content))
       axios.post('/api/blog/add',
-        `title=${this.title}&time=${time}&content=${cont}`).then(res => {
+        `title=${this.title}&time=${time}&content=${cont}&tags=${this.tags}`).then(res => {
         if (res.data.code !== 200) alert(res.data.msg)
         else {
           if (res.data.data === 0) alert('创建失败!')
@@ -56,6 +63,17 @@ export default {
     },
     clear () {
       this.editor.txt.clear()
+    },
+    newTag () {
+      const _tag = this.tag.trim()
+      this.tag = ''
+      console.log(this.tags.includes(_tag))
+      if (_tag === '') return
+      if (this.tags.includes(_tag)) return
+      this.tags.push(_tag)
+    },
+    delTag (tag) {
+      this.$delete(this.tags, this.tags.indexOf(tag))
     }
   }
 }
@@ -63,6 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 #_writing{
+  font-family: '宋体';
   .titleButtons{
     width: 100%;
     list-style: none;
@@ -74,6 +93,31 @@ export default {
         height: 30px;
       }
       margin: 2px 10px;
+    }
+  }
+  .tags{
+    list-style: none;
+    li{
+      background-color: aquamarine;
+      padding: 2px;
+      margin: 2px;
+      border-radius: 8px;
+      cursor: default;
+      font-weight: bold;
+      float: left;
+    }
+    input{
+      margin: 2px;
+      padding: 2px;
+      text-align: center;
+      width: 100px;
+      height: 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid coral;
+      outline: none;
+      color: red;
+      font-weight: bold;
     }
   }
 }
