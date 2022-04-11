@@ -6,7 +6,7 @@
       <p class="time">{{data.time}}</p>
       <div v-html="data.content"></div>
       <div style="height:100px"></div>
-      <span v-for="j in data.tags" :key="j" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>
+      <span v-for="j in data.tags" :key="j.name" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>
     </div>
     <div class="frame right" style="width:20%"> </div>
     <!-- <div style="clear:both"></div> -->
@@ -53,6 +53,7 @@ export default {
     margin-left: 20%;
     background-color: rgba(186, 181, 181, 0.1);
     box-shadow: 0 0 10px rgba(0,0,0,.5);
+    overflow: hidden;
     // min-height: 100%;
     // overflow: scroll;
     .title{
@@ -107,6 +108,7 @@ export default {
       text-indent: 1rem;
       padding: 2px;
       background-color: #000;
+      overflow-x: scroll;
       // border-radius: 3px;
       // padding: 3px 5px;
       // margin: 0 3px;

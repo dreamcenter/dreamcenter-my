@@ -20,6 +20,7 @@ html,body{
 
 *::-webkit-scrollbar{
   width: 4px;
+  height: 8px;
   background-color: rgb(61, 94, 94);
 }
 *::-webkit-scrollbar-thumb{
