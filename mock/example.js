@@ -157,5 +157,10 @@ module.exports = {
         describe: '巨乳ですき！'
       }
     ]
+  },
+  'get /api/info/doge': {
+    code: 200,
+    msg: '',
+    data: 1
   }
 }

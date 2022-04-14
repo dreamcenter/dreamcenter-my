@@ -6,6 +6,7 @@
       <li><button @click="this.commit">提交</button></li>
       <li><button @click="this._export">导出</button></li>
       <li><button @click="this._import">导入</button></li>
+      <input type="file" ref="bak"/>
     </ul><br/>
     <input v-model="title" v-if="this.isBlog" style="height:30px;font-size:30px" placeholder="标题"/>
     <div id="editor"></div>
@@ -39,6 +40,23 @@ export default {
     // // https://bbs-api-static.mihoyo.com/misc/api/emoticon_set
     this.editor = new E('#editor')
     this.editor.highlight = hljs
+    this.editor.config.customUploadImg = function (resultFiles, insertImgFn) {
+      const formData = new FormData()
+      formData.append('aid', 2)
+      formData.append('file', resultFiles[0])
+      axios.post('/api/image/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(res => {
+        console.log(res.data)
+        if (res.data.errno === 0) {
+          insertImgFn(res.data.data[0].url)
+        } else {
+          alert('图片插入失败!data:' + JSON.stringify(res.data))
+        }
+      }).catch(err => err)
+    }
     this.editor.config.height = 500
     this.editor.create()
   },
@@ -78,10 +96,17 @@ export default {
       this.$delete(this.tags, this.tags.indexOf(tag))
     },
     _export () {
-      window.prompt('请复制到本地文件', this.editor.txt.html())
+      alert('请按F12查看')
+      console.log(this.editor.txt.html())
     },
     _import () {
-      this.editor.txt.html(window.prompt('请复制数据'))
+      const _that = this
+      const bak = this.$refs.bak.files[0]
+      const bakReader = new FileReader()
+      bakReader.readAsText(bak)
+      bakReader.onload = function () {
+        _that.editor.txt.html(this.result)
+      }
     }
   }
 }

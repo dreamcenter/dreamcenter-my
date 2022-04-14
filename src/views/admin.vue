@@ -144,6 +144,7 @@ export default {
       color: white;
       overflow-y: scroll;
       li{
+        cursor: default;
         width: 100%;
         height: 50px;
         text-align: center;

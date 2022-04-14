@@ -1,12 +1,20 @@
 <template>
   <div id="album">
     <!-- <h1>秒速之子，回忆杀</h1> -->
-    <!-- <ul> -->
-      <img v-show="this.isIn" height="400" src="/imgs/bk.jpeg" style="position:absolute;top:200px;left:100px"/>
+      <div v-show="this.isIn">
+        <div class="list" @mousewheel="scrollJump" ref="imgList">
+          <ul>
+            <li v-for="item in imgs" :key="item.id">
+              <img :src="item.url | imgHandler" width="200" height="200"/>
+              <p>{{item.name}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
       <transition-group tag="ul" name="transUl" mode="in-out">
-        <li v-for="i in album" :key="i" :data-id="i" @click="inTo(i)">
-          <img src="/imgs/bk.jpeg" width="180" height="180" style="object-fit:cover"/>
-          <p>小标题{{i}}</p>
+        <li v-for="(item, index) in album" :key="item.id" :data-id="item.id" @click="inTo(item.id, index)">
+          <img :src="item.cover" width="180" height="180" style="object-fit:cover"/>
+          <p>{{item.name}}{{item.count}}</p>
         </li>
       </transition-group>
     <!-- </ul> -->
@@ -14,23 +22,92 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
       isIn: false,
-      album: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      albumSec: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      album: [],
+      albumSec: [],
+      tX: 0,
+      fX: 0,
+      mutex: true,
+      imgs: []
     }
   },
+  filters: {
+    imgHandler (src) {
+      return src + '/small'
+    },
+    imgNameHandler (name) {
+      return name.substr(0, 8) + '...'
+    }
+  },
+  beforeMount () {
+    axios.get('/api/album/list').then(res => {
+      this.album = res.data.data
+      this.albumSec = JSON.parse(JSON.stringify(res.data.data))
+    }).catch(res => res)
+  },
   methods: {
-    inTo (id) {
-      // if(this.albumSec)
-      this.album = []
+    inTo (id, index) {
+      if (this.albumSec) {
+        this.album = []
+      }
       this.isIn = !this.isIn
+      if (this.isIn) {
+        axios.get('/api/image/list?aid=' + id).then(res => {
+          this.imgs = res.data.data
+          console.log(this.imgs)
+        }).catch(res => res)
+      } else {
+        this.imgs = []
+      }
       setTimeout(() => {
         if (!this.isIn) this.album = this.albumSec
-        else this.album = [id]
+        else this.album.push(this.albumSec[index])
       }, 400)
+    },
+    scrollJump (e) {
+      if (this.mutex) {
+        this.scrollList(e)
+      }
+    },
+    scrollList (e) {
+      // this.mutex = false
+      const delta = e.deltaY
+      const node = this.$refs.imgList
+      if (this.tX + delta > node.scrollWidth) {
+        this.tX = node.scrollWidth
+        return
+      }
+      if (this.tX + delta < -node.scrollWidth) {
+        this.tX = 0
+        return
+      }
+
+      // const judge = delta > 0
+      // setInterval(() => {
+      //   if (judge && this.fX < this.tX) {
+      //     node.scrollTo(++this.fX, 0)
+      //     this.fX += 2
+      //   } else if (!judge && this.fX > this.tX) {
+      //     node.scrollTo(--this.fX, 0)
+      //     this.fX -= 2
+      //   } else {
+      //     return
+      //   }
+      //   console.log(1)
+      // }, 10)
+
+      // if(delta>=0) {
+      //   while (this.fX < this.tX) {
+      //     node.scrollTo(++this.fX, 0)
+      //   }
+      // }
+      node.scrollTo(this.tX, 0)
+      this.tX += delta
+      // this.mutex = true
     }
   }
 }
@@ -79,6 +156,34 @@ export default {
   .transUl-enter,.transUl-leave-to{
     transform: rotateZ(-6deg);
     opacity: 0;
+  }
+  .list{
+    position:absolute;
+    top:160px;
+    left:100px;
+    width: 80%;
+    height: calc(100% - 280px);
+    background-color: rgba(156, 156, 156, 0.509);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    ul{
+      width: 100%;
+      // height: 50%;
+      box-sizing: border-box;
+      li{
+        display: inline-block;
+        transform: rotateZ(0deg);
+        img{
+          margin: 0;
+        }
+        p{
+          line-height: 20px;
+          font-size: 20px;
+        }
+      }
+    }
   }
 }
 </style>
