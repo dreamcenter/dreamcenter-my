@@ -76,6 +76,10 @@ const routes = [
         component: () => import('../views/admin/dynamic.vue')
       },
       {
+        path: 'album',
+        component: () => import('../views/admin/album.vue')
+      },
+      {
         path: '',
         redirect: 'view'
       }

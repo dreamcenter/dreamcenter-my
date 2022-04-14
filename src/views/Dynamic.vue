@@ -7,7 +7,8 @@
           <h1>{{item.time | beautyDate}}</h1>
           <span style="margin-right:2rem;font-size:12px">[{{item.time | beautyTime}}]</span>
           <p></p>
-          <span>{{item.content}}
+          <span v-html="item.content">
+            <!-- {{item.content}} -->
           <!-- 二零二二 * 四月四日 -->
           </span>
           <div ref="pics" style="text-align:center;background-color:rgba(200,200,200,.5)">

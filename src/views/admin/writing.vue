@@ -4,10 +4,12 @@
       <li><button @click="this.back">返回</button></li>
       <li><button @click="this.clear">清空</button></li>
       <li><button @click="this.commit">提交</button></li>
+      <li><button @click="this._export">导出</button></li>
+      <li><button @click="this._import">导入</button></li>
     </ul><br/>
     <input v-model="title" v-if="this.isBlog" style="height:30px;font-size:30px" placeholder="标题"/>
     <div id="editor"></div>
-    <ul class="tags">
+    <ul class="tags" v-if="isBlog">
       <li v-for="item in tags" :key="item" @click.left="delTag(item)">{{item}}</li>
       <input placeholder="回车添加tag" @keyup.enter="newTag" v-model="tag"/>
     </ul>
@@ -52,7 +54,7 @@ export default {
       const time = this.$time()
       const content = this.editor.txt.html()
       const cont = this.$xss(encodeURIComponent(content))
-      axios.post('/api/blog/add',
+      axios.post('/api/' + (this.isBlog ? 'blog' : 'dynamic') + '/add',
         `title=${this.title}&time=${time}&content=${cont}&tags=${this.tags}`).then(res => {
         if (res.data.code !== 200) alert(res.data.msg)
         else {
@@ -74,6 +76,12 @@ export default {
     },
     delTag (tag) {
       this.$delete(this.tags, this.tags.indexOf(tag))
+    },
+    _export () {
+      window.prompt('请复制到本地文件', this.editor.txt.html())
+    },
+    _import () {
+      this.editor.txt.html(window.prompt('请复制数据'))
     }
   }
 }

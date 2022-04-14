@@ -21,7 +21,7 @@
         <router-link active-class="act" tag="li" to="/Admin/blog">博客</router-link>
         <router-link active-class="act" tag="li" to="/Admin/dynamic">动态</router-link>
         <li>番剧</li>
-        <li>回忆</li>
+        <router-link active-class="act" tag="li" to="/Admin/album">回忆</router-link>
         <li>仓库</li>
         <li>灵感</li>
         <li>待做</li>
