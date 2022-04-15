@@ -1,17 +1,17 @@
 <template>
-  <div id="_album">
+  <div id="_album" @click="showMenu = false">
     <h3>回忆</h3>
     <div class="left">
       <!-- <span style="background-color:coral;font-size:20px;margin-left:calc(50% - 40px)">
         <a href="#">添加相册</a>
       </span> -->
       <ul v-if="albums.length!=0">
-        <li v-for="(item, index) in albums" :key="item.id" @click="showAlbum(item.id, index)">
+        <li v-for="(item, index) in albums" :key="item.id" @click.right.prevent="targetDeal($event,item.id, true)" @click="showAlbum(item.id, index)">
           <b v-if="target===index">&gt;</b>
           <b v-else>|</b>
           <b>{{item.name}}</b>
           <i>{{item.count}}</i>
-          <a href="#">编辑</a>
+          <!-- <a href="#">编辑</a> -->
         </li>
         <li class="album_add">
           <b v-if="newAlbumName === null" @click="newAlbumName = ''" style="cursor:default;width:80%;text-align:center">添加相册</b>
@@ -32,7 +32,7 @@
         </form>
       </div>
       <ol v-if="imgs.length!=0">
-        <li v-for="item in imgs" :key="item.id" @click="showInfo (item.id)">
+        <li v-for="item in imgs" :key="item.id" @click.right.prevent="targetDeal($event,item.id, false)" @click="showInfo (item.id)">
           <img :src="item.url | imgHandler" width="100" height="100"/>
           <p>{{item.name | imgNameHandler}}</p>
         </li>
@@ -48,6 +48,11 @@
         <span>{{info.describe}}</span>
         <div @click="isInfo=false">X</div>
       </div>
+    </div>
+    <div class="menu" ref="menu" v-show="showMenu">
+      <p>编辑</p>
+      <p @click="delTarget">删除</p>
+      <p>取消</p>
     </div>
   </div>
 </template>
@@ -67,7 +72,10 @@ export default {
       tempTime: '',
       tempName: '',
       file: null,
-      describe: ''
+      describe: '',
+      showMenu: false,
+      targetMenuId: -1,
+      targetMenuAlbum: null
     }
   },
   filters: {
@@ -149,6 +157,33 @@ export default {
           alert('添加失败!!!!!!!\ndata:' + JSON.stringify(res.data))
         }
       }).catch(err => err)
+    },
+    targetDeal (e, id, isAlbum) {
+      this.targetMenuAlbum = isAlbum
+      this.targetMenuId = id
+      const node = this.$refs.menu
+      node.style.top = e.clientY + 'px'
+      node.style.left = e.clientX + 'px'
+      this.showMenu = true
+    },
+    delTarget () {
+      if (this.targetMenuAlbum == null) return
+      if (this.targetMenuAlbum) {
+        axios.post('/api/album/delete', 'id=' + this.targetMenuId).then(res => {
+          if (res.data.code === 200) {
+            this.freshAlbum()
+          }
+        }).catch(err => err)
+      } else {
+        axios.post('/api/image/delete', 'ids=' + this.targetMenuId + '&aid=' + this.aid).then(res => {
+          if (res.data.code === 200) {
+            this.freshImg()
+          }
+        }).catch(err => err)
+      }
+
+      this.targetMenuId = -1
+      this.targetMenuAlbum = null
     }
   }
 }
@@ -168,6 +203,7 @@ export default {
     float: left;
     overflow-y: scroll;
     background-color: rgba(255, 255, 255, 0.422);
+    cursor: default;
     ul{
       li{
         border-bottom: 1px dashed black;
@@ -259,6 +295,19 @@ export default {
       }
     }
   border: 1px solid red;
+  }
+  .menu{
+    position:absolute;
+    width:100px;
+    background-color:white;
+    text-align: center;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: default;
+    p{
+      border-bottom: 1px solid gray;
+      padding: 2px;
+    }
   }
 }
 </style>

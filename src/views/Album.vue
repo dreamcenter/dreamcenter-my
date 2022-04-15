@@ -4,7 +4,7 @@
       <div v-show="this.isIn">
         <div class="list" @mousewheel="scrollJump" ref="imgList">
           <ul>
-            <li v-for="item in imgs" :key="item.id">
+            <li v-for="item in imgs" :key="item.id" @click="showInfo (item.id)">
               <img :src="item.url | imgHandler" width="200" height="200"/>
               <p>{{item.name}}</p>
             </li>
@@ -18,6 +18,17 @@
         </li>
       </transition-group>
     <!-- </ul> -->
+    <div class="info" v-show="isInfo">
+        <img :src="info.url" width="400" height="300"/>
+        <h1>{{info.name}}</h1>
+        <p>id:{{info.id}}</p>
+        <p>aid:{{info.aid}}</p>
+        <p>time:{{info.time}}</p>
+        <p>url:<a :href="info.url" target="_blank">链接</a></p>
+        <p>describe:</p>
+        <span>{{info.describe}}</span>
+        <div @click="isInfo=false">X</div>
+      </div>
   </div>
 </template>
 
@@ -32,7 +43,9 @@ export default {
       tX: 0,
       fX: 0,
       mutex: true,
-      imgs: []
+      imgs: [],
+      isInfo: false,
+      info: {}
     }
   },
   filters: {
@@ -108,6 +121,12 @@ export default {
       node.scrollTo(this.tX, 0)
       this.tX += delta
       // this.mutex = true
+    },
+    showInfo (id) {
+      this.isInfo = true
+      this.info = this.imgs.find((item) => {
+        return item.id === id
+      })
     }
   }
 }
@@ -182,6 +201,56 @@ export default {
           line-height: 20px;
           font-size: 20px;
         }
+      }
+    }
+  }
+  .info{
+    overflow: hidden;
+    background-color: rgba(99, 98, 97, 0.804);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    img{
+      object-fit: contain;
+    }
+    h1{
+      margin-top: 0;
+      width: 400px;
+      font-size: 40px;
+      text-align: center;
+      color: wheat;
+    }
+    a{
+      color: aquamarine;
+    }
+    p,span{
+      margin-left: 10px;
+      margin-top: 10px;
+      font-size: 20px;
+      color: wheat;
+    }
+    div{
+      width:180px;
+      height: 180px;
+      position: absolute;
+      color: rgba(255, 255, 255, 0.78);
+      background-color: black;
+      top: -90px;
+      right: -90px;
+      border-radius: 80px;
+      text-align: left;
+      line-height: 260px;
+      text-indent: 30px;
+      font-size: 60px;
+      font-family:'Times New Roman', Times, serif;
+      cursor: default;
+      transition: .2s 0s ease-out;
+      &:hover{
+        box-shadow: 0 0 100px rgba($color: #000, $alpha: .5);
+        color: white;
       }
     }
   }

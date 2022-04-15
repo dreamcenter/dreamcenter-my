@@ -11,12 +11,12 @@
             <!-- {{item.content}} -->
           <!-- 二零二二 * 四月四日 -->
           </span>
-          <div ref="pics" style="text-align:center;background-color:rgba(200,200,200,.5)">
+          <!-- <div ref="pics" style="text-align:center;background-color:rgba(200,200,200,.5)">
             <img width="100%" src="/imgs/temp.jpg"/>
           </div>
           <div v-for="j in 10" :key="j+1" style="width:100px;height:100px;display:inline-block;overflow:hidden;margin-top:10px;margin-right:10px">
             <img src="/imgs/temp.jpg" width="100%"/>
-          </div>
+          </div> -->
         </li>
       </ul>
       <div style="height:100px"></div>

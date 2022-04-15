@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
-#blog{
+#_blog{
   // width: 100%;
   // overflow-y: scroll;
 }

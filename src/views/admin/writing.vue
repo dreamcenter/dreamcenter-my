@@ -40,9 +40,10 @@ export default {
     // // https://bbs-api-static.mihoyo.com/misc/api/emoticon_set
     this.editor = new E('#editor')
     this.editor.highlight = hljs
+    const _that = this
     this.editor.config.customUploadImg = function (resultFiles, insertImgFn) {
       const formData = new FormData()
-      formData.append('aid', 2)
+      formData.append('aid', _that.isBlog ? 2 : 3)
       formData.append('file', resultFiles[0])
       axios.post('/api/image/upload', formData, {
         headers: {
@@ -96,7 +97,16 @@ export default {
       this.$delete(this.tags, this.tags.indexOf(tag))
     },
     _export () {
-      alert('请按F12查看')
+      const myBlob = new Blob([this.editor.txt.html()])
+
+      const toDownload = document.createElement('a')
+
+      toDownload.download = 'log' + this.$time() + '.txt'
+      toDownload.href = URL.createObjectURL(myBlob)
+      toDownload.click()
+      document.body.removeChild(myBlob)
+
+      // alert('请按F12查看')
       console.log(this.editor.txt.html())
     },
     _import () {

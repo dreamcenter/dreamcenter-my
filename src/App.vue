@@ -55,7 +55,7 @@ export default {
     padding: 10px;
     position: fixed;
     transition: 1s 0s ease-out;
-    z-index: 99999;
+    z-index: 99;
     .nav-color{
       color: aqua;
     }

@@ -162,5 +162,10 @@ module.exports = {
     code: 200,
     msg: '',
     data: 1
+  },
+  'post /api/dynamic/delete': {
+    code: 200,
+    msg: '',
+    data: 1
   }
 }
