@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 // import Vue from 'vue'
 export default {
   data () {
@@ -31,9 +32,17 @@ export default {
     this.isHome = (this.$route.path === '/')
     const token = this.$cookie.get('token')
     if (token) sessionStorage.token = token
+    const uri2 = this.$route.path.split('/')[1].toLowerCase()
+    if (uri2 === 'blog' || uri2 === 'dynamic' || uri2 === 'album') {
+      axios.get('/api/info/increase?target=' + uri2).then(res => res).catch(err => err)
+    }
   },
   beforeUpdate () {
     this.isHome = (this.$route.path === '/')
+    const uri2 = this.$route.path.split('/')[1].toLowerCase()
+    if (uri2 === 'blog' || uri2 === 'dynamic' || uri2 === 'album') {
+      axios.get('/api/info/increase?target=' + uri2).then(res => res).catch(err => err)
+    }
   },
   methods: {
     gotoAdmin: function () {

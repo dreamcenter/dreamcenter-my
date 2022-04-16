@@ -12,7 +12,10 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      dogeStatus: 'red'
+      dogeStatus: 'red',
+      vBlog: 0,
+      vAlbum: 0,
+      vDynamic: 0
     }
   },
   beforeMount () {
@@ -25,8 +28,13 @@ export default {
         this.dogeStatus = 'red'
       }
     }).catch(err => err)
+    axios.get('/api/info/album').then(res => { this.vAlbum = res.data.data }).catch(err => err)
+    axios.get('/api/info/dynamic').then(res => { this.vDynamic = res.data.data }).catch(err => err)
+    axios.get('/api/info/blog').then(res => { this.vBlog = res.data.data }).catch(err => err)
   },
   mounted () {
+  },
+  beforeUpdate () {
     const myChart = this.$echarts.init(document.getElementById('test'))
     myChart.setOption({
       series: [
@@ -34,16 +42,16 @@ export default {
           type: 'pie',
           data: [
             {
-              value: 335,
-              name: '动态'
+              value: this.vDynamic,
+              name: '动态 [' + this.vDynamic + ']'
             },
             {
-              value: 234,
-              name: '博客'
+              value: this.vBlog,
+              name: '博客 [' + this.vBlog + ']'
             },
             {
-              value: 1548,
-              name: '相册'
+              value: this.vAlbum,
+              name: '相册 [' + this.vAlbum + ']'
             }
           ],
           radius: '150px'

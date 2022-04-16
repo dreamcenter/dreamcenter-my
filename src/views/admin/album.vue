@@ -11,6 +11,7 @@
           <b v-else>|</b>
           <b>{{item.name}}</b>
           <i>{{item.count}}</i>
+          <img :src="item.cover + '/icon'" width="30" height="30" style="margin-top:4px"/>
           <!-- <a href="#">编辑</a> -->
         </li>
         <li class="album_add">
@@ -39,18 +40,19 @@
       </ol>
       <div class="info" v-show="isInfo">
         <img :src="info.url" width="400" height="300"/>
-        <h1>{{info.name}}</h1>
+        <h1 @click="changeImg ('name')">{{info.name}}</h1>
         <p>id:{{info.id}}</p>
         <p>aid:{{info.aid}}</p>
         <p>time:{{info.time}}</p>
         <p>url:<a :href="info.url" target="_blank">链接</a></p>
-        <p>describe:</p>
-        <span>{{info.describe}}</span>
+        <p @click="changeImg ('describe')">describe:</p>
+        <span @click="changeImg ('describe')">{{info.describe}}</span>
+        <p><a @click="changeCover(info.url, info.id)">设为封面</a></p>
         <div @click="isInfo=false">X</div>
       </div>
     </div>
     <div class="menu" ref="menu" v-show="showMenu">
-      <p>编辑</p>
+      <p @click="renameAlbum" v-show="targetMenuAlbum">重命名</p>
       <p @click="delTarget">删除</p>
       <p>取消</p>
     </div>
@@ -168,22 +170,75 @@ export default {
     },
     delTarget () {
       if (this.targetMenuAlbum == null) return
-      if (this.targetMenuAlbum) {
-        axios.post('/api/album/delete', 'id=' + this.targetMenuId).then(res => {
-          if (res.data.code === 200) {
-            this.freshAlbum()
-          }
-        }).catch(err => err)
-      } else {
-        axios.post('/api/image/delete', 'ids=' + this.targetMenuId + '&aid=' + this.aid).then(res => {
-          if (res.data.code === 200) {
-            this.freshImg()
-          }
-        }).catch(err => err)
+      const sure = window.confirm('确认删除吗?')
+      if (sure) {
+        if (this.targetMenuAlbum) {
+          axios.post('/api/album/delete', 'id=' + this.targetMenuId).then(res => {
+            if (res.data.code === 200) {
+              this.freshAlbum()
+            }
+          }).catch(err => err)
+        } else {
+          axios.post('/api/image/delete', 'ids=' + this.targetMenuId + '&aid=' + this.aid).then(res => {
+            if (res.data.code === 200) {
+              this.freshImg()
+            }
+          }).catch(err => err)
+        }
       }
 
       this.targetMenuId = -1
       this.targetMenuAlbum = null
+    },
+    changeImg (el) {
+      let want
+      if ((want = window.prompt('修改' + el)) != null && want.trim() !== '') {
+        this.info[el] = want.trim()
+        axios.post('/api/image/update', `id=${this.info.id}&${el}=${this.info[el]}`).then(res => {
+          if (res.data.code !== 200) {
+            alert(el + '修改失败')
+          }
+        }).catch(err => err)
+      }
+    },
+    renameAlbum () {
+      if (this.targetMenuAlbum == null || !this.targetMenuAlbum) return
+      const tempId = this.targetMenuId
+      let want
+      if ((want = window.prompt('重命名相册')) != null && want.trim() !== '') {
+        want = want.trim()
+        axios.post('/api/album/update', `id=${this.targetMenuId}&name=${want}`).then(res => {
+          if (res.data.code !== 200) {
+            alert('相册重命名失败')
+          }
+          if (res.data.code === 200) {
+            this.albums.forEach((item) => {
+              if (item.id === tempId) {
+                item.name = want
+                return false
+              }
+            })
+          }
+        }).catch(err => err)
+      }
+      this.targetMenuId = -1
+      this.targetMenuAlbum = null
+    },
+    changeCover (url, tid) {
+      axios.post('/api/album/update', `id=${this.aid}&cid=${tid}`).then(res => {
+        if (res.data.code !== 200) {
+          alert('设置失败')
+        }
+        if (res.data.code === 200) {
+          alert('成功设置封面')
+          this.albums.forEach((item) => {
+            if (item.id === this.aid) {
+              item.cover = url
+              return false
+            }
+          })
+        }
+      }).catch(err => err)
     }
   }
 }
@@ -258,6 +313,11 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
+      cursor: default;
+      a{
+        color: aquamarine;
+        text-decoration: underline;
+      }
       img{
         object-fit: contain;
       }
