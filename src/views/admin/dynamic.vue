@@ -1,7 +1,8 @@
 <template>
   <div id="_dynamic">
     <h3>动态</h3>
-    <button @click="this.toWriting">写一篇动态</button>
+    <button @click="toWriting(true)">写一篇动态</button>
+    <button @click="toWriting(false)" style="margin-left:10px">编辑最新动态</button>
     <table>
       <tr>
         <td style="width:6%">id</td>
@@ -40,7 +41,14 @@ export default {
     }).catch(err => err)
   },
   methods: {
-    toWriting () {
+    toWriting (isNew) {
+      if (!isNew && this.dynamicList.length !== 0) {
+        this.$store.commit('changeDynamicId', this.dynamicList[0].id)
+        this.$store.commit('changeDynamicContent', this.dynamicList[0].content)
+      } else {
+        this.$store.commit('changeDynamicId', -1)
+        this.$store.commit('changeDynamicContent', '')
+      }
       this.$router.push('/Admin/writing?type=dynamic')
     },
     changePage (delta) {

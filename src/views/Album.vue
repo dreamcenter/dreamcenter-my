@@ -14,7 +14,7 @@
       <transition-group tag="ul" name="transUl" mode="in-out">
         <li v-for="(item, index) in album" :key="item.id" :data-id="item.id" @click="inTo(item.id, index)">
           <img :src="item.cover" width="180" height="180" style="object-fit:cover"/>
-          <p>{{item.name}}{{item.count}}</p>
+          <p>{{item.name}} [{{item.count}}]</p>
         </li>
       </transition-group>
     <!-- </ul> -->

@@ -28,6 +28,14 @@ export default {
       keyDef: 0
     }
   },
+  beforeCreate () {
+    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+      location.href = '/mobile_deny.html'
+      // 手机端
+    } else {
+      console.log('当前使用pc登录')
+    }
+  },
   beforeMount () {
     this.isHome = (this.$route.path === '/')
     const token = this.$cookie.get('token')

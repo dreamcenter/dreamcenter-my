@@ -27,6 +27,7 @@ export default {
     return {
       from: '',
       isBlog: true,
+      isDynamicEdit: false,
       editor: null,
       title: '',
       tags: [],
@@ -60,8 +61,16 @@ export default {
     }
     this.editor.config.height = 500
     this.editor.create()
+
+    if (this.$store.state.dynamicId !== -1) {
+      this.isDynamicEdit = true
+      this.editor.txt.html(this.$store.state.dynamicContent)
+    }
   },
   beforeDestroy () {
+    this.$store.state.dynamicId = -1
+    this.$store.state.dynamicContent = ''
+    this.isDynamicEdit = false
     this.editor.destroy()
     this.editor = null
   },
@@ -73,8 +82,8 @@ export default {
       const time = this.$time()
       const content = this.editor.txt.html()
       const cont = this.$xss(encodeURIComponent(content))
-      axios.post('/api/' + (this.isBlog ? 'blog' : 'dynamic') + '/add',
-        `title=${this.title}&time=${time}&content=${cont}&tags=${this.tags}`).then(res => {
+      axios.post('/api/' + (this.isBlog ? 'blog' : 'dynamic') + (this.isDynamicEdit ? '/update' : '/add'),
+        `id=${this.$store.state.dynamicId}&title=${this.title}&time=${time}&content=${cont}&tags=${this.tags}`).then(res => {
         if (res.data.code !== 200) alert(res.data.msg)
         else {
           if (res.data.data === 0) alert('创建失败!')

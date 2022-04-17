@@ -1,6 +1,6 @@
 <template>
   <div id="dynamic" @scroll="scroll()">
-    <div class="frame left" style="width:20%">THIS IS LEFT</div>
+    <div class="frame left" style="width:20%"> </div>
     <div class="frame center" style="width:60%">
       <ul>
         <li v-for="item in dynamicList" :key="item.id">
@@ -21,7 +21,7 @@
       </ul>
       <div style="height:100px"></div>
     </div>
-    <div class="frame right" style="width:20%">THIS IS RIGHT</div>
+    <div class="frame right" style="width:20%"> </div>
   </div>
 </template>
 

@@ -50,7 +50,7 @@ export default {
     }).catch(err => err)
     axios.get('/api/blog/count',
       `pageNo=${this.currentPage}&pageSize=${this.pageSize}`).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       this.totalSize = res.data.data
     }).catch(err => err)
   },

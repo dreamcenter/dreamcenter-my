@@ -14,12 +14,26 @@
       <p></p><br/>
       <p></p><br/>
       <p>水字数，水字数ヽ(￣ω￣(￣ω￣〃)ゝ</p><br/>
+      <p style="text-align:center;font-size:12px">2022.03 ~ {{nowTime}}</p>
       <p></p><br/>
       <p></p><br/>
       <p></p><br/>
     </span>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      nowTime: ''
+    }
+  },
+  beforeMount () {
+    this.nowTime = this.$time().substr(0, 7).replace('-', '.')
+  }
+}
+</script>
 
 <style lang="scss">
 #about{

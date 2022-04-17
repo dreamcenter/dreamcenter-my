@@ -3,7 +3,7 @@
   <div id="_view">
     <h3>full view</h3>
     <div class="status">图床状态<span class="status_color" :style="{'background-color':dogeStatus}"></span></div>
-    <div id="test" style="width:500px;height:500px;"></div>
+    <div id="test" style="width:500px;height:500px;" v-show="initSync === 3"></div>
   </div>
 </template>
 
@@ -15,7 +15,8 @@ export default {
       dogeStatus: 'red',
       vBlog: 0,
       vAlbum: 0,
-      vDynamic: 0
+      vDynamic: 0,
+      initSync: 0
     }
   },
   beforeMount () {
@@ -28,9 +29,9 @@ export default {
         this.dogeStatus = 'red'
       }
     }).catch(err => err)
-    axios.get('/api/info/album').then(res => { this.vAlbum = res.data.data }).catch(err => err)
-    axios.get('/api/info/dynamic').then(res => { this.vDynamic = res.data.data }).catch(err => err)
-    axios.get('/api/info/blog').then(res => { this.vBlog = res.data.data }).catch(err => err)
+    axios.get('/api/info/album').then(res => { this.vAlbum = res.data.data; this.initSync++ }).catch(err => err)
+    axios.get('/api/info/dynamic').then(res => { this.vDynamic = res.data.data; this.initSync++ }).catch(err => err)
+    axios.get('/api/info/blog').then(res => { this.vBlog = res.data.data; this.initSync++ }).catch(err => err)
   },
   mounted () {
   },
