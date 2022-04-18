@@ -1,6 +1,7 @@
 <template>
   <div id="about">
     <img src="/imgs/A006.jpg" width="100%"/>
+    <!-- <img src="https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/A006.jpg" width="100%"/> -->
     <span>
       <h1>关于</h1><br/>
       <p>Ciallo，大家好，こんばんは、首先<i style="color:pink"> 感谢 </i>大家的访问，对您的到来我感到了万分的荣幸！</p><br/>

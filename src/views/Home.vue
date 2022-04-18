@@ -13,6 +13,7 @@
   width: 100%;
   height: 100%;
   background: url('/imgs/bk.jpeg') fixed no-repeat;
+  // background: url('https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/bk.jpeg') fixed no-repeat;
   background-size: cover;
   h1{
     width: 100%;

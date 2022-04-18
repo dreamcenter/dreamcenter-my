@@ -2,6 +2,7 @@
   <div id="app">
     <div id="nav" v-if="!this.$store.state.isAdmin" :style="{'backgroundColor':(isHome?'':'black')}">
       <img src="/imgs/avatar.jpg" @click="gotoAdmin()" width="40px" style="border-radius:20px"/>
+      <!-- <img src="https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/avatar.jpg" @click="gotoAdmin()" width="40px" style="border-radius:20px"/> -->
       <span class="sign">时光潜流</span>
       <router-link class="nav-color nav-sub iconfont icon-xiangguan" to="/About" style="margin-right:20px">关于</router-link>
       <router-link class="nav-color nav-sub iconfont icon--todo" to="/Todo">待做</router-link>
@@ -65,6 +66,7 @@ export default {
   width: 100%;
   height: 100%;
   background: url('/imgs/background.png') fixed no-repeat;
+  // background: url('https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/background.png') fixed no-repeat;
   background-size: cover;
   overflow: hidden;
   #nav{

@@ -14,10 +14,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-#_blog{
-  // width: 100%;
-  // overflow-y: scroll;
-}
-</style>
