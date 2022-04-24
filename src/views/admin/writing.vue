@@ -6,7 +6,9 @@
       <li><button @click="this.commit">提交</button></li>
       <li><button @click="this._export">导出</button></li>
       <li><button @click="this._import">导入</button></li>
-      <input type="file" ref="bak"/>
+      <li><input type="file" ref="bak" style="width:150px"/></li>
+      <li v-if="isBlog"><button @click="this.addCode">插入代码</button></li>
+      <li v-if="isBlog"><textarea placeholder="code" v-model="code"></textarea></li>
     </ul><br/>
     <input v-model="title" v-if="this.isBlog" style="height:30px;font-size:30px" placeholder="标题"/>
     <div id="editor"></div>
@@ -22,6 +24,8 @@ import axios from 'axios'
 // https://www.wangeditor.com/
 import E from 'wangeditor'
 import hljs from 'highlight.js'
+import '../../css/a11y-light.min.css'
+
 export default {
   data () {
     return {
@@ -31,16 +35,23 @@ export default {
       editor: null,
       title: '',
       tags: [],
-      tag: ''
+      tag: '',
+      code: ''
     }
   },
   mounted () {
     this.from = location.search.substr(1).split('&')
       .find((item) => item.includes('type')).split('=')[1]
     this.isBlog = this.from === 'blog'
+
     // // https://bbs-api-static.mihoyo.com/misc/api/emoticon_set
     this.editor = new E('#editor')
-    this.editor.highlight = hljs
+    // this.editor.highlight = hljs
+
+    // exclude
+    this.editor.config.excludeMenus = ['code']
+
+    // markdown file upload module
     const _that = this
     this.editor.config.customUploadImg = function (resultFiles, insertImgFn) {
       const formData = new FormData()
@@ -126,6 +137,13 @@ export default {
       bakReader.onload = function () {
         _that.editor.txt.html(this.result)
       }
+    },
+    addCode () {
+      const res = hljs.highlightAuto(this.code).value
+      const codeStr = "<pre><code class='highlight'>" +
+        res + '</code></pre><p data-we-empty-p><br></p>'
+      this.editor.txt.append(codeStr)
+      this.code = ''
     }
   }
 }
@@ -139,7 +157,7 @@ export default {
     list-style: none;
     display: flex;
     li{
-      width: 15%;
+      width: 10%;
       button{
         width: 100%;
         height: 30px;

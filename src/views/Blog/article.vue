@@ -16,6 +16,7 @@
 <script>
 import axios from 'axios'
 import hljs from 'highlight.js'
+import '../../css/a11y-dark.min.css'
 export default {
   data () {
     return {
@@ -105,10 +106,10 @@ export default {
       color: white;
       font-weight: bold;
       font-size: 16px;
-      text-indent: 1rem;
+      // text-indent: 1rem;
       padding: 2px;
       background-color: #000;
-      overflow-x: scroll;
+      overflow-x: auto;
       // border-radius: 3px;
       // padding: 3px 5px;
       // margin: 0 3px;

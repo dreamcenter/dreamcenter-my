@@ -23,8 +23,9 @@
         <li>番剧</li>
         <router-link active-class="act" tag="li" to="/Admin/album">回忆</router-link>
         <li>仓库</li>
-        <li>灵感</li>
-        <li>待做</li>
+        <router-link active-class="act" tag="li" to="/Admin/friend">友链</router-link>
+        <!-- <li>灵感</li> -->
+        <!-- <li>待做</li> -->
         <li @click="back">主页</li>
       </ul>
       <div class="right">

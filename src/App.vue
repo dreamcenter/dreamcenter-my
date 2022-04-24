@@ -5,8 +5,9 @@
       <!-- <img src="https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/avatar.jpg" @click="gotoAdmin()" width="40px" style="border-radius:20px"/> -->
       <span class="sign">时光潜流</span>
       <router-link class="nav-color nav-sub iconfont icon-xiangguan" to="/About" style="margin-right:20px">关于</router-link>
-      <router-link class="nav-color nav-sub iconfont icon--todo" to="/Todo">待做</router-link>
-      <router-link class="nav-color nav-sub iconfont icon-linggandengpao" to="/Inspire">灵感</router-link>
+      <!-- <router-link class="nav-color nav-sub iconfont icon--todo" to="/Todo">待做</router-link> -->
+      <!-- <router-link class="nav-color nav-sub iconfont icon-linggandengpao" to="/Inspire">灵感</router-link> -->
+      <router-link class="nav-color nav-sub iconfont icon-linggandengpao" to="/Inspire">友链</router-link>
       <router-link class="nav-color nav-sub iconfont icon-cangku" to="/Repository">仓库</router-link>
       <router-link class="nav-color nav-sub iconfont icon-xiangpian" to="/Album">回忆</router-link>
       <router-link class="nav-color nav-sub iconfont icon-xihongshifanqie" to="/Acgn">番剧</router-link>
@@ -49,7 +50,8 @@ export default {
   beforeUpdate () {
     this.isHome = (this.$route.path === '/')
     const uri2 = this.$route.path.split('/')[1].toLowerCase()
-    if (uri2 === 'blog' || uri2 === 'dynamic' || uri2 === 'album') {
+    const uri3 = this.$route.path.split('/')[2]
+    if ((uri2 === 'blog' || uri2 === 'dynamic' || uri2 === 'album') && (uri3 === undefined || uri3.trim() === '')) {
       axios.get('/api/info/increase?target=' + uri2).then(res => res).catch(err => err)
     }
   },

@@ -80,6 +80,10 @@ const routes = [
         component: () => import('../views/admin/album.vue')
       },
       {
+        path: 'friend',
+        component: () => import('../views/admin/friend.vue')
+      },
+      {
         path: '',
         redirect: 'view'
       }

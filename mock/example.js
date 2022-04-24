@@ -54,9 +54,9 @@ module.exports = {
     msg: '',
     data: {
       id: 1,
-      title: '论c++语言',
+      title: 'test',
       time: '2022-02-22 12:12:12',
-      content: '一大堆的废话'
+      content: '<pre><code class="highlight"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"this.back"</span>&gt;</span>返回<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></code></pre><br/><pre><code class="highlight"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span></span>返回<span class="hljs-tag"></span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></code></pre>'
     }
   },
   'get /api/dynamic/sheet': {
