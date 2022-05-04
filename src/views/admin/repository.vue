@@ -84,7 +84,7 @@ export default {
       // document.body.removeChild(toDownload)
 
       // alert('请按F12查看')
-      console.log(this.editor.txt.html())
+      // console.log(this.editor.txt.html())
     },
     _import () {
       const _that = this

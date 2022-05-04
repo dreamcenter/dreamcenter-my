@@ -22,7 +22,7 @@
     </div>
     <div class="frame right" style="width:30%">
       <h1>申请</h1>
-      <review  v-if="parent===0" :parent='parent' :target='target'/>
+      <review  v-if="parent===0" :parent='parent' :target='target' @review_success='reviewSuccess(1)'/>
       <ol>
         <li class="parentReply" v-for="(item, index) in reviewList" :key="item.id">
           <img :src="item.email" width="60" height="60"/>
