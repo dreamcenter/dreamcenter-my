@@ -6,16 +6,13 @@
       <p class="time">{{data.time}}</p>
       <div v-html="data.content"></div>
       <div style="height:100px"></div>
-      <span v-for="j in data.tags" :key="j.name" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>
     </div>
     <div class="frame right" style="width:20%"> </div>
-    <!-- <div style="clear:both"></div> -->
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-// 2 to //
 import hljs from 'highlight.js'
 import '../../css/a11y-dark.min.css'
 export default {
@@ -26,13 +23,13 @@ export default {
         title: '',
         time: '',
         content: '',
-        tags: []
+        type: ''
       }
     }
   },
   beforeMount () {
     this.id = this.$route.params.id
-    axios.post('/api/blog/id', `id=${this.id}`).then(res => {
+    axios.get('/api/repository_proj/select?id=' + this.id).then(res => {
       this.data = res.data.data
     }).catch(err => err)
     hljs.highlightAll()
@@ -44,20 +41,15 @@ export default {
 <style lang="scss">
 #article{
   height: 100%;
-  // display: flex;
   overflow-y: scroll;
   .frame{
     margin-top: 80px;
-    // border: 1px solid red;
-    // display: flexbox;
   }
   .center{
     margin-left: 20%;
     background-color: rgba(186, 181, 181, 0.1);
     box-shadow: 0 0 10px rgba(0,0,0,.5);
     overflow: hidden;
-    // min-height: 100%;
-    // overflow: scroll;
     .title{
       text-align: center;
       font-family: '宋体';
@@ -65,7 +57,6 @@ export default {
     .time{
       text-align: center;
       font-size: 12px;
-      // margin-right: 100px;
       margin-bottom: 10px;
       color: rgb(111, 106, 106);
     }
@@ -101,19 +92,12 @@ export default {
 
     /* code 样式 */
     code {
-      // display: inline-block;
-      // display: inline;
-      // zoom: 1;
       color: white;
       font-weight: bold;
       font-size: 16px;
-      // text-indent: 1rem;
       padding: 2px;
       background-color: #000;
       overflow-x: auto;
-      // border-radius: 3px;
-      // padding: 3px 5px;
-      // margin: 0 3px;
     }
     pre code {
       display: block;

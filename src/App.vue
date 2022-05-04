@@ -22,6 +22,7 @@
 
 <script>
 import axios from 'axios'
+import { bkeffectStart } from './js/bkeffect'
 // import Vue from 'vue'
 export default {
   data () {
@@ -59,6 +60,10 @@ export default {
     gotoAdmin: function () {
       this.$router.push('/admin')
     }
+  },
+  mounted () {
+    bkeffectStart()
+    console.log('页面装载完毕')
   }
 }
 </script>

@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 import Home from '../views/Home.vue'
 import Blog from '../views/Blog.vue'
 import Dynamic from '../views/Dynamic.vue'
@@ -44,6 +46,10 @@ const routes = [
     component: Repository
   },
   {
+    path: '/Repository/:id',
+    component: () => import('../views/Repository/article.vue')
+  },
+  {
     path: '/Inspire',
     component: Inspire
   },
@@ -76,8 +82,16 @@ const routes = [
         component: () => import('../views/admin/dynamic.vue')
       },
       {
+        path: 'acgn',
+        component: () => import('../views/admin/acgn.vue')
+      },
+      {
         path: 'album',
         component: () => import('../views/admin/album.vue')
+      },
+      {
+        path: 'repository',
+        component: () => import('../views/admin/repository.vue')
       },
       {
         path: 'friend',
@@ -99,6 +113,15 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  nprogress.start()
+  next()
+})
+
+router.afterEach(() => {
+  nprogress.done()
 })
 
 export default router

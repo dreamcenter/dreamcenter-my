@@ -1,6 +1,7 @@
 *{
   margin: 0px;
   padding: 0px;
+  cursor: url('/cur/cursor.ico'),auto;
 }
 
 html,body{

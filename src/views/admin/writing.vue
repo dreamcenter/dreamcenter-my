@@ -124,7 +124,7 @@ export default {
       toDownload.download = 'log' + this.$time() + '.txt'
       toDownload.href = URL.createObjectURL(myBlob)
       toDownload.click()
-      document.body.removeChild(myBlob)
+      // document.body.removeChild(myBlob)
 
       // alert('请按F12查看')
       console.log(this.editor.txt.html())

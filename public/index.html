@@ -4,14 +4,27 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="referrer" content="never">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      #beforeLoading{
+        background-color: rgba(128, 128, 128, 0.098);
+      }
+      #beforeLoading h1{
+        color:rgb(14, 147, 102);
+      }
+    </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app">
+      <div id="beforeLoading">
+        <h1>页面加载中,不要离开哦 ヾ(•ω•`)o ...</h1>
+      </div>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>

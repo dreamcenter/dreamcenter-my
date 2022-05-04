@@ -20,9 +20,9 @@
         <router-link active-class="act" tag="li" to="/Admin/view">概览</router-link>
         <router-link active-class="act" tag="li" to="/Admin/blog">博客</router-link>
         <router-link active-class="act" tag="li" to="/Admin/dynamic">动态</router-link>
-        <li>番剧</li>
+        <router-link active-class="act" tag="li" to="/Admin/acgn">番剧</router-link>
         <router-link active-class="act" tag="li" to="/Admin/album">回忆</router-link>
-        <li>仓库</li>
+        <router-link active-class="act" tag="li" to="/Admin/repository">仓库</router-link>
         <router-link active-class="act" tag="li" to="/Admin/friend">友链</router-link>
         <!-- <li>灵感</li> -->
         <!-- <li>待做</li> -->

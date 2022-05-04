@@ -9,11 +9,20 @@ import './css/iconfont.css'
 import 'highlight.js/styles/androidstudio.css'
 
 import { getNowTime } from './js/util'
-import * as echarts from 'echarts'
 import cookie from 'vue-cookies'
 import axios from 'axios'
 import { Pagination } from 'element-ui'
 import xss from 'xss'
+
+// import * as echarts from 'echarts'
+// import echarts
+import * as echarts from 'echarts/core'
+import { PieChart } from 'echarts/charts'
+import { CanvasRenderer } from 'echarts/renderers'
+echarts.use([
+  PieChart,
+  CanvasRenderer
+])
 
 axios.interceptors.request.use((config) => {
   const token = sessionStorage.getItem('token')
