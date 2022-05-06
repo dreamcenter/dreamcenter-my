@@ -136,6 +136,7 @@ export default {
 #album{
   height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
   h1{
     margin-top: 260px;
     text-align: center;
@@ -251,6 +252,31 @@ export default {
       &:hover{
         box-shadow: 0 0 100px rgba($color: #000, $alpha: .5);
         color: white;
+      }
+    }
+  }
+}
+@media screen and (max-width: 800px){
+  #album{
+    overflow-x: hidden;
+    ul{
+      li{
+        transform: rotateZ(0deg);
+        // transform: scale(.8);
+        // margin: -4% -5%;
+      }
+    }
+    .list{
+      height: 280px;
+      left: 10px;
+      top: 50%;
+      width: 90%;
+      z-index: 999;
+      ul{
+        margin: 0px;
+        height: 280px;
+        li{
+        }
       }
     }
   }

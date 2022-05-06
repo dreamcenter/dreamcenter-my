@@ -1,8 +1,8 @@
 <template>
   <div id="acgn">
     <!-- <h1>现在还不想做啦，にに</h1> -->
-    <div class="frame left" style="width:20%"> </div>
-    <div class="frame center" style="width:60%">
+    <div class="frame left" style="width:20%" v-if="$store.state.isPc"> </div>
+    <div class="frame center" :style="{'width':$store.state.isPc?'60%':'80%'}">
       <div class="acgn_entry" id="acgn_watching">
         <h2>正在看</h2>
         <div>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="frame right" style="width:20%">
+    <div class="frame right" style="width:20%" v-if="$store.state.isPc">
       <div @click="banned">二次元站</div>
       <div @click="banned">搜番引擎</div>
       <div @click="banned">GALGAME</div>
@@ -62,7 +62,7 @@ export default {
       res.data.data.forEach((item) => {
         this.animeList[item.type - 1].push(item)
       })
-      console.log(this.animeList)
+      // console.log(this.animeList)
     }).catch(err => err)
   },
   methods: {
@@ -120,6 +120,13 @@ export default {
       text-align: center;
       font-size: 20px;
       cursor: pointer;
+    }
+  }
+}
+@media screen and (max-width: 800px){
+  #acgn{
+    .center{
+      margin: 60px auto;
     }
   }
 }

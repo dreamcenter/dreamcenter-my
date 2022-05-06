@@ -1,14 +1,14 @@
 <template>
   <div id="article">
-    <div class="frame left" style="width:20%"> </div>
-    <div class="frame center" style="width:60%;padding:10px;box-sizing: border-box;">
+    <div class="frame left" style="width:20%" v-if="$store.state.isPc"> </div>
+    <div class="frame center" :style="{'width':($store.state.isPc?'60%':'80%'),'padding':'10px','box-sizing': 'border-box'}">
       <h1 class="title">{{data.title}}</h1>
       <p class="time">{{data.time}}</p>
       <div v-html="data.content"></div>
       <div style="height:100px"></div>
       <span v-for="j in data.tags" :key="j.name" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>
     </div>
-    <div class="frame right" style="width:20%"> </div>
+    <div class="frame right" style="width:20%" v-if="$store.state.isPc"> </div>
     <!-- <div style="clear:both"></div> -->
   </div>
 </template>
@@ -128,6 +128,13 @@ export default {
     content: '';
     display: block;
     clear: both;
+  }
+}
+@media screen and (max-width: 800px){
+  #article{
+    .center{
+      margin: 80px auto;
+    }
   }
 }
 </style>

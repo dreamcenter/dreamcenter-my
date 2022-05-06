@@ -93,6 +93,10 @@ export default {
       }
     },
     commit () {
+      if (this.toEdit.icon.length > 100) {
+        alert('icon too long')
+        return
+      }
       axios.post('/api/anime/' + (this.isEdit === 1 ? 'update' : 'add'), qs.stringify(this.toEdit)).then(res => {
         console.log(res.data)
         if (res.data.code === 200 && res.data.data === 1) {

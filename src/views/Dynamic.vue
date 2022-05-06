@@ -1,7 +1,7 @@
 <template>
   <div id="dynamic" @scroll="scroll()">
-    <div class="frame left" style="width:20%"> </div>
-    <div class="frame center" style="width:60%">
+    <div class="frame left" style="width:20%" v-if="$store.state.isPc"> </div>
+    <div class="frame center" :style="{'width':$store.state.isPc?'60%':'80%'}">
       <ul>
         <li v-for="item in dynamicList" :key="item.id">
           <h1>{{item.time | beautyDate}}</h1>
@@ -21,7 +21,9 @@
       </ul>
       <div style="height:100px"></div>
     </div>
-    <div class="frame right" style="width:20%"> </div>
+    <div class="frame right" style="width:20%" v-if="$store.state.isPc">
+      <div id="goToTop" @click="toTop">回到顶部</div>
+    </div>
   </div>
 </template>
 
@@ -97,6 +99,9 @@ export default {
           }).catch(err => err)
         }
       }
+    },
+    toTop () {
+      document.querySelector('#dynamic').scrollTo(0, 0)
     }
   }
 }
@@ -104,6 +109,7 @@ export default {
 
 <style lang="scss">
 #dynamic{
+  scroll-behavior: smooth;
   height: 100%;
   display: flex;
   overflow-y: scroll;
@@ -127,6 +133,39 @@ export default {
         span{
           // display: inline-block;
         }
+      }
+    }
+  }
+  #goToTop{
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 12%;
+    bottom: 10%;
+    background-color: rgb(190, 187, 187);
+    padding: 2px;
+    box-sizing: border-box;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,.5);
+    transition: .4s 0s ease-in;
+    cursor: pointer;
+    &:hover{
+      background-color: rgb(255, 255, 255);
+      color: rgb(163, 162, 162);
+      box-shadow: 4px 6px 20px rgba(0,0,0,.5);
+      transform: rotateZ(360deg);
+    }
+  }
+}
+@media screen and (max-width: 800px){
+  #dynamic{
+    .center{
+      margin: 60px auto;
+      h1{
+        font-size: 24px;
       }
     }
   }

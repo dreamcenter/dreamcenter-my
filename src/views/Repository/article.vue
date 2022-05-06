@@ -1,13 +1,13 @@
 <template>
   <div id="article">
-    <div class="frame left" style="width:20%"> </div>
-    <div class="frame center" style="width:60%;padding:10px;box-sizing: border-box;">
+    <div class="frame left" style="width:20%" v-if="$store.state.isPc"> </div>
+    <div class="frame center" :style="{'width':($store.state.isPc?'60%':'80%'),'padding':'10px','box-sizing': 'border-box'}">
       <h1 class="title">{{data.title}}</h1>
       <p class="time">{{data.time}}</p>
       <div v-html="data.content"></div>
       <div style="height:100px"></div>
     </div>
-    <div class="frame right" style="width:20%"> </div>
+    <div class="frame right" style="width:20%" v-if="$store.state.isPc"> </div>
   </div>
 </template>
 
@@ -112,6 +112,13 @@ export default {
     content: '';
     display: block;
     clear: both;
+  }
+}
+@media screen and (max-width: 800px){
+  #article{
+    .center{
+      margin: 80px auto;
+    }
   }
 }
 </style>

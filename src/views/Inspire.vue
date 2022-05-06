@@ -1,7 +1,7 @@
 <template>
   <div id="inspire">
-    <div class="frame left" style="width:10%"> </div>
-    <div class="frame center" style="width:60%">
+    <div class="frame left" style="width:10%" v-if="$store.state.isPc"> </div>
+    <div class="frame center" :style="{'width':$store.state.isPc?'60%':'80%'}">
       <h1>友人志</h1>
       <ul>
         <li v-for="item in friendList" :key="item.id" @click="jump(item.url)">
@@ -11,16 +11,17 @@
             <p>{{item.describe }}</p>
           </div>
         </li>
-        <li v-for="i in 20" :key="'k'+i">
+        <li v-for="i in 10" :key="'k'+i">
           <img src="/imgs/avatar.jpg" width="60" height="60"/>
           <div>
             <h3>占位填充</h3>
             <p>这样看起来就很多了</p>
           </div>
         </li>
+        <p v-if="!$store.state.isPc" style="background-color:gray;margin-bottom:10px;color:white;padding:10px">申请友链请转至pc端访问此页面</p>
       </ul>
     </div>
-    <div class="frame right" style="width:30%">
+    <div class="frame right" style="width:30%" v-if="$store.state.isPc">
       <h1>申请</h1>
       <review  v-if="parent===0" :parent='parent' :target='target' @review_success='reviewSuccess(1)'/>
       <ol>
@@ -218,6 +219,19 @@ export default {
               width: 100%;
             }
           }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 800px){
+  #inspire{
+    flex-direction: column;
+    .center{
+      margin: 60px auto;
+      ul{
+        li{
+          width: 100%;
         }
       }
     }

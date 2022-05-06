@@ -13,25 +13,22 @@ import cookie from 'vue-cookies'
 import axios from 'axios'
 import { Pagination } from 'element-ui'
 import xss from 'xss'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 
-// import * as echarts from 'echarts'
-// import echarts
-import * as echarts from 'echarts/core'
-import { PieChart } from 'echarts/charts'
-import { CanvasRenderer } from 'echarts/renderers'
-echarts.use([
-  PieChart,
-  CanvasRenderer
-])
-
+axios.defaults.timeout = 10000
 axios.interceptors.request.use((config) => {
+  nprogress.start()
   const token = sessionStorage.getItem('token')
   if (token) config.headers.Authorization = token
   return config
 })
+axios.interceptors.response.use(response => {
+  nprogress.done()
+  return response
+})
 
 Vue.config.productionTip = false
-Vue.prototype.$echarts = echarts
 Vue.prototype.$cookie = cookie
 Vue.prototype.$time = getNowTime
 Vue.prototype.$xss = xss

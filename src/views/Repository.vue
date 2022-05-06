@@ -42,7 +42,7 @@ export default {
   beforeMount () {
     axios.get('/api/repository_type/list').then(res => {
       this.titleList.push(...res.data.data)
-      console.log(this.titleList)
+      // console.log(this.titleList)
     }).catch(err => err)
     axios.get('/api/repository_proj/list?type=0').then(res => {
       this.projectList = res.data.data
@@ -79,6 +79,7 @@ export default {
       // border: 1px solid red;
       li{
         margin-right: 6px;
+        margin-bottom: 4px;
         padding: 4px 10px;
         display: inline-block;
         // border: 1px solid blue;

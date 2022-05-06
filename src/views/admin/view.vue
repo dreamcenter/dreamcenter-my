@@ -1,9 +1,15 @@
 <template>
-<!-- echarts -->
   <div id="_view">
     <h3>full view</h3>
     <div class="status">图床状态<span class="status_color" :style="{'background-color':dogeStatus}"></span></div>
-    <div id="test" style="width:500px;height:500px;" v-show="initSync === 3"></div>
+    <p>Blog Visit: {{vBlog}}</p>
+    <p>Album Visit: {{vAlbum}}</p>
+    <p>Dynamic Visit: {{vDynamic}}</p>
+    <p id="drawVisit" v-show="initSync === 3">
+      <span :style="{'width': getPcBlogVisit + 'px'}">{{vBlog}}</span>
+      <span :style="{'width': getPcAlbumVisit + 'px'}">{{vAlbum}}</span>
+      <span :style="{'width': getPcDynamicVisit + 'px'}">{{vDynamic}}</span>
+    </p>
   </div>
 </template>
 
@@ -17,6 +23,17 @@ export default {
       vAlbum: 0,
       vDynamic: 0,
       initSync: 0
+    }
+  },
+  computed: {
+    getPcBlogVisit () {
+      return 150 * this.vBlog / (this.vBlog + this.vAlbum + this.vDynamic)
+    },
+    getPcAlbumVisit () {
+      return 150 * this.vAlbum / (this.vBlog + this.vAlbum + this.vDynamic)
+    },
+    getPcDynamicVisit () {
+      return 150 * this.vDynamic / (this.vBlog + this.vAlbum + this.vDynamic)
     }
   },
   beforeMount () {
@@ -36,29 +53,6 @@ export default {
   mounted () {
   },
   beforeUpdate () {
-    const myChart = this.$echarts.init(document.getElementById('test'))
-    myChart.setOption({
-      series: [
-        {
-          type: 'pie',
-          data: [
-            {
-              value: this.vDynamic,
-              name: '动态 [' + this.vDynamic + ']'
-            },
-            {
-              value: this.vBlog,
-              name: '博客 [' + this.vBlog + ']'
-            },
-            {
-              value: this.vAlbum,
-              name: '相册 [' + this.vAlbum + ']'
-            }
-          ],
-          radius: '150px'
-        }
-      ]
-    })
   }
 }
 </script>
@@ -75,6 +69,33 @@ export default {
       display: inline-block;
       border-radius: 6px;
       border: 2px solid coral;
+    }
+  }
+  #drawVisit{
+    width: 150px;
+    border: 1px solid black;
+    span{
+      display: block;
+      float: left;
+      height: 16px;
+      color: white;
+      font-family: 'Times New Roman', Times, serif;
+      text-align: center;
+      line-height: 16px;
+      &:nth-child(1){
+        background-color: rgb(238, 142, 142);
+      }
+      &:nth-child(2){
+        background-color: rgb(143, 166, 241);
+      }
+      &:nth-child(3){
+        background-color: rgb(157, 233, 134);
+      }
+    }
+    &::after{
+      clear: both;
+      content: '';
+      display: block;
     }
   }
 }

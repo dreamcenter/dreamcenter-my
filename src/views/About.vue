@@ -67,4 +67,22 @@ export default {
   //   background-color: rgb(155, 214, 99);
   // }
 }
+@media screen and (max-width: 800px){
+  #about{
+    img{
+      height: 300px;
+      object-fit: cover;
+      object-position: 90% 0%;
+    }
+    span{
+      margin: 0 10%;
+      h1{
+        font-size: 30px;
+      }
+      p{
+        font-size: 18px;
+      }
+    }
+  }
+}
 </style>
