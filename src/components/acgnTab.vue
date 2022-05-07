@@ -2,7 +2,7 @@
   <div class="acgn_tab">
     <img :src="icon" width="100" height="100"/>
     <span>
-      <h3>{{title}}</h3>
+      <h3><a :title="title">{{title}}</a></h3>
       <b>进度: {{temp}}/{{total}}</b>
     </span>
   </div>
@@ -22,10 +22,14 @@ export default {
   margin: 5px;
   box-shadow: 0 0 4px rgba(0,0,0,.8);
   overflow: hidden;
+  h3{
+    font-size: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
   img{
     box-sizing: border-box;
     object-fit:cover;
-    // border: 1px solid green;
     display: inline-block;
   }
   span{

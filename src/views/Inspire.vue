@@ -30,7 +30,7 @@
           <div>
             <b @click="jump(item.url)">{{item.nickname}}</b><br/>
             <i>{{item.time}}</i>
-            <pre style="font-size:12px;font-family:default">{{item.msg}}</pre>
+            <p class="rw_msg" style="font-size:12px;font-family:default">{{item.msg}}</p>
             <p @click="reply(index, item.id, item.id)" class="reply">回复</p>
             <ul>
               <li v-for="subItem in item.child" :key="subItem.id">
@@ -118,7 +118,7 @@ export default {
   cursor: default;
   height: 100%;
   display: flex;
-  overflow-y: scroll;
+  overflow-y: auto;
   .frame{
     margin-top: 60px;
     display: flex;
@@ -198,27 +198,38 @@ export default {
           vertical-align: top;
           border-radius: 30px;
           border: 1px solid gray;
+          transition: .2s 0s ease-in-out;
+          &:hover{
+            transform: rotateZ(-15deg);
+          }
         }
         div{
           width: calc(100% - 100px);
           // border:1px solid coral;
           display: inline-block;
-          margin-left: 30px;
+          margin-left: 15px;
           i{
-            font-size: 12px;
+            font-size: 4px;
             font-style: normal;
+            color: gray;
           }
           p{
             font-size: 12px;
           }
           ul{
-            width: 100%;
+            width: calc(100% + 20px);
             list-style: none;
-              // border: 1px solid red;
+            margin-left: -20px;
+            // border: 1px solid red;
             li{
               width: 100%;
             }
           }
+        }
+        .rw_msg{
+          // border: 1px solid red;
+          word-break:break-all;
+          white-space: pre-line;
         }
       }
     }

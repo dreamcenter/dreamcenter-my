@@ -165,8 +165,11 @@ export default {
     .center{
       margin: 60px auto;
       h1{
-        font-size: 24px;
+        font-size: 22px;
       }
+    }
+    iframe{
+      width: 100%;
     }
   }
 }

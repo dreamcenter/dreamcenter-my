@@ -212,11 +212,7 @@ module.exports = {
     msg: '',
     data: []
   },
-  'get /api/friRw/list': {
-    code: 200,
-    msg: '',
-    data: []
-  },
+  'get /api/friRw/list': { code: 200, msg: '', data: { count: 2, list: [{ id: 8, nickname: '猫玖', email: 'https://cravatar.cn/avatar/c6c133ad809939cd4cfd37106f9e4145', time: '2022-05-07 16:14:55', url: 'https://csxandlsy.xyz/', parent: 0, target: 0, msg: '猫玖\nhttps://csxandlsy.xyz/\n目前手机端还未完善', tip: 1, child: [{ id: 9, nickname: '时光潜流', email: 'https://cravatar.cn/avatar/ec3be3b2c87506b56678bc7bca7fdecd', time: '2022-05-07 19:34:48', url: 'https://www.dreamcenter.top', parent: null, target: null, msg: '猫玖:希望小伙伴以后有了更多的博文\n再来吧QAQ, 加油吧，\n建议学点前端框架呢>_<', tip: 1 }] }, { id: 1, nickname: '时光潜流', email: 'https://cravatar.cn/avatar/ec3be3b2c87506b56678bc7bca7fdecd', time: '2022-05-05 00:35:59', url: 'https://www.dreamcenter.top', parent: 0, target: 0, msg: '模板如下咯！\n名称：时光潜流\n头像: https://www.dreamcenter.top/imgs/avatar.jpg\n链接：http://www.dreamcenter.top\n简述：妹控的中二君！', tip: 1, child: [] }] } },
   'get /api/repository_type/list': {
     code: 200,
     msg: '',
@@ -242,6 +238,6 @@ module.exports = {
   'get /api/anime/list': {
     code: 200,
     msg: '',
-    data: []
+    data: [{ id: 1, title: '珈百璃的堕落', icon: '//i0.hdslb.com/bfs/bangumi/7b9a5a6e6c5ca157a4c18b01093a7bb1701f4606.jpg', temp: 10, total: 12, type: 1 }, { id: 2, title: '测不准的阿波连同学', icon: '//i0.hdslb.com/bfs/bangumi/image/91ec1f4bc4af307dbfbd68c9ba6d838b27adee0f.png', temp: 0, total: 12, type: 3 }]
   }
 }

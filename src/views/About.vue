@@ -15,7 +15,8 @@
       <p></p><br/>
       <p></p><br/>
       <p>水字数，水字数ヽ(￣ω￣(￣ω￣〃)ゝ</p><br/>
-      <p style="text-align:center;font-size:12px">2022.03 ~ {{nowTime}}</p>
+      <p class="running_time" style="border-top:1px solid white;">2022.03 ~ {{nowTime}}</p>
+      <p class="running_time">皖ICP备2022005998号</p>
       <p></p><br/>
       <p></p><br/>
       <p></p><br/>
@@ -58,14 +59,12 @@ export default {
       font-size: 20px;
       text-indent: 2rem;
     }
+    .running_time{
+      text-align: center;
+      font-size:12px;
+      text-indent: 0;
+    }
   }
-  // &::-webkit-scrollbar{
-  //   width: 4px;
-  //   background-color: rgb(61, 94, 94);
-  // }
-  // &::-webkit-scrollbar-thumb{
-  //   background-color: rgb(155, 214, 99);
-  // }
 }
 @media screen and (max-width: 800px){
   #about{

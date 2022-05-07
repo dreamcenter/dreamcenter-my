@@ -49,6 +49,7 @@ export default {
     handleCurrentChange (val) {
       this.$store.commit('changeBlogPage', val)
       this.$store.dispatch('getBlogList')
+      document.querySelector('#blog').scrollTo(0, 0)
     },
     jump (id) {
       this.$router.push('/Blog/' + id)
@@ -62,6 +63,7 @@ export default {
   height: 100%;
   display: flex;
   overflow-y: scroll;
+  scroll-behavior:smooth;
   .frame{
     margin-top: 60px;
     // border: 1px solid red;

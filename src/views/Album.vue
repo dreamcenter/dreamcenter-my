@@ -71,7 +71,7 @@ export default {
       if (this.isIn) {
         axios.get('/api/image/list?aid=' + id).then(res => {
           this.imgs = res.data.data
-          console.log(this.imgs)
+          // console.log(this.imgs)
         }).catch(res => res)
       } else {
         this.imgs = []
@@ -91,36 +91,15 @@ export default {
       const delta = e.deltaY
       const node = this.$refs.imgList
       if (this.tX + delta > node.scrollWidth) {
-        this.tX = node.scrollWidth
+        this.tX = node.scrollWidth - delta
         return
       }
       if (this.tX + delta < -node.scrollWidth) {
-        this.tX = 0
+        this.tX = delta
         return
       }
-
-      // const judge = delta > 0
-      // setInterval(() => {
-      //   if (judge && this.fX < this.tX) {
-      //     node.scrollTo(++this.fX, 0)
-      //     this.fX += 2
-      //   } else if (!judge && this.fX > this.tX) {
-      //     node.scrollTo(--this.fX, 0)
-      //     this.fX -= 2
-      //   } else {
-      //     return
-      //   }
-      //   console.log(1)
-      // }, 10)
-
-      // if(delta>=0) {
-      //   while (this.fX < this.tX) {
-      //     node.scrollTo(++this.fX, 0)
-      //   }
-      // }
       node.scrollTo(this.tX, 0)
-      this.tX += delta
-      // this.mutex = true
+      this.tX += delta * 100
     },
     showInfo (id) {
       this.isInfo = true

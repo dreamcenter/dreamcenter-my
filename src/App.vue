@@ -52,6 +52,7 @@ export default {
     }
   },
   beforeMount () {
+    window.onresize = this.sizeChange
     this.isHome = (this.$route.path === '/')
     const token = this.$cookie.get('token')
     if (token) sessionStorage.token = token
@@ -71,6 +72,11 @@ export default {
   methods: {
     gotoAdmin: function () {
       this.$router.push('/admin')
+    },
+    sizeChange () {
+      const res = document.body.clientWidth > 800
+      this.$store.state.isPc = res
+      // console.log(this.$store.state.isPc)
     }
   },
   mounted () {
