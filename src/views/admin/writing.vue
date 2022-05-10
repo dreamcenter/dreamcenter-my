@@ -62,7 +62,7 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }).then(res => {
-        console.log(res.data)
+        console.log('file upload' + res.data)
         if (res.data.errno === 0) {
           insertImgFn(res.data.data[0].url)
         } else {

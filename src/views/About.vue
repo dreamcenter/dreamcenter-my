@@ -16,7 +16,9 @@
       <p></p><br/>
       <p>水字数，水字数ヽ(￣ω￣(￣ω￣〃)ゝ</p><br/>
       <p class="running_time" style="border-top:1px solid white;">2022.03 ~ {{nowTime}}</p>
-      <p class="running_time">皖ICP备2022005998号</p>
+      <p class="running_time">
+        <a href="https://beian.miit.gov.cn/" title="前往查看" class="beian" target="_blank" style="color:rgba(255, 255, 255, 0.822)">皖ICP备2022005998号</a>
+      </p>
       <p></p><br/>
       <p></p><br/>
       <p></p><br/>
@@ -63,6 +65,15 @@ export default {
       text-align: center;
       font-size:12px;
       text-indent: 0;
+    }
+  }
+  .beian{
+    text-decoration: none;
+    transition: .2s 0s ease-in;
+    &:hover{
+      text-decoration: underline;
+      // border-bottom: 1px white dashed;
+      font-size: 16px;
     }
   }
 }

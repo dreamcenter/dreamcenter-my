@@ -52,7 +52,7 @@ export default {
       document.querySelector('#blog').scrollTo(0, 0)
     },
     jump (id) {
-      this.$router.push('/Blog/' + id)
+      this.$router.push('/Blog/' + id).catch(err => err)
     }
   }
 }

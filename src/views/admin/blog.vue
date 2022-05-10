@@ -9,7 +9,7 @@
 export default {
   methods: {
     toWriting () {
-      this.$router.push('/Admin/writing?type=blog')
+      this.$router.push('/Admin/writing?type=blog').catch(err => err)
     }
   }
 }

@@ -88,8 +88,7 @@ export default {
       box-sizing: border-box;
       box-shadow: 0px 20px 10px rgba(247, 255, 157,.7) inset;
       div{
-        // overflow-x: auto;
-        overflow: hidden;
+        overflow-x: auto;
         white-space: nowrap;
         &::-webkit-scrollbar{
           height: 4px;

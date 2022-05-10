@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="()=>listShow=false" :style="{'background': 'url('+appBk+') fixed no-repeat', 'background-size':'cover'}">
+  <div id="app" @click="()=>listShow=false" :style="{'background': isHome?'':'url('+appBk+') fixed no-repeat', 'background-size':'cover'}">
     <div id="nav" v-if="!this.$store.state.isAdmin" :style="{'backgroundColor':(isHome || !$store.state.isPc?'':'black')}">
       <span class="forehead">
         <span class="phonelist" v-if="!$store.state.isPc" @click.stop="()=>listShow=!listShow">{{listShow?'×':'≡'}}</span>
@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     gotoAdmin: function () {
-      this.$router.push('/admin')
+      this.$router.push('/admin').catch(err => err)
     },
     sizeChange () {
       const res = document.body.clientWidth > 800

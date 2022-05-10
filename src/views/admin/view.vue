@@ -37,18 +37,19 @@ export default {
     }
   },
   beforeMount () {
-    axios.get('/api/info/doge').then(res => {
-      if (res.data.data === 1) {
+    axios.get('/api/info/all').then(res => {
+      const result = res.data.data
+      this.vBlog = Number.parseInt(result.vBlog / 2)
+      this.vAlbum = result.vAlbum
+      this.vDynamic = result.vDynamic
+      if (result.doge === 1) {
         this.dogeStatus = '#0f0'
-      } else if (res.data.code === 200) {
+      } else if (result.doge !== null) {
         this.dogeStatus = 'orange'
       } else {
         this.dogeStatus = 'red'
       }
     }).catch(err => err)
-    axios.get('/api/info/album').then(res => { this.vAlbum = res.data.data; this.initSync++ }).catch(err => err)
-    axios.get('/api/info/dynamic').then(res => { this.vDynamic = res.data.data; this.initSync++ }).catch(err => err)
-    axios.get('/api/info/blog').then(res => { this.vBlog = res.data.data; this.initSync++ }).catch(err => err)
   },
   mounted () {
   },

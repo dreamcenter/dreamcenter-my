@@ -49,7 +49,7 @@ export default {
         this.$store.commit('changeDynamicId', -1)
         this.$store.commit('changeDynamicContent', '')
       }
-      this.$router.push('/Admin/writing?type=dynamic')
+      this.$router.push('/Admin/writing?type=dynamic').catch(err => err)
     },
     changePage (delta) {
       delta = Number.parseInt(delta)

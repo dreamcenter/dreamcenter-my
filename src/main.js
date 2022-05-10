@@ -16,16 +16,20 @@ import xss from 'xss'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-axios.defaults.timeout = 10000
+// axios.defaults.timeout = 10000
 axios.interceptors.request.use((config) => {
   nprogress.start()
   const token = sessionStorage.getItem('token')
   if (token) config.headers.Authorization = token
   return config
+}, err => {
+  return Promise.reject(err)
 })
 axios.interceptors.response.use(response => {
   nprogress.done()
   return response
+}, err => {
+  return Promise.reject(err)
 })
 
 Vue.config.productionTip = false
