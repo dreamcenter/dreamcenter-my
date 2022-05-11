@@ -13,6 +13,7 @@ import cookie from 'vue-cookies'
 import axios from 'axios'
 import { Pagination } from 'element-ui'
 import xss from 'xss'
+import md5 from 'js-md5'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 
@@ -36,6 +37,7 @@ Vue.config.productionTip = false
 Vue.prototype.$cookie = cookie
 Vue.prototype.$time = getNowTime
 Vue.prototype.$xss = xss
+Vue.prototype.$md5 = md5
 
 Vue.use(Pagination)
 

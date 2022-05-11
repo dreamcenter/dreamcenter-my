@@ -63,7 +63,7 @@ export default {
   methods: {
     jump () {
       axios.post('/api/admin/check',
-        `username=${this.username}&password=${this.password}`)
+        `username=${this.username}&password=${this.$md5(this.password)}`)
         .then(res => {
           if (res.data.code === 200) {
             if (this.remember) {

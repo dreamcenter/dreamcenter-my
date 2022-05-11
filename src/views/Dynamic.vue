@@ -65,7 +65,7 @@ export default {
 
       if (day[0] !== '0') {
         if (day[0] !== '1') { res += arr[day[0]] }
-        res += '十' + arr[day[1]]
+        res += '十' + (day[1] !== '0' ? arr[day[1]] : '')
       } else {
         res += arr[day[1]]
       }
