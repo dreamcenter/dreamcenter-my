@@ -4,16 +4,16 @@ const appBkNet = 'https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/background.
 const homeBkLoc = '/imgs/bk.jpeg'
 const homeBkNet = 'https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/bk.jpeg'
 
-export {
-  appBkLoc,
-  homeBkLoc,
-  appBkNet as appBk,
-  homeBkNet as homeBk
-}
-
 // export {
-//   appBkLoc as appBk,
-//   homeBkLoc as homeBk,
-//   appBkNet,
-//   homeBkNet
+//   appBkLoc,
+//   homeBkLoc,
+//   appBkNet as appBk,
+//   homeBkNet as homeBk
 // }
+
+export {
+  appBkLoc as appBk,
+  homeBkLoc as homeBk,
+  appBkNet,
+  homeBkNet
+}

@@ -12,7 +12,8 @@
 9. highlight.js 代码高亮组件
 10. qs 序列化为url形式
 11. nprogress加载进度条
-12. js-md5
+12. js-md5 加密
+13. vue-aplayer 音乐播放器 + MetingJS
 
 工具
 1. DOCWAY http://xiaoyaoji.cn => 接口文档编辑

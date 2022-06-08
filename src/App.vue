@@ -7,6 +7,7 @@
         <span class="sign">时光潜流</span>
       </span>
       <span class="foreback" v-show="$store.state.isPc || listShow">
+
         <router-link class="nav-color nav-sub iconfont icon-xiangguan" to="/About" :style="{'margin-right':$store.state.isPc?'20px':''}">关于</router-link>
         <!-- <router-link class="nav-color nav-sub iconfont icon--todo" to="/Todo">待做</router-link> -->
         <!-- <router-link class="nav-color nav-sub iconfont icon-linggandengpao" to="/Inspire">灵感</router-link> -->
@@ -20,7 +21,21 @@
       </span>
     </div>
     <!-- <div style="height:60px"></div> -->
-    <router-view/>
+    <transition name="nav_list" mode="out-in">
+      <router-view/>
+    </transition>
+    <!-- <Aplayer/> -->
+    <meting-js
+      class="music_player"
+      server="tencent"
+      id="7356701986"
+      type="playlist"
+      fixed="true"
+      mini="true"
+      lrc-type="1"
+      :autoplay="autoPlay"
+      mutex="true"
+      list-folded="true"></meting-js>
   </div>
 </template>
 
@@ -35,7 +50,8 @@ export default {
       isHome: true,
       keyDef: 0,
       appBk,
-      listShow: false
+      listShow: false,
+      autoPlay: true
     }
   },
   beforeCreate () {
@@ -47,6 +63,7 @@ export default {
     } */
     const res = document.body.clientWidth > 800
     this.$store.state.isPc = res
+    this.$store.commit('changePagerSize')
     if (!res && this.$route.fullPath === '/') {
       this.$router.push('/Dynamic').catch(err => err)
     }
@@ -59,6 +76,15 @@ export default {
     const uri2 = this.$route.path.split('/')[1].toLowerCase()
     if (uri2 === 'blog' || uri2 === 'dynamic' || uri2 === 'album') {
       axios.get('/api/info/increase?target=' + uri2).then(res => res).catch(err => err)
+    }
+
+    if (this.$cookie.get('autoplay') == null) {
+      const autoPlay = window.confirm('是否每次进入本网站都自动播放音乐？')
+      this.autoPlay = autoPlay
+      this.$cookie.config(-1)
+      this.$cookie.set('autoplay', this.autoPlay)
+    } else {
+      this.autoPlay = this.$cookie.get('autoplay')
     }
   },
   beforeUpdate () {
@@ -76,6 +102,7 @@ export default {
     sizeChange () {
       const res = document.body.clientWidth > 800
       this.$store.state.isPc = res
+      this.$store.commit('changePagerSize')
       // console.log(this.$store.state.isPc)
     }
   },
@@ -125,6 +152,11 @@ export default {
   }
   #nav:hover{
     background-color: black;
+  }
+  .music_player{
+    width: 400px;
+    position: absolute;
+    bottom: 0;
   }
 }
 @media screen and (max-width: 800px){
@@ -188,5 +220,13 @@ export default {
       }
     }
   }
+}
+.nav_list-enter-active,.nav_list-leave-active{
+  transition: .3s -0.1s ease-in-out;
+}
+.nav_list-enter,.nav_list-leave-to{
+  margin-top: 50%;
+  // opacity: .5;
+  // margin-left: 100px;
 }
 </style>

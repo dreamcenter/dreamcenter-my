@@ -2,7 +2,8 @@
   <div id="blog">
     <div class="frame left" style="width:20%" v-if="$store.state.isPc"> </div>
     <div class="frame center" :style="{'width':$store.state.isPc?'60%':'80%'}">
-      <ul>
+      <!-- <ul> -->
+      <transition-group tag="ul" name="blog_list">
         <li v-for="item in $store.getters.getBlogsByPage" :key="item.id" @click="jump(item.id)">
           <h1>
             <b>{{item.title}}</b>
@@ -13,15 +14,17 @@
             <span v-for="j in item.tags" :key="j.name" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>
           </p>
         </li>
-      </ul>
+      </transition-group>
+      <!-- </ul> -->
       <div v-if="$store.getters.getBlogsByPage.length!=0">
         <el-pagination
           id="page"
           @current-change="handleCurrentChange"
           :page-size="$store.state.blogPageSize"
           :current-page="$store.state.blogPage"
-          layout="prev, pager, next, jumper"
-          :total="$store.state.blogTotalSize">
+          :pager-count="$store.state.pagerCount"
+          layout="prev, pager, next"
+          :total="$store.state.blogTotalSize" style="text-align:center">
         </el-pagination>
       </div>
       <div v-else><p style="margin-top: 260px;font-size: 100px;font-family: 'soft';font-weight: 200;text-align: center;color: gainsboro;">还是空空如也</p></div>
@@ -122,5 +125,12 @@ export default {
       }
     }
   }
+}
+
+.blog_list-enter-active,.blog_list-leave-active{
+  transition: .3s -0.1s ease-in;
+}
+.blog_list-enter,.blog_list-leave-to{
+  opacity: 0;
 }
 </style>

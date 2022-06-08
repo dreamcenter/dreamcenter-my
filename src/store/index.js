@@ -14,7 +14,8 @@ export default new Vuex.Store({
     blogPage: 1,
     blogTotalSize: 0,
     blogPageSize: 7,
-    isPc: true
+    isPc: true,
+    pagerCount: 5
   },
   getters: {
     getBlogsByPage (state) {
@@ -53,6 +54,9 @@ export default new Vuex.Store({
     },
     changeBlogPage (state, data) {
       state.blogPage = data
+    },
+    changePagerSize (state) {
+      state.pagerCount = state.isPc ? 11 : 5
     }
   },
   actions: {
@@ -74,6 +78,7 @@ export default new Vuex.Store({
       if (this.state.blogTotalSize === 0) {
         axios.get('/api/blog/count').then(res => {
           context.commit('changeBlogTotalSize', res.data.data)
+          // context.commit('changeBlogTotalSize', 100)
         }).catch(err => err)
       }
     }

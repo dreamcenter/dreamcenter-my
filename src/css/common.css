@@ -12,13 +12,13 @@ html,body{
 @font-face {
   font-family: dotted;
   src: url('https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/ttf/dotted.ttf');
-  /* src: url('dotted.ttf'); */
+  src: url('dotted.ttf');
 }
 
 @font-face {
   font-family: soft;
   src: url('https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/ttf/soft.ttf');
-  /* src: url('soft.ttf'); */
+  src: url('soft.ttf');
 }
 
 *::-webkit-scrollbar{

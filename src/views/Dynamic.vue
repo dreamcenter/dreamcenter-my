@@ -2,7 +2,8 @@
   <div id="dynamic" @scroll="scroll()">
     <div class="frame left" style="width:20%" v-if="$store.state.isPc"> </div>
     <div class="frame center" :style="{'width':$store.state.isPc?'60%':'80%'}">
-      <ul>
+      <!-- <ul> -->
+      <transition-group tag="ul" name="dynamic_list">
         <li v-for="item in dynamicList" :key="item.id">
           <h1>{{item.time | beautyDate}}</h1>
           <span style="margin-right:2rem;font-size:12px">[{{item.time | beautyTime}}]</span>
@@ -18,7 +19,8 @@
             <img src="/imgs/temp.jpg" width="100%"/>
           </div> -->
         </li>
-      </ul>
+      </transition-group>
+      <!-- </ul> -->
       <div style="height:100px"></div>
     </div>
     <div class="frame right" style="width:20%" v-if="$store.state.isPc">
@@ -172,5 +174,12 @@ export default {
       width: 100%;
     }
   }
+}
+
+.dynamic_list-enter-active,.dynamic_list-leave-active{
+  transition: .3s -0.1s ease-in;
+}
+.dynamic_list-enter,.dynamic_list-leave-to{
+  opacity: 0;
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
   <div>
     <form @submit.prevent="commit">
-      <textarea placeholder="申请必要 : 名称、头像、链接、简述" v-model="review.msg">
+      <!-- 申请必要 : 名称、头像、链接、简述 -->
+      <textarea placeholder="在此留言o(*￣▽￣*)ブ" v-model="review.msg">
       </textarea>
       <input class="input-text" placeholder="昵称(必填)" v-model="review.nickname"/>
       <input class="input-text" type="email" placeholder="邮箱(必填)" v-model="review.email"/>
@@ -36,6 +37,14 @@ export default {
   beforeMount () {
     this.review.parent = this.parent
     this.review.target = this.target
+
+    const nickname = this.$cookie.get('review_nickname')
+    const email = this.$cookie.get('review_email')
+    const url = this.$cookie.get('review_url')
+
+    this.review.nickname = nickname == null ? '' : nickname
+    this.review.email = email == null ? '' : email
+    this.review.url = url == null ? '' : url
   },
   beforeUpdate () {
     this.review.parent = this.parent
@@ -51,6 +60,12 @@ export default {
         alert('邮箱不能为空')
         return
       }
+
+      this.$cookie.config(-1)
+      this.$cookie.set('review_nickname', this.review.nickname)
+      this.$cookie.set('review_email', this.review.email)
+      this.$cookie.set('review_url', this.review.url)
+
       this.review.tip = this.review.tip ? 1 : 0
       this.review.time = this.$time()
       axios.post('/api/friRw/insert', JSON.stringify(this.review), {
@@ -59,7 +74,6 @@ export default {
         }
       }).then(res => {
         if (res.data.code === 200) {
-          // alert('回复成功')
           this.$emit('review_success')
         } else {
           alert('回复异常')

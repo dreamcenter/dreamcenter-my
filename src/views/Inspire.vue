@@ -11,7 +11,7 @@
             <p>{{item.describe }}</p>
           </div>
         </li>
-        <li v-for="i in 10" :key="'k'+i">
+        <li v-for="i in placeHoldFriend" :key="'k'+i">
           <img src="/imgs/avatar.jpg" width="60" height="60"/>
           <div>
             <h3>占位填充</h3>
@@ -22,8 +22,9 @@
       </ul>
     </div>
     <div class="frame right" style="width:30%" v-if="$store.state.isPc">
-      <h1>申请</h1>
+      <h1>申请 &amp; 留言</h1>
       <review  v-if="parent===0" :parent='parent' :target='target' @review_success='reviewSuccess(1)'/>
+      <i style="color:red;font-size:12px">*申请友链模板见评论最后一页</i>
       <ol>
         <li class="parentReply" v-for="(item, index) in reviewList" :key="item.id">
           <img :src="item.email" width="60" height="60"/>
@@ -79,12 +80,18 @@ export default {
       page: 1,
       pageSize: 3,
       parent: 0,
-      target: 0
+      target: 0,
+      placeHoldFriend: 14
     }
   },
   beforeMount () {
     axios.get('/api/friend/list').then(res => {
       this.friendList = res.data.data
+      if (this.friendList.length < this.placeHoldFriend) {
+        this.placeHoldFriend = this.placeHoldFriend - this.friendList.length
+      } else {
+        this.placeHoldFriend = 0
+      }
     }).catch(err => err)
     this.reviewSuccess()
   },
