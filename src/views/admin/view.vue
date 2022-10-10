@@ -1,6 +1,6 @@
 <template>
   <div id="_view">
-    <h3>full view</h3>
+    <h3>概览</h3>
     <div class="status">图床状态<span class="status_color" :style="{'background-color':dogeStatus}"></span></div>
     <p>Blog Visit: {{vBlog}}</p>
     <p>Album Visit: {{vAlbum}}</p>

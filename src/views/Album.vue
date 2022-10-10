@@ -12,7 +12,7 @@
         </div>
       </div>
       <transition-group tag="ul" name="transUl" mode="in-out">
-        <li v-for="(item, index) in album" :key="item.id" :data-id="item.id" @click="inTo(item.id, index)">
+        <li v-for="(item, index) in albumList" :key="item.id" :data-id="item.id" @click="inTo(item.id, index)">
           <img :src="item.cover" width="180" height="180" style="object-fit:cover"/>
           <p>{{item.name}} [{{item.count}}]</p>
         </li>
@@ -56,10 +56,15 @@ export default {
       return name.substr(0, 8) + '...'
     }
   },
+  computed: {
+    albumList () {
+      return this.album.filter(item => item.id > 4)
+    }
+  },
   beforeMount () {
     axios.get('/api/album/list').then(res => {
       this.album = res.data.data
-      this.albumSec = JSON.parse(JSON.stringify(res.data.data))
+      this.albumSec = JSON.parse(JSON.stringify(this.albumList))
     }).catch(res => res)
   },
   methods: {

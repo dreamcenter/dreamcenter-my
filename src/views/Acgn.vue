@@ -6,13 +6,13 @@
       <div class="acgn_entry" id="acgn_watching">
         <h2>正在看</h2>
         <div>
-          <tab v-for="item in animeList[0]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
+          <tab class="mytab" v-for="item in animeList[0]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
         </div>
       </div>
       <div class="acgn_entry" id="acgn_toWatch">
         <h2>待看</h2>
         <div>
-          <tab v-for="item in animeList[1]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
+          <tab class="mytab" v-for="item in animeList[1]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
         </div>
       </div>
       <!-- <div class="acgn_entry" id="acgn_review">
@@ -22,13 +22,13 @@
       <div class="acgn_entry" id="acgn_mayWatch">
         <h2>未看</h2>
         <div>
-          <tab v-for="item in animeList[2]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
+          <tab class="mytab" v-for="item in animeList[2]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
         </div>
       </div>
       <div class="acgn_entry" id="acgn_watched">
         <h2>已看</h2>
         <div>
-          <tab v-for="item in animeList[3]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
+          <tab class="mytab" v-for="item in animeList[3]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
         </div>
       </div>
     </div>
@@ -78,21 +78,18 @@ export default {
   height: 100%;
   display: flex;
   overflow-y: auto;
+  font-family: '仿宋';
   .frame{
     margin-top: 60px;
     // border: 1px solid rgb(115, 0, 255);
     display: flexbox;
     .acgn_entry{
-      height: 200px;
+      height: 180px;
       // border: 1px solid red;
       box-sizing: border-box;
       box-shadow: 0px 20px 10px rgba(247, 255, 157,.7) inset;
-      div{
-        overflow-x: auto;
+      .mytab{
         white-space: nowrap;
-        &::-webkit-scrollbar{
-          height: 4px;
-        }
       }
       &:first-child{
         margin-top: 20px;
@@ -127,6 +124,15 @@ export default {
   #acgn{
     .center{
       margin: 60px auto;
+    }
+    .acgn_entry{
+      div{
+        overflow-x: auto;
+        white-space: nowrap;
+        &::-webkit-scrollbar{
+          height: 4px;
+        }
+      }
     }
   }
 }

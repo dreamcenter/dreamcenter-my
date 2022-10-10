@@ -67,6 +67,7 @@ export default {
   display: flex;
   overflow-y: scroll;
   scroll-behavior:smooth;
+  font-family: '仿宋';
   .frame{
     margin-top: 60px;
     // border: 1px solid red;
@@ -87,6 +88,7 @@ export default {
         overflow:hidden;
         cursor: pointer;
         // border: 1px solid blue;
+        transition: .3s ease-out;
         p{
           margin-top: 10px;
         }
@@ -104,7 +106,7 @@ export default {
         margin: 0;
         box-shadow: none;
         font-size: 18px;
-        font-family: 'dotted';
+        // font-family: 'dotted';
         font-weight: 300;
       }
     }

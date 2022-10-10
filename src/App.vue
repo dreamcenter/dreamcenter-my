@@ -147,6 +147,10 @@ export default {
         padding: 10px 10px 5px 10px;
         text-decoration: none;
         font-family: 'dotted';
+        transition: .2s 0s ease-out;
+        &:hover{
+          transform: scale(1.25);
+        }
       }
     }
   }
@@ -218,6 +222,10 @@ export default {
           }
         }
       }
+    }
+    .music_player{
+      // opacity: .1;
+      display: none;
     }
   }
 }

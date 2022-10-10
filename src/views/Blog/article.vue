@@ -46,6 +46,10 @@ export default {
   height: 100%;
   // display: flex;
   overflow-y: scroll;
+  font-family: '仿宋';
+  p{
+    margin: 10px 0;
+  }
   .frame{
     margin-top: 80px;
     // border: 1px solid red;
@@ -54,6 +58,7 @@ export default {
   .center{
     margin-left: 20%;
     background-color: rgba(186, 181, 181, 0.1);
+    // background-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 10px rgba(0,0,0,.5);
     overflow: hidden;
     // min-height: 100%;

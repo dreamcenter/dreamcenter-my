@@ -4,6 +4,14 @@
     <div class="frame center" :style="{'width':$store.state.isPc?'60%':'80%'}">
       <!-- <ul> -->
       <transition-group tag="ul" name="dynamic_list">
+        <!-- <li key="ads">
+          <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-format="fluid"
+            data-ad-layout-key="-fb+5w+4e-db+86"
+            data-ad-client="ca-pub-1328360282542167"
+            data-ad-slot="8621483328"></ins>
+        </li> -->
         <li v-for="item in dynamicList" :key="item.id">
           <h1>{{item.time | beautyDate}}</h1>
           <span style="margin-right:2rem;font-size:12px">[{{item.time | beautyTime}}]</span>
@@ -20,6 +28,7 @@
           </div> -->
         </li>
       </transition-group>
+
       <!-- </ul> -->
       <div style="height:100px"></div>
     </div>
@@ -59,7 +68,8 @@ export default {
       res += ' * '
 
       if (month[0] !== '0') {
-        res += '十' + arr[month[1]]
+        if (month[1] === '0') res += '十'
+        else res += '十' + arr[month[1]]
       } else {
         res += arr[month[1]]
       }
@@ -115,6 +125,7 @@ export default {
   height: 100%;
   display: flex;
   overflow-y: scroll;
+  font-family: '仿宋';
   .frame{
     margin-top: 60px;
     // border: 1px solid red;
@@ -134,6 +145,9 @@ export default {
         overflow:hidden;
         span{
           // display: inline-block;
+          p{
+            margin: 4px 0;
+          }
         }
       }
     }

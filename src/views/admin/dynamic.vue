@@ -78,7 +78,7 @@ export default {
     font-size: 20px;
     width: 100%;
     border-collapse: collapse;
-    margin-top: 50px;
+    margin-top: 20px;
     tr{
       border: 1px solid black;
       &:first-child{
@@ -92,6 +92,7 @@ export default {
   .jump{
     // text-align: right;
     margin-top: 10px;
+    margin-bottom: 20px;
     input{
       width: 50px;
       margin: 0 10px;

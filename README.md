@@ -19,3 +19,4 @@
 1. DOCWAY http://xiaoyaoji.cn => 接口文档编辑
 2. vscode easymock 插件 => 数据模拟
 3. webpack-analyzer前端性能分析
+4. font-spider 字体文件压缩-字蛛

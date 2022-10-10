@@ -166,13 +166,15 @@ export default {
           }
           h3{
             width: 100%;
-            // text-align: center;
-            font-family: 'soft';
+            // font-family: 'soft';
+            font-family: '方正舒体','宋体';
+            font-weight: 700;
             font-size: 20px;
             white-space: nowrap;
           }
           p{
-            font-family: 'soft';
+            // font-family: 'soft';
+            font-family: '方正舒体','楷体';
             margin-top: 4px;
             overflow: hidden;
           }

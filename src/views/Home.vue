@@ -2,6 +2,9 @@
   <div id="home" :style="{'background': $store.state.isPc?'url('+homeBk+') fixed no-repeat':'', 'background-size':'cover'}">
     <h1>时光潜流</h1>
     <p>任时光流逝，进入无言的虚无。</p>
+    <div class="running_time">
+      <a href="https://beian.miit.gov.cn/" title="前往查看" class="beian" target="_blank" style="color:rgba(255, 255, 255, 0.822)">皖ICP备2022005998号</a>
+    </div>
   </div>
 </template>
 
@@ -30,6 +33,10 @@ export default {
     text-align: center;
     color: rgb(215, 240, 236);
     text-shadow: 0 0 15px rgba(16, 159, 255, .7);
+    transition: .2s 0s linear;
+    &:hover{
+      text-shadow: 0 0 10px rgba(16, 159, 255, 1);
+    }
   }
   p{
     width: 100%;
@@ -41,6 +48,23 @@ export default {
     text-align: center;
     color: rgb(174, 255, 228);
     text-shadow: 0 0 4px rgba(248, 224, 116, 0.644);
+  }
+  .running_time{
+    width: 200px;
+    text-align: center;
+    font-size:14px;
+    text-indent: 0;
+    position: fixed;
+    bottom: 10px;
+    left: calc(50% - 100px);
+    .beian{
+      text-decoration: none;
+      transition: .2s 0s ease-in;
+      &:hover{
+        text-decoration: underline;
+        font-size: 16px;
+      }
+    }
   }
 }
 @media screen and (max-width: 800px){
