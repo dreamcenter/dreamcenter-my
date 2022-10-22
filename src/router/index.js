@@ -94,6 +94,10 @@ const routes = [
         component: () => import('../views/admin/repository.vue')
       },
       {
+        path: 'updateRep',
+        component: () => import('../views/admin/updateRep.vue')
+      },
+      {
         path: 'friend',
         component: () => import('../views/admin/friend.vue')
       },

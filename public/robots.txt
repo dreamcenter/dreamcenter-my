@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /Dynamic
+Disallow: /Blog
+Disallow: /Repository
+Disallow: /Acgn
+Disallow: /imgs/
+Sitemap: https://www.dreamcenter.top/site.txt

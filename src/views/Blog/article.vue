@@ -3,7 +3,7 @@
     <div class="frame left" style="width:20%" v-if="$store.state.isPc"> </div>
     <div class="frame center" :style="{'width':($store.state.isPc?'60%':'80%'),'padding':'10px','box-sizing': 'border-box'}">
       <h1 class="title">{{data.title}}</h1>
-      <p class="time">{{data.time}}</p>
+      <p class="time">{{data.time}} &nbsp; 浏览: {{data.visit}}次</p>
       <div v-html="data.content"></div>
       <div style="height:100px"></div>
       <span v-for="j in data.tags" :key="j.name" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>

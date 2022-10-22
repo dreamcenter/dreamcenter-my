@@ -22,7 +22,10 @@
         <router-link active-class="act" tag="li" to="/Admin/dynamic">动态</router-link>
         <router-link active-class="act" tag="li" to="/Admin/acgn">番剧</router-link>
         <router-link active-class="act" tag="li" to="/Admin/album">回忆</router-link>
-        <router-link active-class="act" tag="li" to="/Admin/repository">仓库</router-link>
+        <!-- <router-link active-class="act" tag="li" to="/Admin/repository">仓库</router-link> -->
+        <li @click="expRep=!expRep">仓库</li>
+        <router-link v-show="expRep" class="sub_tab" active-class="act_sub" tag="li" to="/Admin/repository">新建项目</router-link>
+        <router-link v-show="expRep" class="sub_tab" active-class="act_sub" tag="li" to="/Admin/updateRep">修改项目</router-link>
         <router-link active-class="act" tag="li" to="/Admin/friend">友链</router-link>
         <!-- <li>灵感</li> -->
         <!-- <li>待做</li> -->
@@ -44,7 +47,8 @@ export default {
       username: '',
       password: '',
       remember: false,
-      msg: ''
+      msg: '',
+      expRep: false
     }
   },
   beforeMount () {
@@ -143,7 +147,7 @@ export default {
       float: left;
       background-color: #24282daf;
       color: white;
-      overflow-y: scroll;
+      overflow-y: auto;
       li{
         cursor: default;
         width: 100%;
@@ -158,7 +162,7 @@ export default {
           overflow: hidden;
         }
         transition: 1s 0 linear;
-        &:nth-child(n+2):hover{
+        &:nth-child(n+2):hover:not(.sub_tab){
           border-left: 10px solid black;
           background-color: rgba(0, 0, 0, 0.552);
           font-size: 18px;
@@ -176,5 +180,17 @@ export default {
 }
 .act{
   background-color: #24282dd9;
+}
+.sub_tab{
+  background-color:rgba(255, 255, 255, 0.546);
+  color: #000;
+  &:hover{
+    border-left: 40px solid rgb(255, 255, 113);
+    background-color: rgb(227, 227, 130);
+    font-size: 18px;
+  }
+}
+.act_sub{
+  background-color: rgb(255, 255, 184);
 }
 </style>
