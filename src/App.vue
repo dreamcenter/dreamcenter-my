@@ -78,14 +78,14 @@ export default {
       axios.get('/api/info/increase?target=' + uri2).then(res => res).catch(err => err)
     }
 
-    if (this.$cookie.get('autoplay') == null) {
+    /* if (this.$cookie.get('autoplay') == null) {
       const autoPlay = window.confirm('是否每次进入本网站都自动播放音乐？')
       this.autoPlay = autoPlay
       this.$cookie.config(-1)
       this.$cookie.set('autoplay', this.autoPlay)
     } else {
       this.autoPlay = this.$cookie.get('autoplay')
-    }
+    } */
   },
   beforeUpdate () {
     this.isHome = (this.$route.path === '/')

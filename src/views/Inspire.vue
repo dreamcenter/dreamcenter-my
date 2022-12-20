@@ -78,7 +78,7 @@ export default {
       reviewList: [],
       count: 0,
       page: 1,
-      pageSize: 3,
+      pageSize: 2,
       parent: 0,
       target: 0,
       placeHoldFriend: 14

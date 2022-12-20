@@ -13,7 +13,7 @@
       <tr v-for="item in dynamicList" :key="item.id">
         <td>{{item.id}}</td>
         <td>{{item.time}}</td>
-        <td class="content">{{item.content}}</td>
+        <td class="content">{{item.content | clearP}}</td>
         <td><a href="#" @click="delDynamic(item.id)">删除</a></td>
       </tr>
     </table>
@@ -39,6 +39,11 @@ export default {
       this.dynamicList = res.data.data
       console.log(res.data)
     }).catch(err => err)
+  },
+  filters: {
+    clearP (content) {
+      return content.replace(/<\/{0,1}p>/g, '').replace(/<img.+\/>/g, '【图片】')
+    }
   },
   methods: {
     toWriting (isNew) {
@@ -81,11 +86,17 @@ export default {
     margin-top: 20px;
     tr{
       border: 1px solid black;
+      text-align: center;
       &:first-child{
         background-color: rgba(209, 155, 155, 0.609);
       }
-      a{
-        color: blue;
+      &:nth-child(n+2){
+        a{
+          color: blue;
+        }
+        td:nth-child(3){
+          text-align: left;
+        }
       }
     }
   }
@@ -100,7 +111,11 @@ export default {
       font-size: 16px;
     }
     a{
-      color: blue;
+      font-size: 20px;
+      padding: 2px;
+      color: rgb(4, 4, 86);
+      font-weight: bold;
+      background-color: rgb(255, 207, 207);
     }
   }
 }

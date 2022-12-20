@@ -12,6 +12,10 @@
           <p>{{item.content}}...</p>
           <p>
             <span v-for="j in item.tags" :key="j.name" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>
+            <span style="margin-right:20px;font-size:12px;float:right;color:gray;">
+              <span style="font-size:16px">ヽ（≧□≦）ノ</span>
+              <span> {{item.visit}} 阅读</span>
+            </span>
           </p>
         </li>
       </transition-group>

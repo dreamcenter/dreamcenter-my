@@ -106,16 +106,26 @@ export default {
         text-align: center;
         padding: 4px;
         box-sizing: border-box;
+        &:hover p{
+          transform: scale(1.2);
+          text-decoration: underline rgb(0, 255, 13);
+        }
+        &:hover img{
+          box-shadow: 0 -10px 6px rgba($color: rgb(232, 165, 165), $alpha: 1.0);
+        }
         img{
           padding: 4px;
           border-radius: 16px;
           box-shadow: 0 0 6px rgba($color: #000, $alpha: 1.0);
+          transition: .2s ease-in-out;
         }
         p{
           overflow:hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          font-size: 12px;
           // border: 1px solid red;
+          transition: .2s ease-in-out;
         }
       }
     }

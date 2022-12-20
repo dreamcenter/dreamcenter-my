@@ -33,6 +33,7 @@
       </div>
     </div>
     <div class="frame right" style="width:20%" v-if="$store.state.isPc">
+      <div>下面三个模块<br/>暂且摆烂了<br/>🍡🍡🍭🍡🍡</div>
       <div @click="banned">二次元站</div>
       <div @click="banned">搜番引擎</div>
       <div @click="banned">GALGAME</div>
@@ -84,10 +85,11 @@ export default {
     // border: 1px solid rgb(115, 0, 255);
     display: flexbox;
     .acgn_entry{
-      height: 180px;
+      height: 190px;
       // border: 1px solid red;
       box-sizing: border-box;
-      box-shadow: 0px 20px 10px rgba(247, 255, 157,.7) inset;
+      // box-shadow: 0px 20px 10px rgba(247, 255, 157,.7) inset;
+      box-shadow: 0px 10px 5px rgba(208, 157, 255, 0.7) inset;
       .mytab{
         white-space: nowrap;
       }

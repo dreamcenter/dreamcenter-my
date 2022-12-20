@@ -104,7 +104,7 @@ export default {
         return
       }
       node.scrollTo(this.tX, 0)
-      this.tX += delta * 100
+      this.tX += delta * 20
     },
     showInfo (id) {
       this.isInfo = true

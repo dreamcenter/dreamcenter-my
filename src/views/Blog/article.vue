@@ -1,7 +1,7 @@
 <template>
   <div id="article">
     <div class="frame left" style="width:20%" v-if="$store.state.isPc"> </div>
-    <div class="frame center" :style="{'width':($store.state.isPc?'60%':'80%'),'padding':'10px','box-sizing': 'border-box'}">
+    <div class="frame center" :style="{'width':($store.state.isPc?'60%':'85%'),'padding':'10px','box-sizing': 'border-box'}">
       <h1 class="title">{{data.title}}</h1>
       <p class="time">{{data.time}} &nbsp; 浏览: {{data.visit}}次</p>
       <div v-html="data.content"></div>
@@ -49,6 +49,9 @@ export default {
   font-family: '仿宋';
   p{
     margin: 10px 0;
+    font-size: 18px;
+    line-height: 30px;
+    // font-family: '正楷';
   }
   .frame{
     margin-top: 80px;
@@ -57,9 +60,10 @@ export default {
   }
   .center{
     margin-left: 20%;
-    background-color: rgba(186, 181, 181, 0.1);
+    background-color: rgba(250, 249, 222, 0.877);
     // background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 10px rgba(0,0,0,.5);
+    // box-shadow: 0 0 10px rgba(0,0,0,.5);
+    box-shadow: 0 0 10px rgb(185, 184, 163);
     overflow: hidden;
     // min-height: 100%;
     // overflow: scroll;
@@ -105,20 +109,16 @@ export default {
     }
 
     /* code 样式 */
+    pre{
+      border-radius: 10px;
+      overflow-x: auto;
+      background-color: #000;
+    }
     code {
-      // display: inline-block;
-      // display: inline;
-      // zoom: 1;
-      color: white;
+      color: rgb(221, 221, 221);
       font-weight: bold;
       font-size: 16px;
-      // text-indent: 1rem;
-      padding: 2px;
-      background-color: #000;
-      overflow-x: auto;
-      // border-radius: 3px;
-      // padding: 3px 5px;
-      // margin: 0 3px;
+      padding: 4px 10px;
     }
     pre code {
       display: block;
@@ -139,6 +139,9 @@ export default {
   #article{
     .center{
       margin: 80px auto;
+      pre::-webkit-scrollbar{
+        height: 3px;
+      }
     }
   }
 }
