@@ -32,8 +32,20 @@ export default {
   },
   beforeMount () {
     this.id = this.$route.params.id
+    const that = this
     axios.post('/api/blog/id', `id=${this.id}`).then(res => {
       this.data = res.data.data
+      const blogPage = that.$store.state.blogPage
+      that.$store.state.blogList.forEach(el => {
+        if (el[0] === blogPage) {
+          const lst = el[1]
+          for (let i = 0; i < lst.length; i++) {
+            if (lst[i].id === Number.parseInt(that.id)) {
+              lst[i].visit = that.data.visit
+            }
+          }
+        }
+      })
     }).catch(err => err)
     hljs.highlightAll()
   }

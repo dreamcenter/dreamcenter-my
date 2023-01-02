@@ -80,6 +80,13 @@ export default {
       color: rgb(93, 51, 135);
       text-decoration: none;
     }
+    tbody{
+      tr{
+        &:hover{
+          background-color: antiquewhite;
+        }
+      }
+    }
   }
   hr{
     background-color: rgb(70, 21, 160);

@@ -3,7 +3,7 @@
     <div id="nav" v-if="!this.$store.state.isAdmin" :style="{'backgroundColor':(isHome || !$store.state.isPc?'':'black')}">
       <span class="forehead">
         <span class="phonelist" v-if="!$store.state.isPc" @click.stop="()=>listShow=!listShow">{{listShow?'×':'≡'}}</span>
-        <img src="/imgs/avatar.jpg" @click="gotoAdmin()" width="40px" style="border-radius:20px"/>
+        <img id="avatar" src="/imgs/avatar.jpg" @dblclick="gotoAdmin()" width="40px" style="border-radius:20px"/>
         <span class="sign">时光潜流</span>
       </span>
       <span class="foreback" v-show="$store.state.isPc || listShow">
@@ -28,7 +28,7 @@
     <meting-js
       class="music_player"
       server="tencent"
-      id="7356701986"
+      id="8744319675"
       type="playlist"
       fixed="true"
       mini="true"
@@ -51,7 +51,10 @@ export default {
       keyDef: 0,
       appBk,
       listShow: false,
-      autoPlay: true
+      autoPlay: false,
+      mousePt: [],
+      ptmsId: 0,
+      ptwait: 0
     }
   },
   beforeCreate () {
@@ -61,10 +64,10 @@ export default {
     } else {
       console.log('当前使用pc登录')
     } */
-    const res = document.body.clientWidth > 800
-    this.$store.state.isPc = res
+    const pcJi = document.body.clientWidth > 800
+    this.$store.state.isPc = pcJi
     this.$store.commit('changePagerSize')
-    if (!res && this.$route.fullPath === '/') {
+    if (!pcJi && location.pathname === '/') {
       this.$router.push('/Dynamic').catch(err => err)
     }
   },
@@ -104,6 +107,41 @@ export default {
       this.$store.state.isPc = res
       this.$store.commit('changePagerSize')
       // console.log(this.$store.state.isPc)
+    },
+    mouseMoveEv (ev) {
+      const MIDU = 20
+      if (this.ptwait++ < MIDU) return
+      this.ptwait = 0
+      if (!(ev.clientX < document.body.clientWidth - MIDU && ev.clientY < document.body.clientHeight - MIDU)) return
+      this.mousePt.push({
+        x: ev.clientX,
+        y: ev.clientY
+      })
+      if (this.mousePt.length > MIDU) {
+        this.mousePt.shift(0)
+        if (this.ptmsId === MIDU) this.ptmsId = 0
+        const el0 = document.getElementById('ptms-' + this.ptmsId++)
+        el0.style.fontSize = Math.random() * 30 + 10 + 'px'
+        el0.style.left = ev.clientX + 'px'
+        el0.style.top = ev.clientY + 'px'
+      } else {
+        const el = document.createElement('div')
+        el.id = 'ptms-' + this.ptmsId
+        el.style.fontSize = Math.random() * 30 + 10 + 'px'
+        el.style.fontWeight = 'bold'
+        // el.style.width = '20px'
+        // el.style.height = '20px'
+        el.style.color = `rgba(${Math.random() * 30 + 220},${Math.random() * 30 + 220},${Math.random() * 30 + 220},.3)`
+        // el.style.border = '2px solid rgba(100,78,154)'
+        el.innerText = '❤'
+        el.style.borderRadius = '10px'
+        el.style.position = 'absolute'
+        el.style.textShadow = '0 0 2px rgba(240,240,240,.5)'
+        el.style.left = this.mousePt[this.ptmsId].x + 'px'
+        el.style.top = this.mousePt[this.ptmsId].y + 'px'
+        document.getElementById('app').appendChild(el)
+        this.ptmsId++
+      }
     }
   },
   mounted () {
@@ -125,6 +163,21 @@ export default {
     position: fixed;
     transition: 1s 0s ease-out;
     z-index: 99;
+    #avatar{
+      // border: 4px solid rgb(15, 32, 107);
+      // box-sizing: border-box;
+      &:hover{
+        animation: avatarSwag 2s linear 0s infinite reverse none;
+      }
+      @keyframes avatarSwag {
+        25%{
+          transform: rotate(40deg);
+        }
+        75%{
+          transform: rotate(-40deg);
+        }
+      }
+    }
     .nav-color{
       color: aqua;
     }

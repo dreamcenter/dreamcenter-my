@@ -1,19 +1,15 @@
-const appBkLoc = '/imgs/background.png'
-const appBkNet = 'https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/background.png'
+const netUse = true
 
+const appBkLoc = '/imgs/background.png'
 const homeBkLoc = '/imgs/bk.jpeg'
+
+const appBkNet = 'https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/background.png'
 const homeBkNet = 'https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/bk.jpeg'
 
-export {
-  appBkLoc,
-  homeBkLoc,
-  appBkNet as appBk,
-  homeBkNet as homeBk
-}
+const tmpAppBk = netUse ? appBkNet : appBkLoc
+const tmpHomeBk = netUse ? homeBkNet : homeBkLoc
 
-// export {
-//   appBkLoc as appBk,
-//   homeBkLoc as homeBk,
-//   appBkNet,
-//   homeBkNet
-// }
+export {
+  tmpAppBk as appBk,
+  tmpHomeBk as homeBk
+}

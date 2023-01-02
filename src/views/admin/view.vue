@@ -22,7 +22,7 @@ export default {
       vBlog: 0,
       vAlbum: 0,
       vDynamic: 0,
-      initSync: 0
+      initSync: 3
     }
   },
   computed: {
