@@ -1,17 +1,17 @@
 <template>
   <div>
     <form @submit.prevent="commit">
-      <!-- 申请必要 : 名称、头像、链接、简述 -->
-      <textarea placeholder="在此留言o(*￣▽￣*)ブ" v-model="review.msg">
-      </textarea>
       <input class="input-text" placeholder="昵称(必填)" v-model="review.nickname"/>
       <input class="input-text" type="email" placeholder="邮箱(必填)" v-model="review.email"/>
       <input class="input-text" placeholder="网址(选填)" v-model="review.url"/>
+      <!-- 申请必要 : 名称、头像、链接、简述 -->
+      <textarea placeholder="在此留言评论o(*￣▽￣*)ブ (表情包在做了，在做了.jpg)" v-model="review.msg">
+      </textarea>
       <br/>
       <input class="input-checkbox" id="send" type="checkbox" v-model="review.tip"/>
       <label for="send">回复时发送邮件通知</label>
       <slot name="extention"></slot>
-      <input class="input-submit" type="submit"/>
+      <input class="input-submit" type="submit" v-model="submitTip"/>
     </form>
   </div>
 </template>
@@ -30,10 +30,11 @@ export default {
         msg: '',
         tip: 1,
         target: 0
-      }
+      },
+      submitTip: '发送'
     }
   },
-  props: ['parent', 'target'],
+  props: ['parent', 'target', 'uri', 'bid'],
   beforeMount () {
     this.review.parent = this.parent
     this.review.target = this.target
@@ -52,6 +53,8 @@ export default {
   },
   methods: {
     commit () {
+      const isBlog = this.bid !== undefined // true:blog;false:not blog
+      if (isBlog) this.review.bid = Number.parseInt(this.bid)
       if (this.review.nickname.trim() === '') {
         alert('昵称不能为空')
         return
@@ -68,16 +71,22 @@ export default {
 
       this.review.tip = this.review.tip ? 1 : 0
       this.review.time = this.$time()
-      axios.post('/api/friRw/insert', JSON.stringify(this.review), {
+      this.submitTip = '发送中'
+      axios.post(this.uri, JSON.stringify(this.review), {
         headers: {
           'content-type': 'application/json'
         }
       }).then(res => {
         if (res.data.code === 200) {
+          this.submitTip = '发送成功!'
           this.$emit('review_success')
         } else {
+          this.submitTip = '发送失败!'
           alert('回复异常')
         }
+        setTimeout(() => {
+          this.submitTip = '发送'
+        }, 2000)
       }).catch(err => err)
     }
   }
@@ -93,6 +102,9 @@ form{
     height: 100px;
     font-size: 18px;
     padding: 4px;
+    resize: none;
+    background-color: rgba(0,0,0,0);
+    margin-top: 4px;
   }
   .input-text{
     box-sizing: border-box;
@@ -101,6 +113,10 @@ form{
     margin-left: 1%;
     margin-right: 1%;
     text-align: center;
+    border: 0;
+    border: 1px solid gray;
+    outline: none;
+    background-color: rgba(0,0,0,0);
   }
 
   label{
@@ -111,11 +127,14 @@ form{
   .input-submit{
     width: 100px;
     height: 30px;
-    background-color: white;
+    background-color: rgba(0,0,0,0);
     border: 1px solid rgb(69, 60, 60);
     float: right;
     margin-right: 11%;
     margin-top: 4px;
+    &:hover{
+      border: 2px solid coral;
+    }
   }
 }
 </style>

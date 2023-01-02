@@ -23,7 +23,7 @@
     </div>
     <div class="frame right" style="width:30%" v-if="$store.state.isPc">
       <h1>申请 &amp; 留言</h1>
-      <review  v-if="parent===0" :parent='parent' :target='target' @review_success='reviewSuccess(1)'/>
+      <review  v-if="parent===0" :parent='parent' :target='target' :uri='uri' @review_success='reviewSuccess(1)'/>
       <i style="color:red;font-size:12px">*申请友链模板见评论最后一页</i>
       <ol>
         <li class="parentReply" v-for="(item, index) in reviewList" :key="item.id">
@@ -45,7 +45,7 @@
               </li>
             </ul>
           </div>
-          <review v-if="parent===item.id" style="width:100%" :parent='parent' :target='target' @review_success='reviewSuccess'>
+          <review v-if="parent===item.id" style="width:100%" :parent='parent' :target='target' :uri='uri' @review_success='reviewSuccess'>
             <slot slot="extention">
               <a @click="cancel" style="cursor:default;color:blue;text-decoration:underline;margin:10px">取消回复</a>
             </slot>
@@ -81,7 +81,8 @@ export default {
       pageSize: 2,
       parent: 0,
       target: 0,
-      placeHoldFriend: 14
+      placeHoldFriend: 14,
+      uri: '/api/friRw/insert'
     }
   },
   beforeMount () {
