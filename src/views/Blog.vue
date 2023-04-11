@@ -13,7 +13,7 @@
           <p>
             <span v-for="j in item.tags" :key="j.name" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>
             <span style="margin-right:20px;font-size:12px;float:right;color:gray;">
-              <span style="font-size:16px">ヽ（≧□≦）ノ</span>
+              <span style="font-size:14px">{{item.nickname}} / </span>
               <span> {{item.visit}} 阅读</span>
             </span>
           </p>
@@ -87,7 +87,8 @@ export default {
         box-sizing: border-box;
         font-family: '仿宋';
         padding: 10px;
-        background-color: rgba(255,255,255,.6);
+        color: rgb(198, 215, 231);
+        background-color: rgba(59, 56, 56, 0.6);
         box-shadow: 0 0 15px rgba(0,0,0,.3);
         overflow:hidden;
         cursor: pointer;

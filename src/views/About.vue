@@ -4,17 +4,10 @@
     <!-- <img src="https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/A006.jpg" width="100%"/> -->
     <span>
       <h1>关于</h1><br/>
-      <p>Ciallo～(∠・ω&lt; )⌒★，大家好，こんばんは、首先<i style="color:pink"> 感谢 </i>大家的访问，对您的到来我感到了万分的荣幸！在此致以最崇高的敬意！</p><br/>
-      <p>先作一下简单的<i style="color:rgb(193, 127, 255)"> 自我介绍 </i>吧！很显然，时光潜流是我的艺名或者笔名。是从高中时期就开始延用的名字。个人是计算机学院的学生，自初中就开始对编程感兴趣，开始艰难的java自学之路。来到大学后决定走web方向。</p><br/>
-      <p>个人的<i style="color:aquamarine"> 兴趣爱好 </i>比较广泛，摄影、象棋围棋、编程、phtoshop修图、toonboom动画分镜、sai绘画、阅读、二次元(深宅)、unity、l2d、游戏等等。主要的个人定位是<b>技术宅。</b></p><br/>
-      <p>联系方式？额，本尊当然也是会留下来的啦，hiahiahiahia！继续往下看就有啦(尤拉？)！</p><br/>
-      <p>QQ : 1981669259 &nbsp;&nbsp;&nbsp;&nbsp; WX : I_love_you_dyh</p><br/>
-      <p>b站id: <a href="https://space.bilibili.com/39403246" target="_blank">39403246</a> &nbsp;&nbsp;&nbsp;&nbsp; github : <a href="https://github.com/dreamcenter" target="_blank">dreamcenter</a></p><br/>
-      <p>原神UID : 101763822 &nbsp;&nbsp;&nbsp;&nbsp; 碧蓝ID : 265642565</p><br/>
-      <p>个人不大喜欢接电话，所以这里就不留我的电话啦！邮箱就是qq邮箱~</p><br/>
-      <p></p><br/>
-      <p></p><br/>
-      <p>水字数，水字数ヽ(￣ω￣(￣ω￣〃)ゝ</p><br/>
+      <p>这是一个基于大数据的<b style="color:pink">学科竞赛博客</b>网站。</p><br/>
+      <p>网站主要为学生提供了可以<i style="color:coral"> 分享技术、交流技术 </i>的平台。于此同时，学生也可以通过OJ系统做题。</p><br/>
+      <p>通过分析学生的各种做题习惯、关注点按照一定的算法进行分析与处理，向学生推荐一些文章，以方便进行深入的研究。</p><br/>
+      <p>网站设计与维护 : 时光潜流 (QQ:1981669259)</p><br/>
       <p class="running_time" style="border-top:1px solid white;">2022.03 ~ {{nowTime}}</p>
       <p class="running_time">
         <a href="https://beian.miit.gov.cn/" title="前往查看" class="beian" target="_blank" style="color:rgba(255, 255, 255, 0.822)">皖ICP备2022005998号</a>

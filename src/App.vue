@@ -1,21 +1,21 @@
 <template>
-  <div id="app" @click="()=>listShow=false" :style="{'background': isHome?'':'url('+appBk+') fixed no-repeat', 'background-size':'cover'}">
+  <div id="app" @click="()=>listShow=false" :style="{'background': isHome?'rgba(50,50,100,.8)':'url('+appBk+') fixed no-repeat', 'background-size':'cover'}">
     <div id="nav" v-if="!this.$store.state.isAdmin" :style="{'backgroundColor':(isHome || !$store.state.isPc?'':'black')}">
       <span class="forehead">
         <span class="phonelist" v-if="!$store.state.isPc" @click.stop="()=>listShow=!listShow">{{listShow?'×':'≡'}}</span>
-        <img id="avatar" src="/imgs/avatar.jpg" @dblclick="gotoAdmin()" width="40px" style="border-radius:20px"/>
-        <span class="sign">时光潜流</span>
+        <img id="avatar" src="/imgs/avatar.jpg" @click="gotoAccount()" @dblclick="gotoAdmin()" width="40px" style="border-radius:20px"/>
+        <span class="sign">{{this.$store.state.nickname}}</span>
       </span>
       <span class="foreback" v-show="$store.state.isPc || listShow">
 
         <router-link class="nav-color nav-sub iconfont icon-xiangguan" to="/About" :style="{'margin-right':$store.state.isPc?'20px':''}">关于</router-link>
         <!-- <router-link class="nav-color nav-sub iconfont icon--todo" to="/Todo">待做</router-link> -->
         <!-- <router-link class="nav-color nav-sub iconfont icon-linggandengpao" to="/Inspire">灵感</router-link> -->
-        <router-link class="nav-color nav-sub iconfont icon-linggandengpao" to="/Inspire">友链</router-link>
-        <router-link class="nav-color nav-sub iconfont icon-cangku" to="/Repository">仓库</router-link>
-        <router-link class="nav-color nav-sub iconfont icon-xiangpian" to="/Album">回忆</router-link>
-        <router-link class="nav-color nav-sub iconfont icon-xihongshifanqie" to="/Acgn">番剧</router-link>
-        <router-link class="nav-color nav-sub iconfont icon-airudiantubiaohuizhi-zhuanqu_zixundongtai" to="/Dynamic">动态</router-link>
+        <router-link class="nav-color nav-sub iconfont icon-linggandengpao" to="/Inspire">榜单</router-link>
+        <router-link class="nav-color nav-sub iconfont icon-cangku" to="/Repository">工程</router-link>
+        <router-link class="nav-color nav-sub iconfont icon-xiangpian" to="/Album">典例</router-link>
+        <router-link class="nav-color nav-sub iconfont icon-xihongshifanqie" to="/Acgn">好书</router-link>
+        <router-link class="nav-color nav-sub iconfont icon-airudiantubiaohuizhi-zhuanqu_zixundongtai" to="/Dynamic">OJ</router-link>
         <router-link class="nav-color nav-sub iconfont icon-bokeyuan" to="/Blog">博客</router-link>
         <router-link class="nav-color nav-sub iconfont icon-zhuye" to="/">首页</router-link>
       </span>
@@ -25,7 +25,7 @@
       <router-view/>
     </transition>
     <!-- <Aplayer/> -->
-    <meting-js
+    <!-- <meting-js
       class="music_player"
       server="tencent"
       id="8744319675"
@@ -35,7 +35,7 @@
       lrc-type="1"
       :autoplay="autoPlay"
       mutex="true"
-      list-folded="true"></meting-js>
+      list-folded="true"></meting-js> -->
   </div>
 </template>
 
@@ -81,14 +81,16 @@ export default {
       axios.get('/api/info/increase?target=' + uri2).then(res => res).catch(err => err)
     }
 
-    /* if (this.$cookie.get('autoplay') == null) {
-      const autoPlay = window.confirm('是否每次进入本网站都自动播放音乐？')
-      this.autoPlay = autoPlay
-      this.$cookie.config(-1)
-      this.$cookie.set('autoplay', this.autoPlay)
-    } else {
-      this.autoPlay = this.$cookie.get('autoplay')
-    } */
+    axios.get('/api/account/fc').then(res => {
+      if (res.data.code === 200) {
+        this.$store.commit('setNickname', res.data.data)
+      }
+    }).catch(err => err)
+    axios.get('/api/info/total').then(res => {
+      if (res.data.code === 200) {
+        this.$store.commit('setNickname', '管理员')
+      }
+    }).catch(err => err)
   },
   beforeUpdate () {
     this.isHome = (this.$route.path === '/')
@@ -101,6 +103,9 @@ export default {
   methods: {
     gotoAdmin: function () {
       this.$router.push('/admin').catch(err => err)
+    },
+    gotoAccount: function () {
+      this.$router.push('/account').catch(err => err)
     },
     sizeChange () {
       const res = document.body.clientWidth > 800

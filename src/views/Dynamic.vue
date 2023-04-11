@@ -12,20 +12,20 @@
             data-ad-client="ca-pub-1328360282542167"
             data-ad-slot="8621483328"></ins>
         </li> -->
-        <li v-for="item in dynamicList" :key="item.id">
+        <li v-for="(item, index) in dynamicList" :key="item.id">
           <h1>{{item.time | beautyDate}}</h1>
           <span style="margin-right:2rem;font-size:12px">[{{item.time | beautyTime}}]</span>
           <p></p>
           <span v-html="item.content">
-            <!-- {{item.content}} -->
-          <!-- 二零二二 * 四月四日 -->
           </span>
-          <!-- <div ref="pics" style="text-align:center;background-color:rgba(200,200,200,.5)">
-            <img width="100%" src="/imgs/temp.jpg"/>
-          </div>
-          <div v-for="j in 10" :key="j+1" style="width:100px;height:100px;display:inline-block;overflow:hidden;margin-top:10px;margin-right:10px">
-            <img src="/imgs/temp.jpg" width="100%"/>
-          </div> -->
+          <form class="dataSquare">
+            <tr>
+              <td>答题情况: {{item.acc}} / {{item.total}} [{{item.total==0?'0.00':new Number(item.acc/item.total*100).toFixed(2)}}%]</td>
+              <td v-if="$store.state.nickname!='' && $store.state.nickname!='管理员'">提交历史: {{item.history == null ? '-' : item.history}}</td>
+              <td v-if="$store.state.nickname!='' && $store.state.nickname!='管理员'"><label>答题</label>:<textarea rows="1" v-model="item.code" placeholder="粘贴代码"/></td>
+              <td v-if="$store.state.nickname!='' && $store.state.nickname!='管理员'"><button @click.prevent="ojPush(index)">提交</button></td>
+            </tr>
+          </form>
         </li>
       </transition-group>
 
@@ -45,11 +45,12 @@ export default {
     return {
       sheet: 1,
       dynamicList: [],
-      scrollLock: false
+      scrollLock: false,
+      rescode: 'AAC 100%'
     }
   },
   beforeMount () {
-    axios.get('/api/dynamic/sheet?sheet=' + this.sheet).then(res => {
+    axios.get('/api/dynamic/sheet?sheet=' + this.sheet + `&nickname=${this.$store.state.nickname}`).then(res => {
       this.dynamicList = res.data.data
     }).catch(err => err)
   },
@@ -97,7 +98,7 @@ export default {
           console.log('need more')
           this.scrollLock = true
           this.sheet++
-          axios.get('/api/dynamic/sheet?sheet=' + this.sheet).then(res => {
+          axios.get('/api/dynamic/sheet?sheet=' + this.sheet + `&nickname=${this.$store.state.nickname}`).then(res => {
             if (res.data.data.length === 0) {
               console.log('已经加载完全部数据啦！')
               this.scrollLock = true
@@ -114,6 +115,27 @@ export default {
     },
     toTop () {
       document.querySelector('#dynamic').scrollTo(0, 0)
+    },
+    ojPush (index) {
+      const tmp = {
+        dynamicID: this.dynamicList[index].id,
+        code: this.dynamicList[index].code == null ? '' : this.dynamicList[index].code
+      }
+      axios.post('/api/oj', JSON.stringify(tmp), {
+        headers: {
+          'content-type': 'application/json'
+        }
+      }).then(res => {
+        const datas = res.data.split(':')
+        if (datas[0] === '2') {
+          alert(datas[1])
+          return
+        }
+        if (datas[0] === '1') this.dynamicList[index].acc++
+        this.dynamicList[index].total++
+        this.dynamicList[index].history = datas[1]
+      }).catch(err => err)
+      // console.log(this.$store.state.nickname)
     }
   }
 }
@@ -126,21 +148,52 @@ export default {
   display: flex;
   overflow-y: scroll;
   font-family: '仿宋';
+
+  .dataSquare{
+    background: white;
+    margin: 2px;
+    text-align: center;
+    td{
+      width: 20%;
+      // border: 1px solid red;
+      button{
+        width: 80%;
+        margin: 2px;
+        box-sizing: border-box;
+      }
+    }
+  }
+/* code 样式 */
+    pre{
+      border-radius: 10px;
+      overflow-x: auto;
+      background-color: #000;
+    }
+    code {
+      color: rgb(221, 221, 221);
+      font-weight: bold;
+      font-size: 16px;
+      padding: 4px 10px;
+    }
+    pre code {
+      display: block;
+    }
+
   .frame{
     margin-top: 60px;
     // border: 1px solid red;
     display: flexbox;
   }
   .center{
-    ul{
+    >ul{
       list-style-type: none;
-      li{
+      >li{
         width: 100%;
         margin-top: 20px;
         box-sizing: border-box;
         font-family: '仿宋';
         padding: 10px;
-        background-color: rgba(255,255,255,.6);
+        background-color: rgba(255, 255, 255, 0.6);
         box-shadow: 0 0 15px rgba(0,0,0,.3);
         overflow:hidden;
         span{
@@ -148,6 +201,10 @@ export default {
           p{
             margin: 4px 0;
           }
+        }
+        ul{
+          padding-left: 2rem;
+          color: #000;
         }
       }
     }
@@ -158,14 +215,14 @@ export default {
     position: fixed;
     right: 12%;
     bottom: 10%;
-    background-color: rgb(190, 187, 187);
+    background-color: rgb(133, 114, 230);
     padding: 2px;
     box-sizing: border-box;
     text-align: center;
     color: white;
     font-weight: bold;
     font-size: 17px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,.5);
+    box-shadow: 0px 0px 10px rgba(228, 214, 214, 0.5);
     transition: .4s 0s ease-in;
     cursor: pointer;
     &:hover{

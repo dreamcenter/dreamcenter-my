@@ -11,8 +11,14 @@
       <li v-if="isBlog"><textarea placeholder="code" v-model="code"></textarea></li>
     </ul><br/>
     <input v-model="title" v-if="this.isBlog" style="height:30px;font-size:30px" placeholder="标题"/>
-    <div id="editor"></div>
-    <ul class="tags" v-if="isBlog">
+    <div style="width:100%;overflow:hidden">
+      <div id="editor" style="width:75%;float:left"></div>
+      <div style="width:20%;float:right">
+        <textarea cols="100" rows="10" placeholder="输入数据，使用独特标识符号间隔开" v-model="input"></textarea>
+        <textarea cols="100" rows="10" placeholder="输出数据，使用独特标识符号间隔开" v-model="output"></textarea>
+      </div>
+    </div>
+    <ul class="tags" v-if="isBlog || true">
       <li v-for="item in tags" :key="item" @click.left="delTag(item)">{{item}}</li>
       <input placeholder="回车添加tag" @keyup.enter="newTag" v-model="tag"/>
     </ul>
@@ -36,7 +42,9 @@ export default {
       title: '',
       tags: [],
       tag: '',
-      code: ''
+      code: '',
+      input: '',
+      output: ''
     }
   },
   mounted () {
@@ -49,7 +57,7 @@ export default {
     // this.editor.highlight = hljs
 
     // exclude
-    this.editor.config.excludeMenus = ['code']
+    // this.editor.config.excludeMenus = ['code']
 
     // markdown file upload module
     const _that = this
@@ -94,7 +102,7 @@ export default {
       const content = this.editor.txt.html()
       const cont = this.$xss(encodeURIComponent(content))
       axios.post('/api/' + (this.isBlog ? 'blog' : 'dynamic') + (this.isDynamicEdit ? '/update' : '/add'),
-        `id=${this.$store.state.dynamicId}&title=${this.title}&time=${time}&content=${cont}&tags=${this.tags}`).then(res => {
+        `id=${this.$store.state.dynamicId}&title=${this.title}&time=${time}&content=${cont}&tags=${this.tags}&input=${this.input}&output=${this.output}`).then(res => {
         if (res.data.code !== 200) alert(res.data.msg)
         else {
           if (res.data.data === 0) alert('创建失败!')

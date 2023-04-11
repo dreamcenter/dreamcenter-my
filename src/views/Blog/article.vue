@@ -3,13 +3,18 @@
     <div class="frame left" style="width:20%" v-if="$store.state.isPc"> </div>
     <div class="frame center" :style="{'width':($store.state.isPc?'60%':'85%'),'padding':'10px','box-sizing': 'border-box'}">
       <h1 class="title">{{data.title}}</h1>
-      <p class="time">{{data.time}} &nbsp; 浏览: {{data.visit}}次</p>
+      <p class="time">{{data.time}} &nbsp; 浏览: {{data.visit}}次 &nbsp; 作者: {{data.nickname}}</p>
       <div v-html="data.content"></div>
       <div style="height:100px"></div>
       <span v-for="j in data.tags" :key="j.name" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>
       <div class="rwc">
         <h2>评论区</h2>
-        <review id="rw" v-if="parent===0" :parent='parent' :target='target' :uri='uri' :bid='id' @review_success='reviewSuccess(1)'/>
+        <review id="rw" v-if="parent===0 && $store.state.nickname!==''" :parent='parent' :target='target' :uri='uri' :bid='id' @review_success='reviewSuccess(1)'/>
+        <span v-if="$store.state.nickname===''">
+          <span>&nbsp;&nbsp;&nbsp;请登录进行评论哦!</span>
+          <button @click="gotoLogin()" style="background-color:rgba(255,255,255,.6)">前往登录</button>
+          <br/><br/>
+        </span>
         <ol>
           <li class="parentReply" v-for="(item, index) in reviewList" :key="item.id">
             <img :src="item.email" width="60" height="60"/>
@@ -30,7 +35,7 @@
                 </li>
               </ul>
             </div>
-            <review v-if="parent===item.id" style="width:100%" :parent='parent' :target='target' :uri='uri' :bid='id' @review_success='reviewSuccess'>
+            <review v-if="parent===item.id && $store.state.nickname!==''" style="width:100%" :parent='parent' :target='target' :uri='uri' :bid='id' @review_success='reviewSuccess'>
               <slot slot="extention">
                 <a @click="cancel" style="cursor:default;color:blue;text-decoration:underline;margin:10px">取消回复</a>
               </slot>
@@ -104,6 +109,9 @@ export default {
     this.reviewSuccess()
   },
   methods: {
+    gotoLogin () {
+      this.$router.push('/account')
+    },
     reply (index, parent, target) {
       this.parent = parent
       this.target = target
@@ -147,11 +155,12 @@ export default {
     // display: flexbox;
   }
   .center{
+    color: #d0e5f2;
     margin-left: 20%;
-    background-color: rgba(250, 249, 222, 0.877);
+    background-color: rgba(46, 46, 44, 0.877);
     // background-color: rgba(255, 255, 255, 0.5);
     // box-shadow: 0 0 10px rgba(0,0,0,.5);
-    box-shadow: 0 0 10px rgb(185, 184, 163);
+    box-shadow: 0 0 10px rgb(102, 102, 100);
     overflow: hidden;
     // min-height: 100%;
     // overflow: scroll;
@@ -218,7 +227,7 @@ export default {
     }
     .rwc{
       margin-top: 20px;
-      background-color: rgba(217, 255, 208, 0.498);
+      background-color: rgba(67, 76, 65, 0.498);
       h2{
         text-align: center;
         padding-top: 10px;

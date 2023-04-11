@@ -1,7 +1,7 @@
 <template>
   <div id="home" :style="{'background': $store.state.isPc?'url('+homeBk+') fixed no-repeat':'', 'background-size':'cover'}">
-    <h1>时光潜流</h1>
-    <p>任时光流逝，进入无言的虚无。</p>
+    <h1>学科竞赛博客</h1>
+    <p>一切的不利条件都是自身能力不足的体现</p>
     <div class="running_time">
       <a href="https://beian.miit.gov.cn/" title="前往查看" class="beian" target="_blank" style="color:rgba(255, 255, 255, 0.822)">皖ICP备2022005998号</a>
     </div>

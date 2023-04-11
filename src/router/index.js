@@ -12,6 +12,8 @@ import Inspire from '../views/Inspire.vue'
 import Todo from '../views/Todo.vue'
 import About from '../views/About.vue'
 import Admin from '../views/admin.vue'
+import Account from '../views/account.vue'
+import Register from '../views/register.vue'
 
 Vue.use(VueRouter)
 
@@ -74,10 +76,6 @@ const routes = [
         component: () => import('../views/admin/writing.vue')
       },
       {
-        path: 'blog',
-        component: () => import('../views/admin/blog.vue')
-      },
-      {
         path: 'dynamic',
         component: () => import('../views/admin/dynamic.vue')
       },
@@ -90,14 +88,6 @@ const routes = [
         component: () => import('../views/admin/album.vue')
       },
       {
-        path: 'repository',
-        component: () => import('../views/admin/repository.vue')
-      },
-      {
-        path: 'updateRep',
-        component: () => import('../views/admin/updateRep.vue')
-      },
-      {
         path: 'friend',
         component: () => import('../views/admin/friend.vue')
       },
@@ -106,6 +96,40 @@ const routes = [
         redirect: 'view'
       }
     ]
+  },
+  {
+    path: '/Account',
+    component: Account,
+    children: [
+      {
+        path: 'view',
+        component: () => import('../views/account/view.vue')
+      },
+      {
+        path: 'writing',
+        component: () => import('../views/account/writing.vue')
+      },
+      {
+        path: 'blog',
+        component: () => import('../views/account/blog.vue')
+      },
+      {
+        path: 'repository',
+        component: () => import('../views/account/repository.vue')
+      },
+      {
+        path: 'updateRep',
+        component: () => import('../views/account/updateRep.vue')
+      },
+      {
+        path: '',
+        redirect: 'view'
+      }
+    ]
+  },
+  {
+    path: '/Register',
+    component: Register
   },
   {
     path: '*',

@@ -8,7 +8,7 @@ module.exports = {
   },
   chainWebpack: config => {
     config.plugin('html').tap(args => {
-      args[0].title = '时光潜流 | 妹控的中二君'
+      args[0].title = '毕设 | 学课竞赛博客'
       return args
     })
     config.plugin('webpack-bundle-analyzer')

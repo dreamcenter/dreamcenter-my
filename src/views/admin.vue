@@ -15,18 +15,18 @@
     <div class="adminPanel" v-else>
       <ul class="left">
         <li>
-          <h1>小戴主页后台</h1>
+          <h1>管理员后台</h1>
         </li>
         <router-link active-class="act" tag="li" to="/Admin/view">概览</router-link>
-        <router-link active-class="act" tag="li" to="/Admin/blog">博客</router-link>
-        <router-link active-class="act" tag="li" to="/Admin/dynamic">动态</router-link>
-        <router-link active-class="act" tag="li" to="/Admin/acgn">番剧</router-link>
-        <router-link active-class="act" tag="li" to="/Admin/album">回忆</router-link>
+        <!-- <router-link active-class="act" tag="li" to="/Admin/blog">博客</router-link> -->
+        <router-link active-class="act" tag="li" to="/Admin/dynamic">OJ</router-link>
+        <router-link active-class="act" tag="li" to="/Admin/acgn">好书</router-link>
+        <router-link active-class="act" tag="li" to="/Admin/album">典例</router-link>
         <!-- <router-link active-class="act" tag="li" to="/Admin/repository">仓库</router-link> -->
-        <li @click="expRep=!expRep">仓库</li>
-        <router-link v-show="expRep" class="sub_tab" active-class="act_sub" tag="li" to="/Admin/repository">新建项目</router-link>
-        <router-link v-show="expRep" class="sub_tab" active-class="act_sub" tag="li" to="/Admin/updateRep">修改项目</router-link>
-        <router-link active-class="act" tag="li" to="/Admin/friend">友链</router-link>
+        <!-- <li @click="expRep=!expRep">仓库</li> -->
+        <!-- <router-link v-show="expRep" class="sub_tab" active-class="act_sub" tag="li" to="/Admin/repository">新建项目</router-link> -->
+        <!-- <router-link v-show="expRep" class="sub_tab" active-class="act_sub" tag="li" to="/Admin/updateRep">修改项目</router-link> -->
+        <router-link active-class="act" tag="li" to="/Admin/friend">榜单</router-link>
         <!-- <li>灵感</li> -->
         <!-- <li>待做</li> -->
         <li @click="back">主页</li>
@@ -56,6 +56,9 @@ export default {
       if (res.data.code !== -403) {
         this.isLogin = true
         this.$store.commit('toAdmin', true)
+        if (res.data.code === 200) {
+          this.$store.commit('setNickname', '管理员')
+        }
       }
     }).catch(err => err)
   },
@@ -70,6 +73,7 @@ export default {
         `username=${this.username}&password=${this.$md5(this.password)}`)
         .then(res => {
           if (res.data.code === 200) {
+            this.$store.commit('setNickname', '管理员')
             if (this.remember) {
               sessionStorage.token = res.data.data
               this.$cookie.config('10d')

@@ -15,7 +15,8 @@ export default new Vuex.Store({
     blogTotalSize: 0,
     blogPageSize: 7,
     isPc: true,
-    pagerCount: 5
+    pagerCount: 5,
+    nickname: ''
   },
   getters: {
     getBlogsByPage (state) {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
   mutations: {
     toAdmin (state, data) {
       state.isAdmin = data
+    },
+    setNickname (state, data) {
+      state.nickname = data
     },
     changeDynamicId (state, data) {
       state.dynamicId = data

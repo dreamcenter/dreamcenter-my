@@ -1,6 +1,6 @@
-const netUse = true
+const netUse = false
 
-const appBkLoc = '/imgs/background.png'
+const appBkLoc = '/imgs/background1.png'
 const homeBkLoc = '/imgs/bk.jpeg'
 
 const appBkNet = 'https://s-bj-2133-dreamcenter.oss.dogecdn.com/fast/background.png'

@@ -2,7 +2,7 @@
   <div id="inspire">
     <div class="frame left" style="width:10%" v-if="$store.state.isPc"> </div>
     <div class="frame center" :style="{'width':$store.state.isPc?'60%':'80%'}">
-      <h1>友人志</h1>
+      <h1>活跃榜</h1>
       <ul>
         <li v-for="item in friendList" :key="item.id" @click="jump(item.url)">
           <img :src="item.avatar" width="60" height="60"/>
@@ -127,6 +127,7 @@ export default {
   height: 100%;
   display: flex;
   overflow-y: auto;
+  color: rgba(206, 214, 221, 0.88);
   .frame{
     margin-top: 60px;
     display: flex;
@@ -150,7 +151,9 @@ export default {
         // width: 400px;
         width: 45%;
         height: 80px;
-        box-shadow: 0 0 20px rgba(0,0,0,.3);
+        box-shadow: 0 0 10px rgba(101, 202, 111, 0.3);
+        background-color: rgba(48, 41, 85, 0.556);
+        // color: rgba(206, 214, 221, 0.88);
         padding: 10px;
         box-sizing: border-box;
         overflow: hidden;
@@ -182,7 +185,7 @@ export default {
         }
         transition: .2s 0s linear;
         &:hover{
-          box-shadow:0 0 10px rgb(251, 255, 8);
+          box-shadow:0 0 10px rgb(46, 96, 189);
           // color: white;
         }
       }

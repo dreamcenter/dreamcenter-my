@@ -1,8 +1,8 @@
 <template>
   <div id="_dynamic">
     <h3>动态</h3>
-    <button @click="toWriting(true)">写一篇动态</button>
-    <button @click="toWriting(false)" style="margin-left:10px">编辑最新动态</button>
+    <button @click="toWriting(true)">出一道题目</button>
+    <button @click="toWriting(false)" style="margin-left:10px">编辑最新题目</button>
     <table>
       <tr>
         <td style="width:6%">id</td>
@@ -85,6 +85,7 @@ export default {
     border-collapse: collapse;
     margin-top: 20px;
     tr{
+      color: rgb(156, 141, 112);
       border: 1px solid black;
       text-align: center;
       &:first-child{

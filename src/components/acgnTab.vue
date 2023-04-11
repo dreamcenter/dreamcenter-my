@@ -5,7 +5,7 @@
     </div>
     <span>
       <h3><a :title="title">{{title}}</a></h3>
-      <b>进度: {{temp}}/{{total}}</b>
+      <!-- <b>进度: {{temp}}/{{total}}</b> -->
     </span>
   </div>
 </template>
@@ -18,13 +18,15 @@ export default {
 
 <style lang="scss">
 .acgn_tab{
-  height: 140px;
+  // height: 140px;
+  height: 120px;
   width: 100px;
   display: inline-block;
   margin: 5px;
   box-shadow: 0 0 4px rgba(0,0,0,.8);
   overflow: hidden;
   font-family: '仿宋';
+  background-color: aliceblue;
   h3{
     font-size: 16px;
     text-overflow: ellipsis;

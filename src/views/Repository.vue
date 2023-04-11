@@ -78,6 +78,7 @@ export default {
     .title{
       // border: 1px solid red;
       li{
+        color: rgba(240, 255, 255, 0.806);
         margin-right: 6px;
         margin-bottom: 4px;
         padding: 4px 10px;
@@ -88,7 +89,7 @@ export default {
         cursor: pointer;
         transition: .2s 0s linear;
         &:hover{
-          background-color: antiquewhite;
+          background-color: rgb(153, 80, 8);
         }
       }
     }

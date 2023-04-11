@@ -198,6 +198,7 @@ export default {
 
 <style lang="scss">
 #_view{
+  color: antiquewhite;
   .status{
     line-height: 20px;
     margin-top: 10px;
@@ -240,6 +241,7 @@ export default {
   #server{
     // width: 80%;
     // border: 1px solid red;
+    color: coral;
     overflow: hidden;
     list-style: none;
     display: flex;
@@ -286,13 +288,13 @@ export default {
     .inner{
       padding: 10px;
       box-sizing: border-box;
-      width: 200px;
+      width: 220px;
       height: 140px;
       position: absolute;
-      background-color: rgb(245, 218, 218);
+      background-color: rgb(184, 182, 182);
       box-shadow: 0 0 20px rgba($color: #cc6060, $alpha: 1.0);
       top: 200px;
-      left: calc(50% - 100px);
+      left: calc(50% - 110px);
     }
   }
 }

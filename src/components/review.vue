@@ -1,11 +1,11 @@
 <template>
   <div>
     <form @submit.prevent="commit">
-      <input class="input-text" placeholder="昵称(必填)" v-model="review.nickname"/>
+      <!-- <input class="input-text" placeholder="昵称(必填)" v-model="review.nickname"/>
       <input class="input-text" type="email" placeholder="邮箱(必填)" v-model="review.email"/>
-      <input class="input-text" placeholder="网址(选填)" v-model="review.url"/>
+      <input class="input-text" placeholder="网址(选填)" v-model="review.url"/> -->
       <!-- 申请必要 : 名称、头像、链接、简述 -->
-      <textarea placeholder="在此留言评论o(*￣▽￣*)ブ (表情包在做了，在做了.jpg)" v-model="review.msg">
+      <textarea placeholder="在此留言评论o(*￣▽￣*)ブ" v-model="review.msg">
       </textarea>
       <br/>
       <input class="input-checkbox" id="send" type="checkbox" v-model="review.tip"/>
@@ -39,13 +39,13 @@ export default {
     this.review.parent = this.parent
     this.review.target = this.target
 
-    const nickname = this.$cookie.get('review_nickname')
-    const email = this.$cookie.get('review_email')
-    const url = this.$cookie.get('review_url')
+    // const nickname = this.$cookie.get('review_nickname')
+    // const email = this.$cookie.get('review_email')
+    // const url = this.$cookie.get('review_url')
 
-    this.review.nickname = nickname == null ? '' : nickname
-    this.review.email = email == null ? '' : email
-    this.review.url = url == null ? '' : url
+    // this.review.nickname = nickname == null ? '' : nickname
+    // this.review.email = email == null ? '' : email
+    // this.review.url = url == null ? '' : url
   },
   beforeUpdate () {
     this.review.parent = this.parent
@@ -55,19 +55,19 @@ export default {
     commit () {
       const isBlog = this.bid !== undefined // true:blog;false:not blog
       if (isBlog) this.review.bid = Number.parseInt(this.bid)
-      if (this.review.nickname.trim() === '') {
-        alert('昵称不能为空')
-        return
-      }
-      if (this.review.email.trim() === '') {
-        alert('邮箱不能为空')
-        return
-      }
+      // if (this.review.nickname.trim() === '') {
+      //   alert('昵称不能为空')
+      //   return
+      // }
+      // if (this.review.email.trim() === '') {
+      //   alert('邮箱不能为空')
+      //   return
+      // }
 
-      this.$cookie.config(-1)
-      this.$cookie.set('review_nickname', this.review.nickname)
-      this.$cookie.set('review_email', this.review.email)
-      this.$cookie.set('review_url', this.review.url)
+      // this.$cookie.config(-1)
+      // this.$cookie.set('review_nickname', this.review.nickname)
+      // this.$cookie.set('review_email', this.review.email)
+      // this.$cookie.set('review_url', this.review.url)
 
       this.review.tip = this.review.tip ? 1 : 0
       this.review.time = this.$time()
@@ -105,6 +105,7 @@ form{
     resize: none;
     background-color: rgba(0,0,0,0);
     margin-top: 4px;
+    color: rgb(202, 210, 216);
   }
   .input-text{
     box-sizing: border-box;
@@ -128,10 +129,11 @@ form{
     width: 100px;
     height: 30px;
     background-color: rgba(0,0,0,0);
-    border: 1px solid rgb(69, 60, 60);
+    border: 1px solid rgb(216, 175, 175);
     float: right;
     margin-right: 11%;
     margin-top: 4px;
+    color: aliceblue;
     &:hover{
       border: 2px solid coral;
     }
