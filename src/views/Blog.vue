@@ -34,23 +34,37 @@
       <div v-else><p style="margin-top: 260px;font-size: 100px;font-family: 'soft';font-weight: 200;text-align: center;color: gainsboro;">还是空空如也</p></div>
       <div style="height:100px"></div>
     </div>
-    <div class="frame right" style="width:20%" v-if="$store.state.isPc"> </div>
+    <div class="frame right" style="width:20%;color:white" v-if="$store.state.isPc">
+      <div class="suggest">
+        <h2>博客推荐</h2>
+        <ol>
+          <li v-for="item in suggestBlogs" :key="item.id">
+            <a :href="'/Blog/'+item.id">{{item.title}}</a>
+          </li>
+        </ol>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
       currentPage: 1,
       pageSize: 7,
       blogList: [],
-      totalSize: 8
+      totalSize: 8,
+      suggestBlogs: []
     }
   },
   beforeMount () {
     this.$store.dispatch('getBlogTotalSize')
     this.$store.dispatch('getBlogList')
+    axios.get('/api/blog/suggestList').then(res => {
+      if (res.data.code === 200) this.suggestBlogs = res.data.data
+    }).catch(err => err)
   },
   methods: {
     handleCurrentChange (val) {
@@ -114,6 +128,29 @@ export default {
         // font-family: 'dotted';
         font-weight: 300;
       }
+    }
+  }
+  .right{
+    padding: 70px 0 0 70px;
+    .suggest{
+      h2{
+        margin-left: 20px;
+        color: bisque;
+      }
+      li{
+        margin: 10px;
+        a{
+          text-decoration: none;
+          color: white;
+          transition: .1s linear;
+          &:hover{
+            color: wheat;
+            font-size: 18px;
+          }
+        }
+      }
+      position: fixed;
+      top: 100px;
     }
   }
 }

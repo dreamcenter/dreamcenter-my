@@ -71,6 +71,7 @@ export default {
 
 <style lang="scss">
 #_blog{
+  color: white;
   table{
     width: 100%;
     text-align: center;

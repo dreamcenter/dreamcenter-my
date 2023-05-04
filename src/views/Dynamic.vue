@@ -13,7 +13,7 @@
             data-ad-slot="8621483328"></ins>
         </li> -->
         <li v-for="(item, index) in dynamicList" :key="item.id">
-          <h1>{{item.time | beautyDate}}</h1>
+          <h1>{{item.time | beautyDate}}#{{item.id}}</h1>
           <span style="margin-right:2rem;font-size:12px">[{{item.time | beautyTime}}]</span>
           <p></p>
           <span v-html="item.content">
