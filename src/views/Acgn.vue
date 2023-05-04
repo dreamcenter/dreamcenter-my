@@ -28,7 +28,8 @@
       <div class="acgn_entry" id="acgn_watched">
         <h2>已看</h2>
         <div>
-          <tab class="mytab" v-for="item in animeList[3]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
+          <span class="viewed" v-for="item in animeList[3]" :key="item.id">{{item.title}}</span>
+          <!-- <tab class="mytab" v-for="item in animeList[3]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/> -->
         </div>
       </div>
     </div>
@@ -98,6 +99,15 @@ export default {
       }
       &:last-child{
         margin-bottom: 20px;
+      }
+      .viewed{
+        background: rgb(255, 223, 211);
+        margin: 4px;
+        color: rgb(92, 2, 218);
+        word-break: normal;
+        display: inline-block;
+        padding: 2px;
+        font-weight: bold;
       }
     }
   }
