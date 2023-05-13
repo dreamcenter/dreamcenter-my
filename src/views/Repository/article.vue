@@ -47,7 +47,7 @@ export default {
   }
   .center{
     margin-left: 20%;
-    background-color: rgba(186, 181, 181, 0.1);
+    background-color: rgba(200, 200, 190, 0.81);
     box-shadow: 0 0 10px rgba(0,0,0,.5);
     overflow: hidden;
     .title{

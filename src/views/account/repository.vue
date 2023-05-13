@@ -1,6 +1,6 @@
 <template>
   <div id="_repository">
-    <h3>仓库</h3>
+    <h3 style="color:white">仓库</h3>
     <button @click="commit">提交</button>
     <button @click="clear">刷新</button>
     <button @click="_export">导出</button>
@@ -104,5 +104,6 @@ export default {
   #repoEditor{
     font-family: '微软雅黑';
   }
+  // color: aliceblue;
 }
 </style>

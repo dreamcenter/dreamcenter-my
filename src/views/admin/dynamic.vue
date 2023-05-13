@@ -1,8 +1,10 @@
 <template>
   <div id="_dynamic">
     <h3>动态</h3>
-    <button @click="toWriting(true)">出一道题目</button>
-    <button @click="toWriting(false)" style="margin-left:10px">编辑最新题目</button>
+    <!-- <button @click="toWriting(true)">出一道题目</button> -->
+    <el-button type="success" @click="toWriting(true)" size="small">出一道题目</el-button>
+    <!-- <button @click="toWriting(false)" style="margin-left:10px">编辑最新题目</button> -->
+    <el-button type="success" @click="toWriting(false)" style="margin-left:10px" size="small">编辑最新题目</el-button>
     <table>
       <tr>
         <td style="width:6%">id</td>
@@ -13,7 +15,7 @@
       <tr v-for="item in dynamicList" :key="item.id">
         <td>{{item.id}}</td>
         <td>{{item.time}}</td>
-        <td class="content">{{item.content | clearP}}</td>
+        <td class="content" v-html="clearPTag(item.content)"></td>
         <td><a href="#" @click="delDynamic(item.id)">删除</a></td>
       </tr>
     </table>
@@ -46,6 +48,9 @@ export default {
     }
   },
   methods: {
+    clearPTag (content) {
+      return content.replace(/<\/{0,1}p>/g, '').replace(/<img.+\/>/g, '【图片】')
+    },
     toWriting (isNew) {
       if (!isNew && this.dynamicList.length !== 0) {
         this.$store.commit('changeDynamicId', this.dynamicList[0].id)
@@ -85,8 +90,8 @@ export default {
     border-collapse: collapse;
     margin-top: 20px;
     tr{
-      color: rgb(156, 141, 112);
-      border: 1px solid black;
+      color: rgb(211, 195, 163);
+      border: 1px solid rgb(247, 193, 193);
       text-align: center;
       &:first-child{
         background-color: rgba(209, 155, 155, 0.609);

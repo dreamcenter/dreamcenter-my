@@ -65,6 +65,7 @@ export default {
 <style lang="scss">
 #repository{
   padding: 10px;
+  color: aliceblue;
   h1{
     margin-top: 260px;
     font-size: 60px;
@@ -85,7 +86,7 @@ export default {
         display: inline-block;
         // border: 1px solid blue;
         transform:skewX(-10deg);
-        box-shadow: 0 0 4px rgba($color: #000000, $alpha: 1.0);
+        box-shadow: 0 0 4px rgba($color: #dddddd, $alpha: 1.0);
         cursor: pointer;
         transition: .2s 0s linear;
         &:hover{
@@ -112,12 +113,12 @@ export default {
           text-decoration: underline rgb(0, 255, 13);
         }
         &:hover img{
-          box-shadow: 0 -10px 6px rgba($color: rgb(232, 165, 165), $alpha: 1.0);
+          box-shadow: 0 -10px 6px rgba($color: rgb(81, 66, 66), $alpha: 1.0);
         }
         img{
           padding: 4px;
           border-radius: 16px;
-          box-shadow: 0 0 6px rgba($color: #000, $alpha: 1.0);
+          box-shadow: 0 0 6px rgba($color: #c8c8c8, $alpha: 1.0);
           transition: .2s ease-in-out;
         }
         p{

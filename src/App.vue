@@ -13,7 +13,7 @@
         <!-- <router-link class="nav-color nav-sub iconfont icon-linggandengpao" to="/Inspire">灵感</router-link> -->
         <router-link class="nav-color nav-sub iconfont icon-linggandengpao" to="/Inspire">榜单</router-link>
         <router-link class="nav-color nav-sub iconfont icon-cangku" to="/Repository">工程</router-link>
-        <router-link class="nav-color nav-sub iconfont icon-xiangpian" to="/Album">典例</router-link>
+        <!-- <router-link class="nav-color nav-sub iconfont icon-xiangpian" to="/Album">典例</router-link> -->
         <router-link class="nav-color nav-sub iconfont icon-xihongshifanqie" to="/Acgn">好书</router-link>
         <router-link class="nav-color nav-sub iconfont icon-airudiantubiaohuizhi-zhuanqu_zixundongtai" to="/Dynamic">OJ</router-link>
         <router-link class="nav-color nav-sub iconfont icon-bokeyuan" to="/Blog">博客</router-link>

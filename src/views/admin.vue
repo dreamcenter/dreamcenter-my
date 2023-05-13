@@ -21,7 +21,7 @@
         <!-- <router-link active-class="act" tag="li" to="/Admin/blog">博客</router-link> -->
         <router-link active-class="act" tag="li" to="/Admin/dynamic">OJ</router-link>
         <router-link active-class="act" tag="li" to="/Admin/acgn">好书</router-link>
-        <router-link active-class="act" tag="li" to="/Admin/album">典例</router-link>
+        <!-- <router-link active-class="act" tag="li" to="/Admin/album">典例</router-link> -->
         <!-- <router-link active-class="act" tag="li" to="/Admin/repository">仓库</router-link> -->
         <!-- <li @click="expRep=!expRep">仓库</li> -->
         <!-- <router-link v-show="expRep" class="sub_tab" active-class="act_sub" tag="li" to="/Admin/repository">新建项目</router-link> -->

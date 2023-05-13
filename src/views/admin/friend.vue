@@ -1,15 +1,16 @@
 <template>
   <div id="_friend">
-    <h3>友链</h3>
-    <button @click="() => this.showEditPanel=true">添加新的</button>
+    <h3>榜单</h3>
+    <!-- <button @click="() => this.showEditPanel=true">添加新的</button> -->
+    <el-button type="success" @click="() => this.showEditPanel=true" size="small">添加新的</el-button>
     <table>
-      <thead style="font-weight:bold;border-bottom: 1px solid black;">
+      <thead style="font-weight:bold;border-bottom: 1px solid coral;">
         <td>id</td>
         <td>nickname</td>
         <td>avatar</td>
         <td>host</td>
         <td>describe</td>
-        <td colspan="2">操作</td>
+        <!-- <td colspan="2">操作</td> -->
       </thead>
       <tbody>
         <tr v-for="item in firends" :key="item.id">
@@ -18,8 +19,8 @@
           <td><a :href="item.avatar" target="_black">点击查看</a></td>
           <td><a :href="item.url" target="_black">{{item.url}}</a></td>
           <td>{{item.describe}}</td>
-          <td style="color:green;cursor:default" @click="editFri(item)">编辑</td>
-          <td style="color:red;cursor:default" @click="deleteFri(item.id)">删除</td>
+          <!-- <td style="color:green;cursor:default" @click="editFri(item)">编辑</td>
+          <td style="color:red;cursor:default" @click="deleteFri(item.id)">删除</td> -->
         </tr>
       </tbody>
     </table>
@@ -121,6 +122,7 @@ export default {
 
 <style lang="scss" scoped>
 #_friend{
+  color: antiquewhite;
   table{
     width: 100%;
     text-align: center;
@@ -141,7 +143,7 @@ export default {
     .innerPanel{
       width:300px;
       height:200px;
-      background-color: white;
+      background-color: rgb(145, 145, 145);
       box-shadow: 0 0 20px rgba(255, 255, 255, 1);
       border-radius: 10px;
       margin: 200px auto;

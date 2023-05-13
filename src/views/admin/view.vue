@@ -10,10 +10,20 @@
       <span :style="{'width': getPcAlbumVisit + 'px'}">{{vAlbum}}</span>
       <span :style="{'width': getPcDynamicVisit + 'px'}">{{vDynamic}}</span>
     </p>
-    <h2>服务监测 <button @click="updateServers()">U</button> </h2>
+    <h2>
+      <span>服务监测 </span>
+      <!-- <button @click="updateServers()">U</button> -->
+      <el-button @click="updateServers()" type="primary" icon="el-icon-refresh" circle="" size="mini"></el-button>
+    </h2>
     <ol id="server">
       <li v-for="item in servers" :key="item.ip">
-        <h3>{{item.ip}} <span :class="item.up?'up':'down'"></span> <button @click="delServer(item.ip)">D</button> <button @click="toEdit(item.ip)">A</button></h3>
+        <h3>{{item.ip}} <span :class="item.up?'up':'down'"></span>
+        <!-- <button @click="delServer(item.ip)">D</button> <button @click="toEdit(item.ip)">A</button> -->&nbsp;
+        <el-button-group>
+          <el-button @click="toEdit(item.ip)" type="primary" icon="el-icon-plus" size="mini"></el-button>
+          <el-button @click="delServer(item.ip)" type="danger" icon="el-icon-delete" size="mini"></el-button>
+        </el-button-group>
+        </h3>
         <div>
           <table>
             <!-- <tr> <td>port</td><td>name</td><td>status</td><td>del</td><td>chg</td> </tr> -->
@@ -22,8 +32,14 @@
               <td>{{port.name === '' ? 'DEFAULT' : port.name}}</td>
               <td>{{port.alert ? '√' : 'x'}}</td>
               <td><span :class="port.up?'up':'down'"></span></td>
-              <td><button @click="delPort (item.ip, port.port)">D</button></td>
-              <td><button @click="toEdit(item.ip, port)">C</button></td>
+              <!-- <td><button @click="delPort (item.ip, port.port)">D</button></td>
+              <td><button @click="toEdit(item.ip, port)">C</button></td> -->
+              <td>
+                <el-button-group>
+                  <el-button @click="toEdit(item.ip, port)" type="primary" icon="el-icon-edit" size="mini"></el-button>
+                  <el-button @click="delPort (item.ip, port.port)" type="danger" icon="el-icon-delete" size="mini"></el-button>
+                </el-button-group>
+              </td>
             </tr>
           </table>
           <p v-if="item.ports.length===0" style="text-align:center;font-size:14px;padding:10px;color:gray">- 暂无监听的端口 -</p>
@@ -247,7 +263,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     li{
-      width: 250px;
+      width: 268px;
       min-height: 100px;
       // border: 1px solid red;
       // float: left;

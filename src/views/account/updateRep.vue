@@ -25,7 +25,7 @@
           <td><input v-model="rep.title"/></td>
           <td><input v-model="rep.type"/></td>
           <td><input v-model="rep.icon"/></td>
-          <td><button @click="changeRep()">修改</button></td>
+          <td><button style="color:white" @click="changeRep()">修改</button></td>
         </tr>
       </tbody>
     </table>
@@ -67,14 +67,14 @@ export default {
     }
   },
   beforeMount () {
-    axios.get('/api/repository_type/list').then(res => {
-      this.types.push(...res.data.data)
-    }).catch(err => err)
+    // axios.get('/api/repository_type/listByAID').then(res => {
+    //   this.types.push(...res.data.data)
+    // }).catch(err => err)
     this.getList()
   },
   methods: {
     getList () {
-      axios.get('/api/repository_proj/list?type=0').then(res => {
+      axios.get('/api/repository_proj/listByAID?type=0').then(res => {
         this.titleList = res.data.data
       }).catch(err => err)
     },
@@ -106,6 +106,7 @@ export default {
 
 <style lang="scss">
 #_updateRep{
+  color: aliceblue;
   table{
     width: 100%;
     text-align: center;

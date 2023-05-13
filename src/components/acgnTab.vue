@@ -4,7 +4,7 @@
       <img :src="icon" width="100" height="100"/>
     </div>
     <span>
-      <h3><a :title="title">{{title}}</a></h3>
+      <h3><a :title="title" :href="url" target="_blank">{{title}}</a></h3>
       <!-- <b>进度: {{temp}}/{{total}}</b> -->
     </span>
   </div>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  props: ['icon', 'title', 'temp', 'total']
+  props: ['icon', 'title', 'temp', 'total', 'url']
 }
 </script>
 
@@ -26,11 +26,15 @@ export default {
   box-shadow: 0 0 4px rgba(0,0,0,.8);
   overflow: hidden;
   font-family: '仿宋';
-  background-color: aliceblue;
+  background-color: rgb(92, 93, 93);
   h3{
     font-size: 16px;
     text-overflow: ellipsis;
     overflow: hidden;
+    a{
+      text-decoration: none;
+      color: rgb(216, 216, 216);
+    }
   }
   img{
     box-sizing: border-box;

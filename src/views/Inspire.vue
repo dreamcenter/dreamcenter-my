@@ -22,9 +22,9 @@
       </ul>
     </div>
     <div class="frame right" style="width:30%" v-if="$store.state.isPc">
-      <h1>申请 &amp; 留言</h1>
+      <h1>反馈 &amp; 留言</h1>
       <review  v-if="parent===0" :parent='parent' :target='target' :uri='uri' @review_success='reviewSuccess(1)'/>
-      <i style="color:red;font-size:12px">*申请友链模板见评论最后一页</i>
+      <i style="color:red;font-size:12px">* 请友好发言讨论哦</i>
       <ol>
         <li class="parentReply" v-for="(item, index) in reviewList" :key="item.id">
           <img :src="item.email" width="60" height="60"/>

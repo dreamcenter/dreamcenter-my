@@ -1,16 +1,18 @@
 <template>
   <div id="_acgn">
-    <h3>番剧</h3>
-    <button @click="addAnime">添加番剧</button>
+    <h3>好书</h3>
+    <!-- <button @click="addAnime">添加书籍</button> -->
+    <br/>
+    <el-button type="success"  @click="addAnime" size="mini">添加书籍</el-button>
     <div class="content">
-      <h4>正在看</h4>
+      <h4>基础</h4>
       <tab class="mytab" v-for="item in animeList[0]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total" @click.native="editAnime(item)"/>
-      <h4>待看</h4>
+      <h4>算法</h4>
       <tab class="mytab" v-for="item in animeList[1]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total" @click.native="editAnime(item)"/>
-      <h4>未看</h4>
+      <h4>扩展</h4>
       <tab class="mytab" v-for="item in animeList[2]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total" @click.native="editAnime(item)"/>
-      <h4>已看</h4>
-      <tab class="mytab" v-for="item in animeList[3]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total" @click.native="editAnime(item)"/>
+      <!-- <h4>进阶</h4>
+      <tab class="mytab" v-for="item in animeList[3]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total" @click.native="editAnime(item)"/> -->
     </div>
     <div class="editTab" v-if="isEdit!=0">
       <div class="editMain">
@@ -18,15 +20,16 @@
         <table>
           <tr><td>标题</td><td><input v-model="toEdit.title"/></td></tr>
           <tr><td>封面</td><td><input v-model="toEdit.icon"/></td></tr>
-          <tr><td>已看</td><td><input type="number" v-model="toEdit.temp" :max="toEdit.total" required/></td></tr>
-          <tr><td>总共</td><td><input type="number" v-model="toEdit.total" required/></td></tr>
+          <!-- <tr><td>已看</td><td><input type="number" v-model="toEdit.temp" :max="toEdit.total" required/></td></tr> -->
+          <!-- <tr><td>总共</td><td><input type="number" v-model="toEdit.total" required/></td></tr> -->
+          <tr><td>地址</td><td><input v-model="toEdit.url"/></td></tr>
           <tr>
-            <td>状态</td><td>
+            <td>类别</td><td>
               <select v-model="toEdit.type" @change="typeChange">
-                <option label="正在看" value="1"/>
-                <option label="待看" value="2"/>
-                <option label="未看" value="3"/>
-                <option label="已看" value="4"/>
+                <option label="基础" value="1"/>
+                <option label="算法" value="2"/>
+                <option label="扩展" value="3"/>
+                <!-- <option label="真题" value="4"/> -->
               </select>
             </td>
           </tr>
@@ -72,7 +75,7 @@ export default {
     },
     addAnime () {
       this.isEdit = 2
-      this.toEdit.type = 3
+      this.toEdit.type = 1
       this.toEdit.temp = 0
       this.toEdit.total = 12
     },
@@ -85,15 +88,15 @@ export default {
       this.isEdit = 0
     },
     typeChange () {
-      if (this.toEdit.type === '3') {
-        this.toEdit.temp = 0
-      }
-      if (this.toEdit.type === '4') {
-        this.toEdit.temp = this.toEdit.total
-      }
+      // if (this.toEdit.type === '3') {
+      //   this.toEdit.temp = 0
+      // }
+      // if (this.toEdit.type === '4') {
+      //   this.toEdit.temp = this.toEdit.total
+      // }
     },
     commit () {
-      if (this.toEdit.icon.length > 100) {
+      if (this.toEdit.icon.length > 150) {
         alert('icon too long')
         return
       }
@@ -114,6 +117,7 @@ export default {
 
 <style lang="scss">
 #_acgn{
+  color: aliceblue;
   .content{
     font-family: '宋体';
     padding: 10px;
@@ -137,9 +141,9 @@ export default {
     background-color: rgba(78, 75, 72, 0.041);
     overflow: hidden;
     .editMain{
-      width: 300px;
-      height: 200px;
-      background-color: white;
+      width: 220px;
+      min-height: 100px;
+      background-color: rgb(41, 41, 41);
       margin: 200px auto;
       overflow: hidden;
       font-family: '仿宋';

@@ -4,15 +4,15 @@
     <div class="frame left" style="width:20%" v-if="$store.state.isPc"> </div>
     <div class="frame center" :style="{'width':$store.state.isPc?'60%':'80%'}">
       <div class="acgn_entry" id="acgn_watching">
-        <h2>正在看</h2>
+        <h2>基础</h2>
         <div>
-          <tab class="mytab" v-for="item in animeList[0]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
+          <tab class="mytab" v-for="item in animeList[0]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total" :url="item.url"/>
         </div>
       </div>
       <div class="acgn_entry" id="acgn_toWatch">
-        <h2>待看</h2>
+        <h2>算法</h2>
         <div>
-          <tab class="mytab" v-for="item in animeList[1]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
+          <tab class="mytab" v-for="item in animeList[1]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total" :url="item.url"/>
         </div>
       </div>
       <!-- <div class="acgn_entry" id="acgn_review">
@@ -20,17 +20,17 @@
         <h3 style="text-align:center;color:gray;margin-top:20px;font-size:50px;font-family:'soft">暂无番评</h3>
       </div> -->
       <div class="acgn_entry" id="acgn_mayWatch">
-        <h2>未看</h2>
+        <h2>扩展</h2>
         <div>
-          <tab class="mytab" v-for="item in animeList[2]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
+          <tab class="mytab" v-for="item in animeList[2]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total" :url="item.url"/>
         </div>
       </div>
-      <div class="acgn_entry" id="acgn_watched">
-        <h2>已看</h2>
+      <!-- <div class="acgn_entry" id="acgn_watched">
+        <h2>真题</h2>
         <div>
-          <tab class="mytab" v-for="item in animeList[3]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total"/>
+          <tab class="mytab" v-for="item in animeList[3]" :key="item.id" :icon="item.icon" :title="item.title" :temp="item.temp" :total="item.total" :url="item.url"/>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- <div class="frame right" style="width:20%" v-if="$store.state.isPc">
       <div>下面三个模块<br/>暂且摆烂了<br/>🍡🍡🍭🍡🍡</div>
@@ -86,11 +86,11 @@ export default {
     display: flexbox;
     .acgn_entry{
       // height: 190px;
-      height: 170px;
+      min-height: 170px;
       // border: 1px solid red;
       box-sizing: border-box;
       // box-shadow: 0px 20px 10px rgba(247, 255, 157,.7) inset;
-      box-shadow: 0px 10px 5px rgba(109, 76, 142, 0.7) inset;
+      box-shadow: 0px 10px 5px rgba(217, 207, 226, 0.382) inset;
       .mytab{
         white-space: nowrap;
       }
@@ -112,7 +112,7 @@ export default {
     color: gainsboro;
   }
   h2{
-    color: rgb(231, 179, 112);
+    color: rgb(240, 200, 149);
   }
 
   .right{

@@ -24,7 +24,7 @@
         <!-- <router-link active-class="act" tag="li" to="/Admin/acgn">番剧</router-link> -->
         <!-- <router-link active-class="act" tag="li" to="/Admin/album">回忆</router-link> -->
         <!-- <router-link active-class="act" tag="li" to="/Admin/repository">仓库</router-link> -->
-        <li @click="expRep=!expRep">仓库</li>
+        <li @click="gotoList()">仓库</li>
         <router-link v-show="expRep" class="sub_tab" active-class="act_sub" tag="li" to="/Account/repository">新建项目</router-link>
         <router-link v-show="expRep" class="sub_tab" active-class="act_sub" tag="li" to="/Account/updateRep">修改项目</router-link>
         <!-- <router-link active-class="act" tag="li" to="/Admin/friend">友链</router-link> -->
@@ -109,6 +109,10 @@ export default {
       sessionStorage.removeItem('token')
       this.$router.push('/')
       this.$store.commit('setNickname', '')
+    },
+    gotoList () {
+      this.expRep = !this.expRep
+      this.$router.push('/Account/updateRep')
     }
   }
 }
