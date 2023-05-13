@@ -86,7 +86,7 @@ export default {
     // border: 1px solid rgb(115, 0, 255);
     display: flexbox;
     .acgn_entry{
-      height: 190px;
+      min-height: 190px;
       // border: 1px solid red;
       box-sizing: border-box;
       // box-shadow: 0px 20px 10px rgba(247, 255, 157,.7) inset;

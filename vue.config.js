@@ -3,6 +3,12 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'http://localhost:9999'
+      },
+      '/sl': {
+        target: 'http://localhost:9999'
+      },
+      '/s1': {
+        target: 'http://localhost:9999'
       }
     }
   },

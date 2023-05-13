@@ -102,6 +102,10 @@ const routes = [
         component: () => import('../views/admin/friend.vue')
       },
       {
+        path: 'shortLink',
+        component: () => import('../views/admin/shortLink.vue')
+      },
+      {
         path: '',
         redirect: 'view'
       }

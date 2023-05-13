@@ -14,6 +14,7 @@
 11. nprogress加载进度条
 12. js-md5 加密
 13. vue-aplayer 音乐播放器 + MetingJS
+14. clipboard一键复制
 
 工具
 1. DOCWAY http://xiaoyaoji.cn => 接口文档编辑
