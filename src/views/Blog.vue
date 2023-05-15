@@ -5,10 +5,10 @@
       <!-- <ul> -->
       <transition-group tag="ul" name="blog_list">
         <li v-for="item in $store.getters.getBlogsByPage" :key="item.id" @click="jump(item.id)">
-          <h1>
+          <h2>
             <b>{{item.title}}</b>
             <p style="float:right;font-size:16px;font-weight:200">{{item.time}}</p>
-          </h1>
+          </h2>
           <p>{{item.content}}...</p>
           <p>
             <span v-for="j in item.tags" :key="j.name" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>

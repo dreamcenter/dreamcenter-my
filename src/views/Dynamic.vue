@@ -13,7 +13,7 @@
             data-ad-slot="8621483328"></ins>
         </li> -->
         <li v-for="(item, index) in dynamicList" :key="item.id">
-          <h1>{{item.time | beautyDate}}#{{item.id}}</h1>
+          <h2>{{item.time | beautyDate}}#{{item.id}}</h2>
           <span style="margin-right:2rem;font-size:12px">[{{item.time | beautyTime}}]</span>
           <p></p>
           <span v-html="item.content">
@@ -33,6 +33,10 @@
       <div style="height:100px"></div>
     </div>
     <div class="frame right" style="width:20%" v-if="$store.state.isPc">
+      <ul>
+        <li @click="changeTag('')">全部</li>
+        <li v-for="item in dynamicTags" :key="item" @click="changeTag(item)">{{item}}</li>
+      </ul>
       <div id="goToTop" @click="toTop">回到顶部</div>
     </div>
   </div>
@@ -45,13 +49,17 @@ export default {
     return {
       sheet: 1,
       dynamicList: [],
-      scrollLock: false,
-      rescode: 'AAC 100%'
+      dynamicTags: [],
+      stag: '',
+      scrollLock: false
     }
   },
   beforeMount () {
-    axios.get('/api/dynamic/sheet?sheet=' + this.sheet + `&nickname=${this.$store.state.nickname}`).then(res => {
+    axios.get('/api/dynamic/sheet?sheet=' + this.sheet + `&nickname=${this.$store.state.nickname}&tag=${this.stag}`).then(res => {
       this.dynamicList = res.data.data
+    }).catch(err => err)
+    axios.get('/api/dynamic/tags').then(res => {
+      this.dynamicTags = res.data.data
     }).catch(err => err)
   },
   filters: {
@@ -91,6 +99,18 @@ export default {
     }
   },
   methods: {
+    changeTag (tag) {
+      this.stag = tag
+      this.dynamicList = []
+      this.sheet = 1
+      this.scrollLock = false
+      axios.get('/api/dynamic/sheet?sheet=' + this.sheet + `&nickname=${this.$store.state.nickname}&tag=${this.stag}`).then(res => {
+        this.dynamicList = res.data.data
+      }).catch(err => err)
+    },
+    getByTag () {
+
+    },
     scroll () {
       if (!this.scrollLock) {
         const cards = document.querySelector('li:last-child')
@@ -98,7 +118,7 @@ export default {
           console.log('need more')
           this.scrollLock = true
           this.sheet++
-          axios.get('/api/dynamic/sheet?sheet=' + this.sheet + `&nickname=${this.$store.state.nickname}`).then(res => {
+          axios.get('/api/dynamic/sheet?sheet=' + this.sheet + `&nickname=${this.$store.state.nickname}&tag=${this.stag}`).then(res => {
             if (res.data.data.length === 0) {
               console.log('已经加载完全部数据啦！')
               this.scrollLock = true
@@ -205,6 +225,24 @@ export default {
         ul{
           padding-left: 2rem;
           color: #000;
+        }
+      }
+    }
+  }
+  .right{
+    ul{
+      color: aliceblue;
+      list-style: none;
+      margin: 20px;
+      position: fixed;
+      li{
+        display: inline-block;
+        background: rgb(64, 125, 127);
+        margin: 3px;
+        padding: 1px 6px;
+        border-radius: 6px;
+        &:hover{
+          background: rgb(42, 84, 86);
         }
       }
     }
