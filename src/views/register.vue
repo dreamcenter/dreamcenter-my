@@ -55,6 +55,14 @@ export default {
         this.msg = '密码不能为空'
         return
       }
+      if (!((this.password.search(/[a-z | A-Z]/g) !== -1) && (this.password.search(/\d/g) !== -1))) {
+        this.msg = '密码须有英文和数字'
+        return
+      }
+      if (this.password.length < 6) {
+        this.msg = '密码至少六位'
+        return
+      }
       this.email = this.email.trim()
       if (this.email === '') {
         this.msg = '邮箱不能为空'

@@ -7,10 +7,10 @@
         <input name="account" class="text long" placeholder="昵称" v-model="username"/><br/>
         <input name="password" class="text long" type="password" placeholder="密码" v-model="password"/><br/>
         <input name="remember" id="remember" class="checkbox" type="checkbox" v-model="remember"/><label for="remember">记住密码</label>
-        <a href="#">忘记密码?</a>
+        <!-- <a href="#">忘记密码?</a> -->
+        <a @click="toRegister">注册</a>
         <input class="submit long" type="submit" value="提交"/>
         <label style="color:red;font-weight:bold">{{this.msg}}</label>
-        <a @click="toRegister">注册</a>
       </form>
     </div>
     <div class="adminPanel" v-else>

@@ -2,12 +2,13 @@
   <div id="_updateRep">
     <h1>编辑仓库</h1>
     <table>
-      <thead style="font-weight:bold;border-bottom: 1px solid black;">
+      <thead style="font-weight:bold;border-bottom: 1px solid coral;">
         <td>id</td>
         <td>title</td>
         <td>type</td>
         <td>icon</td>
-        <td colspan="1">操作</td>
+        <!-- <td colspan="1">操作</td> -->
+        <td></td>
       </thead>
       <tbody>
         <tr v-for="item in titleList" :key="item.id">
@@ -16,15 +17,15 @@
           <td>{{item.type | getType(that)}}</td>
           <td><img width="20" height="20" :src="item.icon"/></td>
           <!-- <td style="color:green;cursor:default">编辑</td> -->
-          <td style="color:red;cursor:default">删除</td>
+          <td style="color:red;cursor:default"></td>
           <!-- <td style="color:green;cursor:default" @click="editFri(item)">编辑</td> -->
           <!-- <td style="color:red;cursor:default" @click="deleteFri(item.id)">删除</td> -->
         </tr>
         <tr class="form_update">
-          <td><input v-model="rep.id"/></td>
-          <td><input v-model="rep.title"/></td>
-          <td><input v-model="rep.type"/></td>
-          <td><input v-model="rep.icon"/></td>
+          <td><input style="color:white" v-model="rep.id"/></td>
+          <td><input style="color:white" v-model="rep.title"/></td>
+          <td><input style="color:white" v-model="rep.type"/></td>
+          <td><input style="color:white" v-model="rep.icon"/></td>
           <td><button style="color:white" @click="changeRep()">修改</button></td>
         </tr>
       </tbody>
@@ -67,9 +68,9 @@ export default {
     }
   },
   beforeMount () {
-    // axios.get('/api/repository_type/listByAID').then(res => {
-    //   this.types.push(...res.data.data)
-    // }).catch(err => err)
+    axios.get('/api/repository_type/list').then(res => {
+      this.types.push(...res.data.data)
+    }).catch(err => err)
     this.getList()
   },
   methods: {

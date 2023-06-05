@@ -1,6 +1,11 @@
 <template>
   <div>
     <form @submit.prevent="commit">
+      <span v-if="nL == 0">
+        <input style="color:white" class="input-text" placeholder="昵称(必填)" v-model="review.nickname"/>
+        <input style="color:white" class="input-text" type="email" placeholder="邮箱(必填)" v-model="review.email"/>
+        <input style="color:white" class="input-text" placeholder="网址(选填)" v-model="review.url"/>
+      </span>
       <!-- <input class="input-text" placeholder="昵称(必填)" v-model="review.nickname"/>
       <input class="input-text" type="email" placeholder="邮箱(必填)" v-model="review.email"/>
       <input class="input-text" placeholder="网址(选填)" v-model="review.url"/> -->
@@ -34,18 +39,23 @@ export default {
       submitTip: '发送'
     }
   },
-  props: ['parent', 'target', 'uri', 'bid'],
+  props: ['parent', 'target', 'uri', 'bid', 'nL'],
   beforeMount () {
     this.review.parent = this.parent
     this.review.target = this.target
+    console.log(this.nL)
 
-    // const nickname = this.$cookie.get('review_nickname')
-    // const email = this.$cookie.get('review_email')
-    // const url = this.$cookie.get('review_url')
+    if (this.nL === 0 || this.nL === '0') {
+      const nickname = this.$cookie.get('review_nickname')
+      const email = this.$cookie.get('review_email')
+      const url = this.$cookie.get('review_url')
 
-    // this.review.nickname = nickname == null ? '' : nickname
-    // this.review.email = email == null ? '' : email
-    // this.review.url = url == null ? '' : url
+      this.review.nickname = nickname == null ? '' : nickname
+      this.review.email = email == null ? '' : email
+      this.review.url = url == null ? '' : url
+    }
+  },
+  mounted () {
   },
   beforeUpdate () {
     this.review.parent = this.parent
@@ -55,19 +65,22 @@ export default {
     commit () {
       const isBlog = this.bid !== undefined // true:blog;false:not blog
       if (isBlog) this.review.bid = Number.parseInt(this.bid)
-      // if (this.review.nickname.trim() === '') {
-      //   alert('昵称不能为空')
-      //   return
-      // }
-      // if (this.review.email.trim() === '') {
-      //   alert('邮箱不能为空')
-      //   return
-      // }
 
-      // this.$cookie.config(-1)
-      // this.$cookie.set('review_nickname', this.review.nickname)
-      // this.$cookie.set('review_email', this.review.email)
-      // this.$cookie.set('review_url', this.review.url)
+      if (this.nL === 0 || this.nL === '0') {
+        if (this.review.nickname.trim() === '') {
+          alert('昵称不能为空')
+          return
+        }
+        if (this.review.email.trim() === '') {
+          alert('邮箱不能为空')
+          return
+        }
+
+        this.$cookie.config(-1)
+        this.$cookie.set('review_nickname', this.review.nickname)
+        this.$cookie.set('review_email', this.review.email)
+        this.$cookie.set('review_url', this.review.url)
+      }
 
       this.review.tip = this.review.tip ? 1 : 0
       this.review.time = this.$time()

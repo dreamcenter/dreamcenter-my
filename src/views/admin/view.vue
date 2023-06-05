@@ -69,10 +69,13 @@
         <button @click="cancelEdit()">取消</button>
       </div>
     </div>
+    <div id="tagStatus">wait ... </div>
+    <div id="tagStatusAC">wait ... </div>
   </div>
 </template>
 
 <script>
+import * as echarts from 'echarts'
 import axios from 'axios'
 export default {
   data () {
@@ -123,10 +126,70 @@ export default {
     this.serverStatus()
   },
   mounted () {
+    this.get_bd_tag()
+    this.get_bd_tag_ac()
   },
   beforeUpdate () {
   },
   methods: {
+    get_bd_tag () {
+      axios.get('/api/admin/bd_blog').then(res => {
+        const datas = res.data.data
+        const axisData = []
+        for (const key in datas) {
+          axisData.push({
+            value: datas[key],
+            name: key
+          })
+        }
+        const tagStatus = echarts.init(document.getElementById('tagStatus'), 'dark')
+        tagStatus.setOption({
+          title: {
+            text: '综合标签热度榜',
+            left: 'center',
+            top: 'bottom'
+          },
+          tooltip: {},
+          legend: {},
+          series: [
+            {
+              type: 'pie',
+              data: axisData,
+              roseType: 'area'
+            }
+          ]
+        })
+      }).catch(err => err)
+    },
+    get_bd_tag_ac () {
+      axios.get('/api/admin/bd_blog_ac').then(res => {
+        const datas = res.data.data
+        const axisData = []
+        for (const key in datas) {
+          axisData.push({
+            value: datas[key],
+            name: key
+          })
+        }
+        const tagStatus = echarts.init(document.getElementById('tagStatusAC'), 'dark')
+        tagStatus.setOption({
+          title: {
+            text: '薄弱点分析结果展现',
+            left: 'center',
+            top: 'center'
+          },
+          tooltip: {},
+          legend: {},
+          series: [
+            {
+              type: 'pie',
+              data: axisData,
+              radius: ['40%', '70%']
+            }
+          ]
+        })
+      }).catch(err => err)
+    },
     newServer () {
       const v = this.tmp.ip.match(/^\d+\.\d+.\d+.\d+$/g)
       if (v == null) {
@@ -312,6 +375,14 @@ export default {
       top: 200px;
       left: calc(50% - 110px);
     }
+  }
+  #tagStatus,#tagStatusAC{
+    width: 50%;
+    height: 700px;
+    display: inline-block;
+    border: 1px dashed rgb(163, 140, 140);
+    border-left: 0;
+    border-right: 0;
   }
 }
 </style>

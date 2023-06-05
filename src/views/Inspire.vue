@@ -4,11 +4,12 @@
     <div class="frame center" :style="{'width':$store.state.isPc?'60%':'80%'}">
       <h1>活跃榜</h1>
       <ul>
-        <li v-for="item in friendList" :key="item.id" @click="jump(item.url)">
+        <li v-for="(item, index) in friendList" :key="item.id" @click="jump(item.describe)">
           <img :src="item.avatar" width="60" height="60"/>
           <div>
+            <h2>No.{{index+1}}</h2>
             <h3>{{item.nickname}}</h3>
-            <p>{{item.describe }}</p>
+            <!-- <p>{{item.describe }}</p> -->
           </div>
         </li>
         <li v-for="i in placeHoldFriend" :key="'k'+i">
@@ -23,7 +24,7 @@
     </div>
     <div class="frame right" style="width:30%" v-if="$store.state.isPc">
       <h1>反馈 &amp; 留言</h1>
-      <review  v-if="parent===0" :parent='parent' :target='target' :uri='uri' @review_success='reviewSuccess(1)'/>
+      <review nL="0"  v-if="parent===0" :parent='parent' :target='target' :uri='uri' @review_success='reviewSuccess(1)'/>
       <i style="color:red;font-size:12px">* 请友好发言讨论哦</i>
       <ol>
         <li class="parentReply" v-for="(item, index) in reviewList" :key="item.id">
@@ -45,7 +46,7 @@
               </li>
             </ul>
           </div>
-          <review v-if="parent===item.id" style="width:100%" :parent='parent' :target='target' :uri='uri' @review_success='reviewSuccess'>
+          <review nL="0" v-if="parent===item.id" style="width:100%" :parent='parent' :target='target' :uri='uri' @review_success='reviewSuccess'>
             <slot slot="extention">
               <a @click="cancel" style="cursor:default;color:blue;text-decoration:underline;margin:10px">取消回复</a>
             </slot>
@@ -106,8 +107,9 @@ export default {
       this.target = 0
     },
     jump (url) {
+      // console.log(url)
       if (url === '') return
-      window.open(url)
+      window.open('mailto:' + url, '_blank')
     },
     reviewSuccess (val) {
       this.page = val !== undefined ? val : this.page
@@ -167,6 +169,13 @@ export default {
           overflow: hidden;
           h3,p{
             vertical-align: top;
+          }
+          h2{
+            width: 100%;
+            // font-family: 'soft';
+            font-family: '方正舒体','宋体';
+            font-weight: 700;
+            font-size: 30px;
           }
           h3{
             width: 100%;

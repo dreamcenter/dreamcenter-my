@@ -2,7 +2,8 @@
   <div id="_blog">
     <h3>博客</h3>
     <br/>
-    <button @click="this.toWriting">写一篇博客</button>
+    <!-- <button @click="this.toWriting">写一篇博客</button> -->
+    <el-button type="success" @click="this.toWriting" size="small">写一篇博客</el-button>
     <br/><br/>
     <hr/>
 
@@ -13,7 +14,7 @@
         <td>time</td>
         <td>visit</td>
         <td>keywords</td>
-        <td colspan="2">操作</td>
+        <td colspan="1">操作</td>
       </thead>
       <tbody>
         <tr v-for="item in blogs" :key="item.id">
@@ -23,7 +24,7 @@
           <td>{{item.visit}}</td>
           <td>{{item.keywords}}</td>
           <td style="color:rgb(100,200,100);cursor:default" @click="editBlog(item)">编辑</td>
-          <td style="color:gray;cursor:default">删除</td>
+          <!-- <td style="color:gray;cursor:default">删除</td> -->
         </tr>
       </tbody>
     </table>

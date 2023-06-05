@@ -1,12 +1,16 @@
 <template>
   <div id="_repository">
     <h3 style="color:white">仓库</h3>
-    <button @click="commit">提交</button>
-    <button @click="clear">刷新</button>
-    <button @click="_export">导出</button>
-    <button @click="_import">导入</button>
+    <!-- <button @click="commit">提交</button> -->
+    <el-button type="success" @click="commit" size="small">提交</el-button>
+    <!-- <button @click="clear">刷新</button> -->
+    <el-button type="success" @click="clear" size="small">刷新</el-button>
+    <!-- <button @click="_export">导出</button> -->
+    <el-button type="success" @click="_export" size="small">导出</el-button>
+    <!-- <button @click="_import">导入</button> -->
+    <el-button type="success" @click="_import" size="small">导入</el-button>
     <input type="file" ref="bak" style="width:150px;display:inline"/><br/>
-    <input placeholder="标题" v-model="repository.title"/>
+    <input style="font-size:20px" placeholder="标题" v-model="repository.title"/>
     <select  v-model="repository.type">
       <option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id"/>
     </select>
@@ -103,6 +107,9 @@ export default {
 #_repository{
   #repoEditor{
     font-family: '微软雅黑';
+  }
+  input{
+    margin: 10px;
   }
   // color: aliceblue;
 }

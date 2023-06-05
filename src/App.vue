@@ -4,7 +4,7 @@
       <span class="forehead">
         <span class="phonelist" v-if="!$store.state.isPc" @click.stop="()=>listShow=!listShow">{{listShow?'×':'≡'}}</span>
         <img id="avatar" src="/imgs/avatar.jpg" @click="gotoAccount()" @dblclick="gotoAdmin()" width="40px" style="border-radius:20px"/>
-        <span class="sign">{{this.$store.state.nickname}}</span>
+        <span class="sign">{{this.$store.state.nickname==''?'登录':this.$store.state.nickname}}</span>
       </span>
       <span class="foreback" v-show="$store.state.isPc || listShow">
 

@@ -9,7 +9,7 @@
       <span v-for="j in data.tags" :key="j.name" style="margin-left:10px;border-radius:2px;background-color:rgba(0,200,120,.2)">#{{j.name}}</span>
       <div class="rwc">
         <h2>评论区</h2>
-        <review id="rw" v-if="parent===0 && $store.state.nickname!==''" :parent='parent' :target='target' :uri='uri' :bid='id' @review_success='reviewSuccess(1)'/>
+        <review nL="1" id="rw" v-if="parent===0 && $store.state.nickname!==''" :parent='parent' :target='target' :uri='uri' :bid='id' @review_success='reviewSuccess(1)'/>
         <span v-if="$store.state.nickname===''">
           <span>&nbsp;&nbsp;&nbsp;请登录进行评论哦!</span>
           <button @click="gotoLogin()" style="background-color:rgba(255,255,255,.6)">前往登录</button>
@@ -35,7 +35,7 @@
                 </li>
               </ul>
             </div>
-            <review v-if="parent===item.id && $store.state.nickname!==''" style="width:100%" :parent='parent' :target='target' :uri='uri' :bid='id' @review_success='reviewSuccess'>
+            <review nL="1" v-if="parent===item.id && $store.state.nickname!==''" style="width:100%" :parent='parent' :target='target' :uri='uri' :bid='id' @review_success='reviewSuccess'>
               <slot slot="extention">
                 <a @click="cancel" style="cursor:default;color:blue;text-decoration:underline;margin:10px">取消回复</a>
               </slot>

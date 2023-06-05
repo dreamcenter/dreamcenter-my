@@ -103,7 +103,7 @@ export default {
         padding: 10px;
         color: rgb(198, 215, 231);
         background-color: rgba(59, 56, 56, 0.6);
-        box-shadow: 0 0 15px rgba(0,0,0,.3);
+        box-shadow: 0 0 10px rgba(255, 255, 255, .6);
         overflow:hidden;
         cursor: pointer;
         // border: 1px solid blue;
@@ -112,7 +112,7 @@ export default {
           margin-top: 10px;
         }
         &:hover{
-          box-shadow: 0 0 20px rgba(0,0,0,.4);
+          box-shadow: 0 0 20px rgba(255, 255, 255, 1);
         }
       }
     }
