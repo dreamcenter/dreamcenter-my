@@ -28,6 +28,7 @@
         <router-link v-show="expRep" class="sub_tab" active-class="act_sub" tag="li" to="/Admin/updateRep">修改项目</router-link>
         <router-link active-class="act" tag="li" to="/Admin/friend">友链</router-link>
         <router-link active-class="act" tag="li" to="/Admin/shortLink">短链</router-link>
+        <router-link active-class="act" tag="li" to="/Admin/log">日志</router-link>
         <!-- <li>灵感</li> -->
         <!-- <li>待做</li> -->
         <li @click="back">主页</li>

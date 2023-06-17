@@ -137,7 +137,7 @@ export default {
     .center{
       margin: 60px auto;
     }
-    .acgn_entry{
+    .acgn_entry:not(#acgn_watched){
       div{
         overflow-x: auto;
         white-space: nowrap;

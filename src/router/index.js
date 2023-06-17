@@ -106,6 +106,10 @@ const routes = [
         component: () => import('../views/admin/shortLink.vue')
       },
       {
+        path: 'log',
+        component: () => import('../views/admin/log.vue')
+      },
+      {
         path: '',
         redirect: 'view'
       }
